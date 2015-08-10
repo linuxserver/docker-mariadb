@@ -1,0 +1,2 @@
+#!/bin/bash
+/sbin/setuser abc /usr/bin/mysqld_safe --skip-syslog
