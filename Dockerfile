@@ -4,7 +4,7 @@ FROM linuxserver/baseimage
 MAINTAINER Mark Burford <sparklyballs@gmail.com>
 
 # set some environment variables for mariadb to give us our paths
-ENV MYSQL_DIR="/config/mysql"
+ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
 
 # set the repo version for mariadb choose between 5.5 or 10.0
