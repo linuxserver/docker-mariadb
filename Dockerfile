@@ -14,22 +14,17 @@ ENV REPO_VER 10.0
 # set ports
 EXPOSE 3306
 
-# add mariadb repo
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-add-apt-repository "deb http://mirrors.coreix.net/mariadb/repo/$REPO_VER/ubuntu trusty main"
 
 # update apt and install packages
-RUN apt-get update && \
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
+add-apt-repository "deb http://mirrors.coreix.net/mariadb/repo/$REPO_VER/ubuntu trusty main" && \
+apt-get update && \
 apt-get install \
-mariadb-server -qy && \
+mariadb-server mysqltuner -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# install mysqltuner
-RUN apt-get update -q && \
-apt-get install \
-mysqltuner -qy && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 # Tweak my.cnf
 RUN sed -ri 's/^(bind-address|skip-networking)/;\1/' /etc/mysql/my.cnf && \
