@@ -63,7 +63,7 @@ start_mysql
 # shut down after apply sql commands, waiting for pid to stop
 mysqladmin -u root shutdown
 wait "$pid"
-echo "Database Setup Conpleted"
+echo "Database Setup Completed"
 
 # display a message about password if not set or too short
 if [ "$TEST_LEN" -lt "4" ]; then
