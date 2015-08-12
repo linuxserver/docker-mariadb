@@ -10,8 +10,6 @@ ENV DATADIR=$MYSQL_DIR/databases
 # set the repo version for mariadb choose between 5.5 or 10.0
 ENV REPO_VER 10.0
 
-# Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
 
 # set ports
 EXPOSE 3306
