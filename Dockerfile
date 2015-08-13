@@ -22,7 +22,10 @@ apt-get update && \
 apt-get install \
 mariadb-server mysqltuner -qy && \
 apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+
+# empty /var/lib/mysql as we are using our own data folders
+rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql
 
 
 
