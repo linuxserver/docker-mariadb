@@ -22,8 +22,8 @@ linuxserver/mariadb
 **Parameters**
 
 * `-p 3306` - mysql port
-* `-v </path/to/appdata>:/config` - Where you want to store your databases, log and the my.cnf file. The `</path/to/appdata>` represents a path on your local device, the `/config` is the path inside the container (DO NOT CHANGE CONTAINER SIDE PATH).
-* `-e MYSQL_ROOT_PASSWORD=` - Set this to specify a root password for mysql.. if you do not set this variable or set it with less than 4 characters, then the install will continue with no password set
+* `-v /config` - Contains the db itself and all assorted settings. 
+* `-e MYSQL_ROOT_PASSWORD` - set this to root password for installation (minimum 4 characters)
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
