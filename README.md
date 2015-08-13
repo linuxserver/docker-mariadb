@@ -22,8 +22,8 @@ linuxserver/mariadb
 **Parameters**
 
 * `-p 3306` - mysql port
-* `-v </path/to/appdata>:/config` - Where you want to store your databases, log and the my.cnf file. The `</path/to/appdata>` represents a path on your local device, the `/config` is the path inside the container (DO NOT CHANGE CONTAINER SIDE PATH).Find my.cnf in /config, the databases in /config/databases and the log in /config/log/myqsl
-* `-e MYSQL_ROOT_PASSWORD=` - Set this to specify a root password for mariadb.. if you do not set this variable or set it with less than 4 characters, then the install will continue with no password set... use mysqladmin -u root password <PASSWORD> to set one at the docker prompt... NOTE changing this variable after the container has set up the initial databases has no effect. It is also advisable to edit the container after setup and remove reference to this variable.
+* `-v </path/to/appdata>:/config` - Where you want to store your databases, log and the my.cnf file. The `</path/to/appdata>` represents a path on your local device, the `/config` is the path inside the container (DO NOT CHANGE CONTAINER SIDE PATH).
+* `-e MYSQL_ROOT_PASSWORD=` - Set this to specify a root password for mysql.. if you do not set this variable or set it with less than 4 characters, then the install will continue with no password set
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
@@ -37,7 +37,10 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 ## Setting up the application 
 
-<Insert a basic user guide here to get a n00b up and running with the software inside the container.> DELETE ME
+If you didn't set a password during installation, (see logs for warning) use mysqladmin -u root password <PASSWORD> to set one at the docker prompt... NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect. It is also advisable to edit the run command or template/webui after setup and remove reference to this variable.
+
+Find my.cnf in /config, the databases in /config/databases and the log in /config/log/myqsl
+
 
 
 ## Updates
