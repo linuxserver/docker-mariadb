@@ -41,6 +41,8 @@ If you didn't set a password during installation, (see logs for warning) use mys
 
 Find my.cnf in /config, the databases in /config/databases and the log in /config/log/myqsl
 
+The container also has mysqltuner included which can either be run from within the container by exec'ing in or externally by issuing `docker exec -it mariadb mysqltuner`. It will prompt for credentials if you have set a password for root user.
+
 
 
 ## Updates
