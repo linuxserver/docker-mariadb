@@ -67,7 +67,7 @@ echo "Database Setup Completed"
 
 # display a message about password if not set or too short
 if [ "$TEST_LEN" -lt "4" ]; then
-echo >&2 "$(cat /tmp/no-pass.nfo)"
+echo >&2 "$(</tmp/no-pass.nfo)"
 sleep 5s
 fi
 
