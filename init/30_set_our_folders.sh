@@ -6,7 +6,7 @@ fi
 
 
 if [ ! -d "$DATADIR" ]; then
-mkdir -p $DATADIR
+mkdir -p "$DATADIR"
 fi
 
 if [ ! -d "/var/run/mysqld" ]; then
