@@ -11,11 +11,6 @@ ENV DATADIR=$MYSQL_DIR/databases
 # set the repo version for mariadb choose between 5.5 or 10.0
 ENV REPO_VER 10.0
 
-
-# set ports
-EXPOSE 3306
-
-
 # update apt and install packages
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
 add-apt-repository "deb http://mirrors.coreix.net/mariadb/repo/$REPO_VER/ubuntu trusty main" && \
@@ -40,4 +35,7 @@ ADD init/ /etc/my_init.d/
 ADD services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
 
+# set volumes and ports
+VOLUME /config
+EXPOSE 3306
 
