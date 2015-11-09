@@ -24,7 +24,8 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/mysql && \
 mkdir -p /var/lib/mysql
 
 # Tweak my.cnf
-RUN sed -ri 's/^(bind-address|skip-networking)/;\1/' /etc/mysql/my.cnf && \
+RUN sed -i 's/key_buffer\b/key_buffer_size/g' /etc/mysql/my.cnf && \
+sed -ri 's/^(bind-address|skip-networking)/;\1/' /etc/mysql/my.cnf && \
 sed -i s#/var/log/mysql#/config/log/mysql#g /etc/mysql/my.cnf && \
 sed -i -e 's/\(user.*=\).*/\1 abc/g' /etc/mysql/my.cnf && \
 sed -i -e "s#\(datadir.*=\).*#\1 $DATADIR#g" /etc/mysql/my.cnf && \
