@@ -1,6 +1,6 @@
 ![http://linuxserver.io](http://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
 
-The [LinuxServer.io](http://linuxserver.io) team brings you another quality container release featuring auto-update on startup, easy user mapping and community support. Be sure to checkout our [forums](http://forum.linuxserver.io) or for real-time support our [IRC](http://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
+The [LinuxServer.io](http://linuxserver.io) team brings you another quality container release featuring easy user mapping and community support. Be sure to checkout our [forums](http://forum.linuxserver.io) or for real-time support our [IRC](http://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
 
 # linuxserver/mariadb
 
@@ -45,13 +45,12 @@ The container also has mysqltuner included which can either be run from within t
 
 
 
-## Updates
+## Logs
 
-* Upgrade to the latest version simply `docker restart mariadb`.
 * To monitor the logs of the container in realtime `docker logs -f mariadb`.
 
 
 
 ## Versions
-
++ **23.12.2015:** Remove autoupdating, between some version updates the container breaks
 + **12.08.2015:** Initial Release. 
