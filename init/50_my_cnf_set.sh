@@ -7,3 +7,4 @@ chmod 666 "$MYSQL_DIR"/my.cnf
 fi
 
 cp "$MYSQL_DIR"/my.cnf /etc/mysql/my.cnf
+chown -R abc:abc /config
