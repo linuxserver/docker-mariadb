@@ -4,7 +4,7 @@ FROM linuxserver/baseimage
 MAINTAINER Sparklyballs  <sparklyballs@linuxserver.io>
 
 # set some environment variables for mariadb to give us our paths
-ENV APTLIST="mariadb-server mysqltuner"
+ENV INSTALL_LIST="mariadb-server mysqltuner"
 ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
 
@@ -16,7 +16,7 @@ RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a
 add-apt-repository "deb http://mirrors.coreix.net/mariadb/repo/$REPO_VER/ubuntu trusty main" && \
 apt-get update && \
 apt-get install \
-$APTLIST -qy && \
+$INSTALL_LIST -qy && \
 
 # cleanup
 apt-get clean -y && \
