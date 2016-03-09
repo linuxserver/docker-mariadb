@@ -89,3 +89,5 @@ if [ -f "/tmp/mysql-first-time.sql" ]; then
 rm /tmp/mysql-first-time.sql
 fi
 
+chown -R abc:abc /config
+
