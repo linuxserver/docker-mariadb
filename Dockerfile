@@ -24,11 +24,12 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/mysql && \
 mkdir -p /var/lib/mysql
 
 #Adding Custom files
-ADD init/ /etc/my_init.d/
-ADD services/ /etc/service/
+COPY init/ /etc/my_init.d/
+COPY services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
 
 # set volumes and ports
 VOLUME /config
 EXPOSE 3306
+
 
