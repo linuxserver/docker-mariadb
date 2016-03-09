@@ -24,6 +24,7 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/mysql && \
 mkdir -p /var/lib/mysql
 
 #Adding Custom files
+COPY defaults/ /defaults/
 COPY init/ /etc/my_init.d/
 COPY services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
