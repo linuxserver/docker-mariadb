@@ -60,7 +60,7 @@ The container also has mysqltuner included which can either be run from within t
 
 
 ## Versions
-+ **09.03.2016:** Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
++ **09.03.2016:** Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
 + **26.01.2016:** Change user of mysqld_safe script to abc, better unclean shutdown handling on restart.
 + **23.12.2015:** Remove autoupdating, between some version updates the container breaks
 + **12.08.2015:** Initial Release. 
