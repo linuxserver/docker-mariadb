@@ -1,6 +1,6 @@
 ![https://linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
 
-The [LinuxServer.io](https://linuxserver.io) team brings you another container release featuring auto-update on startup, easy user mapping and community support. Find us for support at:
+The [LinuxServer.io](https://linuxserver.io) team brings you another container release featuring easy user mapping and community support. Find us for support at:
 * [forum.linuxserver.io](https://forum.linuxserver.io)
 * [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`
 * [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
@@ -45,7 +45,8 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 If you didn't set a password during installation, (see logs for warning) use mysqladmin -u root password <PASSWORD> to set one at the docker prompt... NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect. It is also advisable to edit the run command or template/webui after setup and remove reference to this variable.
 
-Find my.cnf in /config, the databases in /config/databases and the log in /config/log/myqsl
+Find custom.cnf in /config for config changes (restart container for them to take effect)
+, the databases in /config/databases and the log in /config/log/myqsl
 
 The container also has mysqltuner included which can either be run from within the container by exec'ing in or externally by issuing `docker exec -it mariadb mysqltuner`. It will prompt for credentials if you have set a password for root user.
 
