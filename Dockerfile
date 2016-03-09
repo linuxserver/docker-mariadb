@@ -9,7 +9,7 @@ ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
 
 # set the repo version for mariadb choose between 5.5 or 10.0
-ENV REPO_VER 10.0
+ENV REPO_VER 10.1
 
 # update apt and install packages
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
