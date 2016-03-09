@@ -7,7 +7,7 @@ The [LinuxServer.io](https://linuxserver.io) team brings you another container r
 
 # linuxserver/mariadb
 
-
+![](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)
 
 ## Usage
 
