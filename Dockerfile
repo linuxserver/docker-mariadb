@@ -13,7 +13,7 @@ ENV REPO_VER 10.0
 
 # update apt and install packages
 RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-add-apt-repository "deb http://mirrors.coreix.net/mariadb/repo/$REPO_VER/ubuntu trusty main" && \
+echo "deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/${REPO_VER}/ubuntu trusty main" >> /etc/apt/sources.list.d/mariadb.list && \
 apt-get update && \
 apt-get install \
 $INSTALL_LIST -qy && \
