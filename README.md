@@ -30,6 +30,8 @@ linuxserver/mariadb
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
+It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it mariadb /bin/bash`.
+
 ### User / Group Identifiers
 
 Sometimes when using data volumes (`-v` flags) permissions issues can arise between the host OS and the container. We avoid this issue by allowing you to specify the user `PUID` and group `PGID`. Ensure the data volume directory on the host is owned by the same user you specify and it will "just work" ™.
@@ -48,20 +50,15 @@ If you didn't set a password during installation, (see logs for warning) use mys
 Find custom.cnf in /config for config changes (restart container for them to take effect)
 , the databases in /config/databases and the log in /config/log/myqsl
 
-The container also has mysqltuner included which can either be run from within the container by exec'ing in or externally by issuing `docker exec -it mariadb mysqltuner`. It will prompt for credentials if you have set a password for root user.
-
-
-
-## Logs and Shell
+## Info
 
 * Shell access whilst the container is running: `docker exec -it mariadb /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f mariadb`
 
-
-
 ## Versions
-+ **09.03.2016:** Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
-+ **26.01.2016:** Change user of mysqld_safe script to abc, better unclean shutdown handling on restart.
-+ **23.12.2015:** Remove autoupdating, between some version updates the container breaks
-+ **12.08.2015:** Initial Release. 
++ **09.03.16:** Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
++ **26.01.16:** Change user of mysqld_safe script to abc, better unclean shutdown handling on restart.
++ **23.12.15:** Remove autoupdating, between some version updates the container breaks
++ **12.08.15:** Initial Release. 
+
 

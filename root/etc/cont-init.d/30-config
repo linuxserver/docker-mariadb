@@ -1,0 +1,22 @@
+#!/usr/bin/with-contenv bash
+
+# make folders
+mkdir -p \
+	"${DATADIR}" \
+	"${LOG_DIR}" \
+	/run/mysqld
+
+# configure mysqld_safe
+sed -i \
+	"s/user='mysql'/user='abc'/g" \
+	/usr/bin/mysqld_safe
+
+# copy config
+[[ ! -e /etc/mysql/my.cnf ]] && \
+	cp /defaults/my.cnf /etc/mysql/my.cnf
+
+# permissions
+chown -R abc:abc \
+	"${DATADIR}" \
+	"${LOG_DIR}" \
+	/run/mysqld
