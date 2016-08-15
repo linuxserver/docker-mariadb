@@ -45,7 +45,9 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Setting up the application 
 
-If you didn't set a password during installation, (see logs for warning) use mysqladmin -u root password <PASSWORD> to set one at the docker prompt... NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect. It is also advisable to edit the run command or template/webui after setup and remove reference to this variable.
+If you didn't set a password during installation, (see logs for warning) use mysqladmin -u root password <PASSWORD> to set one at the docker prompt...
+NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin to change it. 
+Unraid users, it is advisable to edit the template/webui after setup and remove reference to this variable.
 
 Find custom.cnf in /config for config changes (restart container for them to take effect)
 , the databases in /config/databases and the log in /config/log/myqsl
@@ -56,6 +58,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 * To monitor the logs of the container in realtime: `docker logs -f mariadb`
 
 ## Versions
++ **15.08.16:** Rebase to alpine linux.
 + **09.03.16:** Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
 + **26.01.16:** Change user of mysqld_safe script to abc, better unclean shutdown handling on restart.
 + **23.12.15:** Remove autoupdating, between some version updates the container breaks
