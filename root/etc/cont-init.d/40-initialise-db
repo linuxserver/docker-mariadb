@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
+
 # set start function that creates user and password, used later
 start_mysql(){
 mysqld --init-file="$tempSqlFile" &
@@ -68,7 +69,7 @@ echo "Database Setup Completed"
 
 # display a message about password if not set or too short
 if [ "$TEST_LEN" -lt "4" ]; then
-less /tmp/no-pass.nfo
+echo "$(cat /tmp/no-pass.nfo)"
 sleep 5s
 fi
 
