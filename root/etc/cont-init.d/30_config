@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 
 # make folders if required
 mkdir -p "$DATADIR" /var/run/mysqld /config/log/mysql
