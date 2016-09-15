@@ -14,8 +14,7 @@ RUN \
  echo "deb-src http://mirrors.coreix.net/mariadb/repo/10.1/ubuntu xenial main" >> /etc/apt/sources.list.d/mariadb.list && \
  apt-get update && \
  apt-get install -y \
-	mariadb-server \
-	mysqltuner && \
+	mariadb-server && \
 
 # cleanup
  rm -rf \
