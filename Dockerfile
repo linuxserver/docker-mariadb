@@ -1,36 +1,37 @@
-# set base os
-FROM linuxserver/baseimage
+FROM lsiobase/xenial
+MAINTAINER sparklyballs
 
-MAINTAINER Sparklyballs  <sparklyballs@linuxserver.io>
-
-# set some environment variables for mariadb to give us our paths
-ENV INSTALL_LIST="mariadb-server mysqltuner"
+# environment variables
+ARG DEBIAN_FRONTEND="noninteractive"
 ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
 
-# set the repo version for mariadb choose between 5.5 or 10.0
-ENV REPO_VER 10.1
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
 # update apt and install packages
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db && \
-echo "deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/${REPO_VER}/ubuntu trusty main" >> /etc/apt/sources.list.d/mariadb.list && \
-apt-get update && \
-apt-get install \
-$INSTALL_LIST -qy && \
+RUN \
+ apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
+ echo "deb [arch=amd64,i386] http://mirrors.coreix.net/mariadb/repo/10.1/ubuntu xenial main" >> /etc/apt/sources.list.d/mariadb.list && \
+ echo "deb-src http://mirrors.coreix.net/mariadb/repo/10.1/ubuntu xenial main" >> /etc/apt/sources.list.d/mariadb.list && \
+ apt-get update && \
+ apt-get install -y \
+	mariadb-server && \
 
 # cleanup
-apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/lib/mysql && \
-mkdir -p /var/lib/mysql
+ rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/lib/mysql \
+	/var/tmp/* && \
+ mkdir -p \
+	/var/lib/mysql
 
-#Adding Custom files
-COPY defaults/ /defaults/
-COPY init/ /etc/my_init.d/
-COPY services/ /etc/service/
-RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
+# add local files
+COPY root/ /
 
-# set volumes and ports
-VOLUME /config
+# ports and volumes
 EXPOSE 3306
-
-
+VOLUME /config
