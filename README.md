@@ -57,7 +57,9 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Setting up the application 
 
-If you didn't set a password during installation, (see logs for warning) use mysqladmin -u root password <PASSWORD> to set one at the docker prompt...
+If you didn't set a password during installation, (see logs for warning) use 
+`mysqladmin -u root password <PASSWORD>` 
+to set one at the docker prompt...
 
 NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password. 
 
@@ -70,8 +72,14 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 * Shell access whilst the container is running: `docker exec -it mariadb /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f mariadb`
-* container version number `docker inspect -f '{{ index .Config.Labels "build_version" }}' mariadb`
-* image version number `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/mariadb`
+
+* container version number 
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' mariadb`
+
+* image version number
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/mariadb`
 
 ## Versions
 + **11.10.16:** Rebase to ubuntu xenial, add version labelling.
