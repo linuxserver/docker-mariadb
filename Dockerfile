@@ -5,6 +5,7 @@ MAINTAINER sparklyballs
 ARG DEBIAN_FRONTEND="noninteractive"
 ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
+ENV TEST="test"
 
 # set version label
 ARG BUILD_DATE
