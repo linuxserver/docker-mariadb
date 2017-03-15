@@ -2,6 +2,8 @@
 [forumurl]: https://forum.linuxserver.io
 [ircurl]: https://www.linuxserver.io/irc/
 [podcasturl]: https://www.linuxserver.io/podcast/
+[appurl]: https://mariadb.org/
+[hub]: https://hub.docker.com/r/linuxserver/mariadb/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -12,12 +14,10 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 # linuxserver/mariadb
 [![](https://images.microbadger.com/badges/version/linuxserver/mariadb.svg)](https://microbadger.com/images/linuxserver/mariadb "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/mariadb.svg)](http://microbadger.com/images/linuxserver/mariadb "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mariadb.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/mariadb.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-mariadb)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-mariadb/)
-[hub]: https://hub.docker.com/r/linuxserver/mariadb/
 
 One of the most popular database servers. Made by the original developers of MySQL
 
-[![mariadb](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)][mariaurl]
-[mariaurl]: https://mariadb.org/
+[![mariadb](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)][appurl]
 
 ## Usage
 
