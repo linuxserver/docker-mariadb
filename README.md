@@ -13,7 +13,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # linuxserver/mariadb
-[![](https://images.microbadger.com/badges/version/linuxserver/mariadb.svg)](https://microbadger.com/images/linuxserver/mariadb "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/mariadb.svg)](http://microbadger.com/images/linuxserver/mariadb "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mariadb.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/mariadb.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-mariadb)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-mariadb/)
+[![](https://images.microbadger.com/badges/version/linuxserver/mariadb.svg)](https://microbadger.com/images/linuxserver/mariadb "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/mariadb.svg)](https://microbadger.com/images/linuxserver/mariadb "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mariadb.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/mariadb.svg)][hub][![Build Status](https://ci.linuxserver.io/buildStatus/icon?job=Docker-Builders/x86-64/x86-64-mariadb)](https://ci.linuxserver.io/job/Docker-Builders/job/x86-64/job/x86-64-mariadb/)
 
 One of the most popular database servers. Made by the original developers of MySQL
 
