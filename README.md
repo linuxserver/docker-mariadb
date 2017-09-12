@@ -89,6 +89,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ## Versions
 
++ **12.09.17:** Gracefully shut down mariadb
 + **27.10.16:** Implement linting suggestions on database init script.
 + **11.10.16:** Rebase to ubuntu xenial, add version labelling.
 + **09.03.16:** Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
