@@ -89,6 +89,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ## Versions
 
++ **09.12.17:** Fix continuation lines.
 + **12.09.17:** Gracefully shut down mariadb
 + **27.10.16:** Implement linting suggestions on database init script.
 + **11.10.16:** Rebase to ubuntu xenial, add version labelling.
