@@ -23,7 +23,7 @@ sed -i "s/user='mysql'/user='abc'/g" /usr/bin/mysqld_safe
 	ln -s /config/custom.cnf /etc/mysql/conf.d/custom.cnf
 
 # set permissions
-[[ -e /etc/mysql/debian.cnf ]] && \
-	(chown abc:abc /etc/mysql/debian.cnf && chmod 644 /etc/mysql/debian.cnf)
+[[ -d /etc/mysql ]] && \
+	find /etc/mysql -type f -name "*.cnf" -exec chown root:root {} \; -exec chmod 644 {} \;
 chmod -R 777 \
 	/var/run/mysqld
