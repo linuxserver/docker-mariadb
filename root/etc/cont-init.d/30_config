@@ -6,12 +6,17 @@ mkdir -p \
 	/config/log/mysql \
 	/var/run/mysqld
 
+if [ -e /etc/mysql/mariadb.conf.d/50-server.cnf ]; then \
+	CONF_FILE="/etc/mysql/mariadb.conf.d/50-server.cnf";
+ else CONF_FILE="/etc/mysql/my.cnf"; 
+fi
+
 # configure my.cnf and mysqld_safe
-sed -i 's/key_buffer\b/key_buffer_size/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-sed -ri 's/^(bind-address|skip-networking)/;\1/' /etc/mysql/mariadb.conf.d/50-server.cnf
-sed -i s#/var/log/mysql#/config/log/mysql#g /etc/mysql/mariadb.conf.d/50-server.cnf
-sed -i -e 's/\(user.*=\).*/\1 abc/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-sed -i -e "s#\\(datadir.*=\\).*#\\1 $DATADIR#g" /etc/mysql/mariadb.conf.d/50-server.cnf
+sed -i 's/key_buffer\b/key_buffer_size/g' "$CONF_FILE"
+sed -ri 's/^(bind-address|skip-networking)/;\1/' "$CONF_FILE"
+sed -i s#/var/log/mysql#/config/log/mysql#g "$CONF_FILE"
+sed -i -e 's/\(user.*=\).*/\1 abc/g' "$CONF_FILE"
+sed -i -e "s#\\(datadir.*=\\).*#\\1 $DATADIR#g" "$CONF_FILE"
 sed -i "s/user='mysql'/user='abc'/g" /usr/bin/mysqld_safe
 
 # setup custom cnf file
