@@ -89,6 +89,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ## Versions
 
++ **10.09.18:** Rebase to ubuntu bionic and use 10.3 mariadb repository.
 + **09.12.17:** Fix continuation lines.
 + **12.09.17:** Gracefully shut down mariadb
 + **27.10.16:** Implement linting suggestions on database init script.
