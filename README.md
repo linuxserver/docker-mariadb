@@ -35,14 +35,14 @@ linuxserver/mariadb
 
 ## Parameters
 
-`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side. 
+`The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side.
 For example with a port -p external:internal - what this shows is the port mapping from internal to external of the container.
 So -p 8080:80 would expose port 80 from inside the container to be accessible from the host's IP on port 8080
 http://192.168.x.x:8080 would show you what's running INSIDE the container on port 80.`
 
 
 * `-p 3306` - mysql port
-* `-v /config` - Contains the db itself and all assorted settings. 
+* `-v /config` - Contains the db itself and all assorted settings.
 * `-e MYSQL_ROOT_PASSWORD` - set this to root password for installation (minimum 4 characters)
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
@@ -61,13 +61,13 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
     uid=1001(dockeruser) gid=1001(dockergroup) groups=1001(dockergroup)
 ```
 
-## Setting up the application 
+## Setting up the application
 
-If you didn't set a password during installation, (see logs for warning) use 
-`mysqladmin -u root password <PASSWORD>` 
+If you didn't set a password during installation, (see logs for warning) use
+`mysqladmin -u root password <PASSWORD>`
 to set one at the docker prompt...
 
-NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password. 
+NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
 
 Unraid users, it is advisable to edit the template/webui after setup and remove reference to this variable.
 
@@ -79,7 +79,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 * Shell access whilst the container is running: `docker exec -it mariadb /bin/bash`
 * To monitor the logs of the container in realtime: `docker logs -f mariadb`
 
-* container version number 
+* container version number
 
 `docker inspect -f '{{ index .Config.Labels "build_version" }}' mariadb`
 
@@ -89,6 +89,7 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ## Versions
 
++ **26.01.19:** Add pipeline logic and multi arch.
 + **10.09.18:** Rebase to ubuntu bionic and use 10.3 mariadb repository.
 + **09.12.17:** Fix continuation lines.
 + **12.09.17:** Gracefully shut down mariadb
