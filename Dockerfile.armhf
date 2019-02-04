@@ -1,4 +1,7 @@
-FROM lsiobase/ubuntu:bionic
+FROM lsiobase/ubuntu.armhf:bionic
+
+# Add qemu to build on x86_64 systems
+COPY qemu-arm-static /usr/bin
 
 # set version label
 ARG BUILD_DATE
@@ -25,14 +28,9 @@ RUN \
  echo "deb-src http://mirror.sax.uk.as61049.net/mariadb/repo/10.3/ubuntu bionic main" >> \
 	/etc/apt/sources.list.d/mariadb.list && \
  echo "**** install runtime packages ****" && \
- if [ -z ${MARIADB_VERSION+x} ]; then \
-        MARIADB="mariadb-server"; \
- else \
-        MARIADB="mariadb-server=${MARIADB_VERSION}"; \
- fi && \
  apt-get update && \
  apt-get install -y \
-	${MARIADB} && \
+	mariadb-server && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \

@@ -1,0 +1,27 @@
+---
+
+# jenkins variables
+project_name: docker-mariadb
+external_type: na
+custom_version_command: "curl -sX GET http://mirror.sax.uk.as61049.net/mariadb/repo/10.3/ubuntu/dists/bionic/main/binary-amd64/Packages |grep -A 7 -m 1 'Package: mariadb-server' | awk -F ': ' '/Version/{print $2;exit}'"
+release_type: stable
+release_tag: latest
+ls_branch: master
+repo_vars:
+  - BUILD_VERSION_ARG = 'MARIADB_VERSION'
+  - LS_USER = 'linuxserver'
+  - LS_REPO = 'docker-mariadb'
+  - CONTAINER_NAME = 'mariadb'
+  - DOCKERHUB_IMAGE = 'linuxserver/mariadb'
+  - DEV_DOCKERHUB_IMAGE = 'lsiodev/mariadb'
+  - PR_DOCKERHUB_IMAGE = 'lspipepr/mariadb'
+  - DIST_IMAGE = 'ubuntu'
+  - MULTIARCH='true'
+  - CI='true'
+  - CI_WEB='false'
+  - CI_PORT='3306'
+  - CI_SSL='false'
+  - CI_DELAY='30'
+  - CI_DOCKERENV='MYSQL_ROOT_PASSWORD=password'
+  - CI_AUTH='user:password'
+  - CI_WEBPATH=''
