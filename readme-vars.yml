@@ -35,7 +35,11 @@ param_device_map: false
 cap_add_param: false
 
 # optional container parameters
-opt_param_usage_include_env: false
+opt_param_usage_include_env: true
+opt_param_env_vars:
+  - { env_var: "MYSQL_DATABASE", env_value: "<USER DB NAME>", desc: "Specify the name of a database to be created on image startup." }
+  - { env_var: "MYSQL_USER", env_value: "<MYSQL USER>", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE." }
+  - { env_var: "MYSQL_PASSWORD", env_value: "<DATABASE PASSWORD>", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters)." }
 opt_param_usage_include_vols: false
 opt_param_usage_include_ports: false
 opt_param_device_map: false
@@ -51,6 +55,8 @@ app_setup_block: |
 
   NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
 
+  NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
+
   Unraid users, it is advisable to edit the template/webui after setup and remove reference to this variable.
 
   Find custom.cnf in /config for config changes (restart container for them to take effect)
@@ -58,6 +64,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup." }
   - { date: "26.01.19:", desc: "Add pipeline logic and multi arch." }
   - { date: "10.09.18:", desc: "Rebase to ubuntu bionic and use 10.3 mariadb repository." }
   - { date: "09.12.17:", desc: "Fix continuation lines." }

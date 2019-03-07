@@ -44,8 +44,21 @@ else
 MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
 fi
 
+# Make sure all user and database settings are set and pass is more than 4 characters
+if [ "${MYSQL_USER+x}" ] && \
+[ "${MYSQL_DATABASE+x}" ] && \
+[ "${MYSQL_PASSWORD+x}" ] && \
+[ "${#MYSQL_PASSWORD}" -gt "4" ]; then
+read -r -d '' MYSQL_DB_SETUP << EOM
+CREATE DATABASE ${MYSQL_DATABASE};
+CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+EOM
+fi
+
 # add rest of sql commands based on password set or not
 cat >> "$tempSqlFile" <<-EONEWSQL
+$MYSQL_DB_SETUP
 $MYSQL_PASS
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
