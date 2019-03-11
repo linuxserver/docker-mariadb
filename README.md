@@ -55,6 +55,9 @@ docker create \
   -e PGID=1000 \
   -e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD> \
   -e TZ=Europe/London \
+  -e MYSQL_DATABASE=<USER DB NAME> `#optional` \
+  -e MYSQL_USER=<MYSQL USER> `#optional` \
+  -e MYSQL_PASSWORD=<DATABASE PASSWORD> `#optional` \
   -p 3306:3306 \
   -v <path to data>:/config \
   --restart unless-stopped \
@@ -78,6 +81,9 @@ services:
       - PGID=1000
       - MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>
       - TZ=Europe/London
+      - MYSQL_DATABASE=<USER DB NAME> #optional
+      - MYSQL_USER=<MYSQL USER> #optional
+      - MYSQL_PASSWORD=<DATABASE PASSWORD> #optional
     volumes:
       - <path to data>:/config
     ports:
@@ -96,6 +102,9 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>` | Set this to root password for installation (minimum 4 characters). |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
+| `-e MYSQL_DATABASE=<USER DB NAME>` | Specify the name of a database to be created on image startup. |
+| `-e MYSQL_USER=<MYSQL USER>` | This user will have superuser access to the database specified by MYSQL_DATABASE. |
+| `-e MYSQL_PASSWORD=<DATABASE PASSWORD>` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters). |
 | `-v /config` | Contains the db itself and all assorted settings. |
 
 ## User / Group Identifiers
@@ -120,6 +129,8 @@ If you didn't set a password during installation, (see logs for warning) use
 to set one at the docker prompt...
 
 NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+
+NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
 Unraid users, it is advisable to edit the template/webui after setup and remove reference to this variable.
 
@@ -169,6 +180,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
+* **07.03.19:** - Add ability to setup a database and default user on first spinup.
 * **26.01.19:** - Add pipeline logic and multi arch.
 * **10.09.18:** - Rebase to ubuntu bionic and use 10.3 mariadb repository.
 * **09.12.17:** - Fix continuation lines.
