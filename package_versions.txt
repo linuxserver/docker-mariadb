@@ -1,187 +1,187 @@
-adduser/now 3.116ubuntu1
-apt/now 1.6.8
-apt-utils/now 1.6.8
-base-files/now 10.1ubuntu2.4
-base-passwd/now 3.5.44
-bash/now 4.4.18-2ubuntu1
-bsdutils/now 1:2.31.1-0.4ubuntu3.3
-bzip2/now 1.0.6-8.1
-ca-certificates/now 20180409
-coreutils/now 8.28-1ubuntu1
-curl/now 7.58.0-2ubuntu3.6
-dash/now 0.5.8-2.10
-debconf/now 1.5.66
-debianutils/now 4.8.4
-diffutils/now 1:3.6-1
-dirmngr/now 2.2.4-1ubuntu1.2
-dpkg/now 1.19.0.5ubuntu2.1
-e2fsprogs/now 1.44.1-1ubuntu1.1
-fdisk/now 2.31.1-0.4ubuntu3.3
-findutils/now 4.6.0+git+20170828-2
-galera-3/now 25.3.25-bionic
-gawk/now 1:4.1.4+dfsg-1build1
-gcc-8-base/now 8.2.0-1ubuntu2~18.04
-gnupg/now 2.2.4-1ubuntu1.2
-gnupg-l10n/now 2.2.4-1ubuntu1.2
-gnupg-utils/now 2.2.4-1ubuntu1.2
-gpg/now 2.2.4-1ubuntu1.2
-gpg-agent/now 2.2.4-1ubuntu1.2
-gpg-wks-client/now 2.2.4-1ubuntu1.2
-gpg-wks-server/now 2.2.4-1ubuntu1.2
-gpgconf/now 2.2.4-1ubuntu1.2
-gpgsm/now 2.2.4-1ubuntu1.2
-gpgv/now 2.2.4-1ubuntu1.2
-grep/now 3.1-2
-gzip/now 1.6-5ubuntu1
-hostname/now 3.20
-init-system-helpers/now 1.51
-iproute2/now 4.15.0-2ubuntu1
-krb5-locales/now 1.16-2ubuntu0.1
-libacl1/now 2.2.52-3build1
-libaio1/now 0.3.110-5
-libapt-inst2.0/now 1.6.8
-libapt-pkg5.0/now 1.6.8
-libasn1-8-heimdal/now 7.5.0+dfsg-1
-libassuan0/now 2.5.1-2
-libatm1/now 1:2.5.1-2build1
-libattr1/now 1:2.4.47-2build1
-libaudit-common/now 1:2.8.2-1ubuntu1
-libaudit1/now 1:2.8.2-1ubuntu1
-libblkid1/now 2.31.1-0.4ubuntu3.3
-libbz2-1.0/now 1.0.6-8.1
-libc-bin/now 2.27-3ubuntu1
-libc6/now 2.27-3ubuntu1
-libcap-ng0/now 0.7.7-3.1
-libcgi-fast-perl/now 1:2.13-1
-libcgi-pm-perl/now 4.38-1
-libcom-err2/now 1.44.1-1ubuntu1.1
-libcurl4/now 7.58.0-2ubuntu3.6
-libdb5.3/now 5.3.28-13.1ubuntu1
-libdbd-mysql-perl/now 4.046-1
-libdbi-perl/now 1.640-1
-libdebconfclient0/now 0.213ubuntu1
-libelf1/now 0.170-0.4
-libencode-locale-perl/now 1.05-1
-libext2fs2/now 1.44.1-1ubuntu1.1
-libfcgi-perl/now 0.78-2build1
-libfdisk1/now 2.31.1-0.4ubuntu3.3
-libffi6/now 3.2.1-8
-libgcc1/now 1:8.2.0-1ubuntu2~18.04
-libgcrypt20/now 1.8.1-4ubuntu1.1
-libgdbm-compat4/now 1.14.1-6
-libgdbm5/now 1.14.1-6
-libgmp10/now 2:6.1.2+dfsg-2
-libgnutls30/now 3.5.18-1ubuntu1
-libgpg-error0/now 1.27-6
-libgssapi-krb5-2/now 1.16-2ubuntu0.1
-libgssapi3-heimdal/now 7.5.0+dfsg-1
-libhcrypto4-heimdal/now 7.5.0+dfsg-1
-libheimbase1-heimdal/now 7.5.0+dfsg-1
-libheimntlm0-heimdal/now 7.5.0+dfsg-1
-libhogweed4/now 3.4-1
-libhtml-parser-perl/now 3.72-3build1
-libhtml-tagset-perl/now 3.20-3
-libhtml-template-perl/now 2.97-1
-libhttp-date-perl/now 6.02-1
-libhttp-message-perl/now 6.14-1
-libhx509-5-heimdal/now 7.5.0+dfsg-1
-libidn2-0/now 2.0.4-1.1build2
-libio-html-perl/now 1.001-1
-libk5crypto3/now 1.16-2ubuntu0.1
-libkeyutils1/now 1.5.9-9.2ubuntu2
-libkrb5-26-heimdal/now 7.5.0+dfsg-1
-libkrb5-3/now 1.16-2ubuntu0.1
-libkrb5support0/now 1.16-2ubuntu0.1
-libksba8/now 1.3.5-2
-libldap-2.4-2/now 2.4.45+dfsg-1ubuntu1.1
-libldap-common/now 2.4.45+dfsg-1ubuntu1.1
-liblwp-mediatypes-perl/now 6.02-1
-liblz4-1/now 0.0~r131-2ubuntu3
-liblzma5/now 5.2.2-1.3
-libmnl0/now 1.0.4-2
-libmount1/now 2.31.1-0.4ubuntu3.3
-libmpfr6/now 4.0.1-1
-libmysqlclient20/now 5.7.25-0ubuntu0.18.04.2
-libncurses5/now 6.1-1ubuntu1.18.04
-libncursesw5/now 6.1-1ubuntu1.18.04
-libnettle6/now 3.4-1
-libnghttp2-14/now 1.30.0-1ubuntu1
-libnpth0/now 1.5-3
-libnuma1/now 2.0.11-2.1
-libp11-kit0/now 0.23.9-2
-libpam-modules/now 1.1.8-3.6ubuntu2.18.04.1
-libpam-modules-bin/now 1.1.8-3.6ubuntu2.18.04.1
-libpam-runtime/now 1.1.8-3.6ubuntu2.18.04.1
-libpam0g/now 1.1.8-3.6ubuntu2.18.04.1
-libpcre3/now 2:8.39-9
-libperl5.26/now 5.26.1-6ubuntu0.3
-libpopt0/now 1.16-11
-libprocps6/now 2:3.3.12-3ubuntu1.1
-libpsl5/now 0.19.1-5build1
-libreadline5/now 5.2+dfsg-3build1
-libreadline7/now 7.0-3
-libroken18-heimdal/now 7.5.0+dfsg-1
-librtmp1/now 2.4+20151223.gitfa8646d.1-1
-libsasl2-2/now 2.1.27~101-g0780600+dfsg-3ubuntu2
-libsasl2-modules/now 2.1.27~101-g0780600+dfsg-3ubuntu2
-libsasl2-modules-db/now 2.1.27~101-g0780600+dfsg-3ubuntu2
-libseccomp2/now 2.3.1-2.1ubuntu4.1
-libselinux1/now 2.7-2build2
-libsemanage-common/now 2.7-2build2
-libsemanage1/now 2.7-2build2
-libsepol1/now 2.7-1
-libsigsegv2/now 2.12-1
-libsmartcols1/now 2.31.1-0.4ubuntu3.3
-libsqlite3-0/now 3.22.0-1
-libss2/now 1.44.1-1ubuntu1.1
-libssl1.1/now 1.1.0g-2ubuntu4.3
-libstdc++6/now 8.2.0-1ubuntu2~18.04
-libsystemd0/now 237-3ubuntu10.15
-libtasn1-6/now 4.13-2
-libterm-readkey-perl/now 2.37-1build1
-libtimedate-perl/now 2.3000-2
-libtinfo5/now 6.1-1ubuntu1.18.04
-libudev1/now 237-3ubuntu10.15
-libunistring2/now 0.9.9-0ubuntu1
-liburi-perl/now 1.73-1
-libuuid1/now 2.31.1-0.4ubuntu3.3
-libwind0-heimdal/now 7.5.0+dfsg-1
-libwrap0/now 7.6.q-27
-libxtables12/now 1.6.1-2ubuntu2
-libzstd1/now 1.3.3+dfsg-2ubuntu1
-locales/now 2.27-3ubuntu1
-login/now 1:4.5-1ubuntu1
-lsb-base/now 9.20170808ubuntu1
-lsof/now 4.89+dfsg-0.1
-mariadb-client-10.3/now 1:10.3.13+maria~bionic
-mariadb-client-core-10.3/now 1:10.3.13+maria~bionic
-mariadb-common/now 1:10.3.13+maria~bionic
-mariadb-server/now 1:10.3.13+maria~bionic
-mariadb-server-10.3/now 1:10.3.13+maria~bionic
-mariadb-server-core-10.3/now 1:10.3.13+maria~bionic
-mawk/now 1.3.3-17ubuntu3
-mount/now 2.31.1-0.4ubuntu3.3
-mysql-common/now 1:10.3.13+maria~bionic
-ncurses-base/now 6.1-1ubuntu1.18.04
-ncurses-bin/now 6.1-1ubuntu1.18.04
-netbase/now 5.4
-openssl/now 1.1.0g-2ubuntu4.3
-passwd/now 1:4.5-1ubuntu1
-perl/now 5.26.1-6ubuntu0.3
-perl-base/now 5.26.1-6ubuntu0.3
-perl-modules-5.26/now 5.26.1-6ubuntu0.3
-pinentry-curses/now 1.1.0-1
-procps/now 2:3.3.12-3ubuntu1.1
-psmisc/now 23.1-1ubuntu0.1
-publicsuffix/now 20180223.1310-1
-readline-common/now 7.0-3
-rsync/now 3.1.2-2.1ubuntu1
-sed/now 4.4-2
-sensible-utils/now 0.0.12
-socat/now 1.7.3.2-2ubuntu2
-sysvinit-utils/now 2.88dsf-59.10ubuntu1
-tar/now 1.29b-2ubuntu0.1
-tzdata/now 2018i-0ubuntu0.18.04
-ubuntu-keyring/now 2018.09.18.1~18.04.0
-util-linux/now 2.31.1-0.4ubuntu3.3
-zlib1g/now 1:1.2.11.dfsg-0ubuntu2
+adduser3.116ubuntu1
+apt1.6.8
+apt-utils1.6.8
+base-files10.1ubuntu2.4
+base-passwd3.5.44
+bash4.4.18-2ubuntu1
+bsdutils1:2.31.1-0.4ubuntu3.3
+bzip21.0.6-8.1
+ca-certificates20180409
+coreutils8.28-1ubuntu1
+curl7.58.0-2ubuntu3.6
+dash0.5.8-2.10
+debconf1.5.66
+debianutils4.8.4
+diffutils1:3.6-1
+dirmngr2.2.4-1ubuntu1.2
+dpkg1.19.0.5ubuntu2.1
+e2fsprogs1.44.1-1ubuntu1.1
+fdisk2.31.1-0.4ubuntu3.3
+findutils4.6.0+git+20170828-2
+galera-325.3.25-bionic
+gawk1:4.1.4+dfsg-1build1
+gcc-8-base8.2.0-1ubuntu2~18.04
+gnupg2.2.4-1ubuntu1.2
+gnupg-l10n2.2.4-1ubuntu1.2
+gnupg-utils2.2.4-1ubuntu1.2
+gpg2.2.4-1ubuntu1.2
+gpg-agent2.2.4-1ubuntu1.2
+gpgconf2.2.4-1ubuntu1.2
+gpgsm2.2.4-1ubuntu1.2
+gpgv2.2.4-1ubuntu1.2
+gpg-wks-client2.2.4-1ubuntu1.2
+gpg-wks-server2.2.4-1ubuntu1.2
+grep3.1-2
+gzip1.6-5ubuntu1
+hostname3.20
+init-system-helpers1.51
+iproute24.15.0-2ubuntu1
+krb5-locales1.16-2ubuntu0.1
+libacl12.2.52-3build1
+libaio10.3.110-5
+libapt-inst2.01.6.8
+libapt-pkg5.01.6.8
+libasn1-8-heimdal7.5.0+dfsg-1
+libassuan02.5.1-2
+libatm11:2.5.1-2build1
+libattr11:2.4.47-2build1
+libaudit11:2.8.2-1ubuntu1
+libaudit-common1:2.8.2-1ubuntu1
+libblkid12.31.1-0.4ubuntu3.3
+libbz2-1.01.0.6-8.1
+libc62.27-3ubuntu1
+libcap-ng00.7.7-3.1
+libc-bin2.27-3ubuntu1
+libcgi-fast-perl1:2.13-1
+libcgi-pm-perl4.38-1
+libcom-err21.44.1-1ubuntu1.1
+libcurl47.58.0-2ubuntu3.6
+libdb5.35.3.28-13.1ubuntu1
+libdbd-mysql-perl4.046-1
+libdbi-perl1.640-1
+libdebconfclient00.213ubuntu1
+libelf10.170-0.4
+libencode-locale-perl1.05-1
+libext2fs21.44.1-1ubuntu1.1
+libfcgi-perl0.78-2build1
+libfdisk12.31.1-0.4ubuntu3.3
+libffi63.2.1-8
+libgcc11:8.2.0-1ubuntu2~18.04
+libgcrypt201.8.1-4ubuntu1.1
+libgdbm51.14.1-6
+libgdbm-compat41.14.1-6
+libgmp102:6.1.2+dfsg-2
+libgnutls303.5.18-1ubuntu1
+libgpg-error01.27-6
+libgssapi3-heimdal7.5.0+dfsg-1
+libgssapi-krb5-21.16-2ubuntu0.1
+libhcrypto4-heimdal7.5.0+dfsg-1
+libheimbase1-heimdal7.5.0+dfsg-1
+libheimntlm0-heimdal7.5.0+dfsg-1
+libhogweed43.4-1
+libhtml-parser-perl3.72-3build1
+libhtml-tagset-perl3.20-3
+libhtml-template-perl2.97-1
+libhttp-date-perl6.02-1
+libhttp-message-perl6.14-1
+libhx509-5-heimdal7.5.0+dfsg-1
+libidn2-02.0.4-1.1build2
+libio-html-perl1.001-1
+libk5crypto31.16-2ubuntu0.1
+libkeyutils11.5.9-9.2ubuntu2
+libkrb5-26-heimdal7.5.0+dfsg-1
+libkrb5-31.16-2ubuntu0.1
+libkrb5support01.16-2ubuntu0.1
+libksba81.3.5-2
+libldap-2.4-22.4.45+dfsg-1ubuntu1.1
+libldap-common2.4.45+dfsg-1ubuntu1.1
+liblwp-mediatypes-perl6.02-1
+liblz4-10.0~r131-2ubuntu3
+liblzma55.2.2-1.3
+libmnl01.0.4-2
+libmount12.31.1-0.4ubuntu3.3
+libmpfr64.0.1-1
+libmysqlclient205.7.25-0ubuntu0.18.04.2
+libncurses56.1-1ubuntu1.18.04
+libncursesw56.1-1ubuntu1.18.04
+libnettle63.4-1
+libnghttp2-141.30.0-1ubuntu1
+libnpth01.5-3
+libnuma12.0.11-2.1
+libp11-kit00.23.9-2
+libpam0g1.1.8-3.6ubuntu2.18.04.1
+libpam-modules1.1.8-3.6ubuntu2.18.04.1
+libpam-modules-bin1.1.8-3.6ubuntu2.18.04.1
+libpam-runtime1.1.8-3.6ubuntu2.18.04.1
+libpcre32:8.39-9
+libperl5.265.26.1-6ubuntu0.3
+libpopt01.16-11
+libprocps62:3.3.12-3ubuntu1.1
+libpsl50.19.1-5build1
+libreadline55.2+dfsg-3build1
+libreadline77.0-3
+libroken18-heimdal7.5.0+dfsg-1
+librtmp12.4+20151223.gitfa8646d.1-1
+libsasl2-22.1.27~101-g0780600+dfsg-3ubuntu2
+libsasl2-modules2.1.27~101-g0780600+dfsg-3ubuntu2
+libsasl2-modules-db2.1.27~101-g0780600+dfsg-3ubuntu2
+libseccomp22.3.1-2.1ubuntu4.1
+libselinux12.7-2build2
+libsemanage12.7-2build2
+libsemanage-common2.7-2build2
+libsepol12.7-1
+libsigsegv22.12-1
+libsmartcols12.31.1-0.4ubuntu3.3
+libsqlite3-03.22.0-1
+libss21.44.1-1ubuntu1.1
+libssl1.11.1.0g-2ubuntu4.3
+libstdc++68.2.0-1ubuntu2~18.04
+libsystemd0237-3ubuntu10.15
+libtasn1-64.13-2
+libterm-readkey-perl2.37-1build1
+libtimedate-perl2.3000-2
+libtinfo56.1-1ubuntu1.18.04
+libudev1237-3ubuntu10.15
+libunistring20.9.9-0ubuntu1
+liburi-perl1.73-1
+libuuid12.31.1-0.4ubuntu3.3
+libwind0-heimdal7.5.0+dfsg-1
+libwrap07.6.q-27
+libxtables121.6.1-2ubuntu2
+libzstd11.3.3+dfsg-2ubuntu1
+locales2.27-3ubuntu1
+login1:4.5-1ubuntu1
+lsb-base9.20170808ubuntu1
+lsof4.89+dfsg-0.1
+mariadb-client-10.31:10.3.13+maria~bionic
+mariadb-client-core-10.31:10.3.13+maria~bionic
+mariadb-common1:10.3.13+maria~bionic
+mariadb-server-10.31:10.3.13+maria~bionic
+mariadb-server1:10.3.13+maria~bionic
+mariadb-server-core-10.31:10.3.13+maria~bionic
+mawk1.3.3-17ubuntu3
+mount2.31.1-0.4ubuntu3.3
+mysql-common1:10.3.13+maria~bionic
+ncurses-base6.1-1ubuntu1.18.04
+ncurses-bin6.1-1ubuntu1.18.04
+netbase5.4
+openssl1.1.0g-2ubuntu4.3
+passwd1:4.5-1ubuntu1
+perl5.26.1-6ubuntu0.3
+perl-base5.26.1-6ubuntu0.3
+perl-modules-5.265.26.1-6ubuntu0.3
+pinentry-curses1.1.0-1
+procps2:3.3.12-3ubuntu1.1
+psmisc23.1-1ubuntu0.1
+publicsuffix20180223.1310-1
+readline-common7.0-3
+rsync3.1.2-2.1ubuntu1
+sed4.4-2
+sensible-utils0.0.12
+socat1.7.3.2-2ubuntu2
+sysvinit-utils2.88dsf-59.10ubuntu1
+tar1.29b-2ubuntu0.1
+tzdata2018i-0ubuntu0.18.04
+ubuntu-keyring2018.09.18.1~18.04.0
+util-linux2.31.1-0.4ubuntu3.3
+zlib1g1:1.2.11.dfsg-0ubuntu2
