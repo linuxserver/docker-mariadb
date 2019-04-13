@@ -135,13 +135,13 @@ libsqlite3-03.22.0-1
 libss21.44.1-1ubuntu1.1
 libssl1.11.1.0g-2ubuntu4.3
 libstdc++68.2.0-1ubuntu2~18.04
-libsystemd0237-3ubuntu10.15
+libsystemd0237-3ubuntu10.19
 libtasn1-64.13-2
 libterm-readkey-perl2.37-1build1
 libtimedate-perl2.3000-2
 libtinfo56.1-1ubuntu1.18.04
-libudev1237-3ubuntu10.15
-libunistring20.9.9-0ubuntu1
+libudev1237-3ubuntu10.19
+libunistring20.9.9-0ubuntu2
 liburi-perl1.73-1
 libuuid12.31.1-0.4ubuntu3.3
 libwind0-heimdal7.5.0+dfsg-1
