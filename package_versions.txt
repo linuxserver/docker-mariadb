@@ -38,7 +38,7 @@ init-system-helpers1.51
 iproute24.15.0-2ubuntu1
 krb5-locales1.16-2ubuntu0.1
 libacl12.2.52-3build1
-libaio10.3.110-5
+libaio10.3.110-5ubuntu0.1
 libapt-inst2.01.6.10
 libapt-pkg5.01.6.10
 libasn1-8-heimdal7.5.0+dfsg-1
