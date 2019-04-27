@@ -135,12 +135,12 @@ libsqlite3-03.22.0-1
 libss21.44.1-1ubuntu1.1
 libssl1.11.1.0g-2ubuntu4.3
 libstdc++68.2.0-1ubuntu2~18.04
-libsystemd0237-3ubuntu10.19
+libsystemd0237-3ubuntu10.20
 libtasn1-64.13-2
 libterm-readkey-perl2.37-1build1
 libtimedate-perl2.3000-2
 libtinfo56.1-1ubuntu1.18.04
-libudev1237-3ubuntu10.19
+libudev1237-3ubuntu10.20
 libunistring20.9.9-0ubuntu2
 liburi-perl1.73-1
 libuuid12.31.1-0.4ubuntu3.3
@@ -180,7 +180,7 @@ sensible-utils0.0.12
 socat1.7.3.2-2ubuntu2
 sysvinit-utils2.88dsf-59.10ubuntu1
 tar1.29b-2ubuntu0.1
-tzdata2018i-0ubuntu0.18.04
+tzdata2019a-0ubuntu0.18.04
 ubuntu-keyring2018.09.18.1~18.04.0
 util-linux2.31.1-0.4ubuntu3.3
 zlib1g1:1.2.11.dfsg-0ubuntu2
