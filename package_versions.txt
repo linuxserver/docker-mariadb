@@ -56,7 +56,7 @@ libcgi-fast-perl1:2.13-1
 libcgi-pm-perl4.38-1
 libcom-err21.44.1-1ubuntu1.1
 libcurl47.58.0-2ubuntu3.7
-libdb5.35.3.28-13.1ubuntu1
+libdb5.35.3.28-13.1ubuntu1.1
 libdbd-mysql-perl4.046-1
 libdbi-perl1.640-1
 libdebconfclient00.213ubuntu1
@@ -71,7 +71,7 @@ libgcrypt201.8.1-4ubuntu1.1
 libgdbm51.14.1-6
 libgdbm-compat41.14.1-6
 libgmp102:6.1.2+dfsg-2
-libgnutls303.5.18-1ubuntu1
+libgnutls303.5.18-1ubuntu1.1
 libgpg-error01.27-6
 libgssapi3-heimdal7.5.0+dfsg-1
 libgssapi-krb5-21.16-2ubuntu0.1
@@ -124,7 +124,7 @@ librtmp12.4+20151223.gitfa8646d.1-1
 libsasl2-22.1.27~101-g0780600+dfsg-3ubuntu2
 libsasl2-modules2.1.27~101-g0780600+dfsg-3ubuntu2
 libsasl2-modules-db2.1.27~101-g0780600+dfsg-3ubuntu2
-libseccomp22.3.1-2.1ubuntu4.1
+libseccomp22.4.1-0ubuntu0.18.04.2
 libselinux12.7-2build2
 libsemanage12.7-2build2
 libsemanage-common2.7-2build2
