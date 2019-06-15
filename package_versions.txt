@@ -1,6 +1,6 @@
 adduser3.116ubuntu1
-apt1.6.10
-apt-utils1.6.10
+apt1.6.11
+apt-utils1.6.11
 base-files10.1ubuntu2.4
 base-passwd3.5.44
 bash4.4.18-2ubuntu1.1
@@ -39,8 +39,8 @@ iproute24.15.0-2ubuntu1
 krb5-locales1.16-2ubuntu0.1
 libacl12.2.52-3build1
 libaio10.3.110-5ubuntu0.1
-libapt-inst2.01.6.10
-libapt-pkg5.01.6.10
+libapt-inst2.01.6.11
+libapt-pkg5.01.6.11
 libasn1-8-heimdal7.5.0+dfsg-1
 libassuan02.5.1-2
 libatm11:2.5.1-2build1
@@ -60,7 +60,7 @@ libdb5.35.3.28-13.1ubuntu1.1
 libdbd-mysql-perl4.046-1
 libdbi-perl1.640-1
 libdebconfclient00.213ubuntu1
-libelf10.170-0.4
+libelf10.170-0.4ubuntu0.1
 libencode-locale-perl1.05-1
 libext2fs21.44.1-1ubuntu1.1
 libfcgi-perl0.78-2build1
@@ -133,7 +133,7 @@ libsigsegv22.12-1
 libsmartcols12.31.1-0.4ubuntu3.3
 libsqlite3-03.22.0-1
 libss21.44.1-1ubuntu1.1
-libssl1.11.1.0g-2ubuntu4.3
+libssl1.11.1.1-1ubuntu2.1~18.04.1
 libstdc++68.3.0-6ubuntu1~18.04
 libsystemd0237-3ubuntu10.21
 libtasn1-64.13-2
@@ -164,7 +164,7 @@ mysql-common1:10.3.15+maria~bionic
 ncurses-base6.1-1ubuntu1.18.04
 ncurses-bin6.1-1ubuntu1.18.04
 netbase5.4
-openssl1.1.0g-2ubuntu4.3
+openssl1.1.1-1ubuntu2.1~18.04.1
 passwd1:4.5-1ubuntu2
 perl5.26.1-6ubuntu0.3
 perl-base5.26.1-6ubuntu0.3
