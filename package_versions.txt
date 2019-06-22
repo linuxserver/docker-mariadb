@@ -20,7 +20,7 @@ fdisk2.31.1-0.4ubuntu3.3
 findutils4.6.0+git+20170828-2
 galera-325.3.26-bionic
 gawk1:4.1.4+dfsg-1build1
-gcc-8-base8.3.0-6ubuntu1~18.04
+gcc-8-base8.3.0-6ubuntu1~18.04.1
 gnupg2.2.4-1ubuntu1.2
 gnupg-l10n2.2.4-1ubuntu1.2
 gnupg-utils2.2.4-1ubuntu1.2
@@ -66,7 +66,7 @@ libext2fs21.44.1-1ubuntu1.1
 libfcgi-perl0.78-2build1
 libfdisk12.31.1-0.4ubuntu3.3
 libffi63.2.1-8
-libgcc11:8.3.0-6ubuntu1~18.04
+libgcc11:8.3.0-6ubuntu1~18.04.1
 libgcrypt201.8.1-4ubuntu1.1
 libgdbm51.14.1-6
 libgdbm-compat41.14.1-6
@@ -133,14 +133,14 @@ libsigsegv22.12-1
 libsmartcols12.31.1-0.4ubuntu3.3
 libsqlite3-03.22.0-1
 libss21.44.1-1ubuntu1.1
-libssl1.11.1.1-1ubuntu2.1~18.04.1
-libstdc++68.3.0-6ubuntu1~18.04
-libsystemd0237-3ubuntu10.21
+libssl1.11.1.1-1ubuntu2.1~18.04.2
+libstdc++68.3.0-6ubuntu1~18.04.1
+libsystemd0237-3ubuntu10.22
 libtasn1-64.13-2
 libterm-readkey-perl2.37-1build1
 libtimedate-perl2.3000-2
 libtinfo56.1-1ubuntu1.18.04
-libudev1237-3ubuntu10.21
+libudev1237-3ubuntu10.22
 libunistring20.9.9-0ubuntu2
 liburi-perl1.73-1
 libuuid12.31.1-0.4ubuntu3.3
@@ -164,7 +164,7 @@ mysql-common1:10.3.16+maria~bionic
 ncurses-base6.1-1ubuntu1.18.04
 ncurses-bin6.1-1ubuntu1.18.04
 netbase5.4
-openssl1.1.1-1ubuntu2.1~18.04.1
+openssl1.1.1-1ubuntu2.1~18.04.2
 passwd1:4.5-1ubuntu2
 perl5.26.1-6ubuntu0.3
 perl-base5.26.1-6ubuntu0.3
