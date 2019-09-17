@@ -34,9 +34,13 @@ EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-TEST_LEN="0"
+	if [ -r "$MYSQL_ROOT_PASSWORD_FILE" ]; then
+		MYSQL_ROOT_PASSWORD=$(< "$MYSQL_ROOT_PASSWORD_FILE")
+	else
+		TEST_LEN="0"
+	fi
 else
-TEST_LEN=${#MYSQL_ROOT_PASSWORD}
+	TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
 if [ "$TEST_LEN" -lt "4" ]; then
 MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
