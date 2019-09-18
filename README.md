@@ -63,6 +63,7 @@ docker create \
   -e PUID=1000 \
   -e PGID=1000 \
   -e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD> \
+  -e MYSQL_ROOT_PASSWORD_FILE=<DATABASE PASSWORD FILE> \
   -e TZ=Europe/London \
   -e MYSQL_DATABASE=<USER DB NAME> `#optional` \
   -e MYSQL_USER=<MYSQL USER> `#optional` \
@@ -88,7 +89,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>
+      - MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD> # Takes precedence over the file
+      - MYSQL_ROOT_PASSWORD_FILE=<DATABASE PASSWORD FILE>
       - TZ=Europe/London
       - MYSQL_DATABASE=<USER DB NAME> #optional
       - MYSQL_USER=<MYSQL USER> #optional
@@ -109,7 +111,8 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-p 3306` | Mariadb listens on this port. |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
-| `-e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>` | Set this to root password for installation (minimum 4 characters). |
+| `-e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>` | Set this to root password for installation (minimum 4 characters). This variable takes precedence over a password file. |
+| `-e MYSQL_ROOT_PASSWORD_FILE=<DATABASE PASSWORD FILE>` | Set this to a file containing the desired root password (useful for docker secrets). Same password rules apply. |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
 | `-e MYSQL_DATABASE=<USER DB NAME>` | Specify the name of a database to be created on image startup. |
 | `-e MYSQL_USER=<MYSQL USER>` | This user will have superuser access to the database specified by MYSQL_DATABASE. |
