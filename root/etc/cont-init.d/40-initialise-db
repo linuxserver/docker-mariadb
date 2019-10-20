@@ -34,7 +34,7 @@ EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-	if [ -r "$MYSQL_ROOT_PASSWORD_FILE" ]; then
+	if [ -f "$MYSQL_ROOT_PASSWORD_FILE" -a -r "$MYSQL_ROOT_PASSWORD_FILE" ]; then
 		MYSQL_ROOT_PASSWORD=$(< "$MYSQL_ROOT_PASSWORD_FILE")
 	else
 		TEST_LEN="0"
