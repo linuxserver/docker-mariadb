@@ -84,7 +84,6 @@ if [ -n "${REMOTE_SQL+set}" ]; then
     fi
   done
 fi
-cat "$tempSqlFile"
 # set some permissions needed before we begin initialising
 chown -R abc:abc /config/log/mysql /var/run/mysqld
 chmod -R 777 /config/log/mysql /var/run/mysqld
