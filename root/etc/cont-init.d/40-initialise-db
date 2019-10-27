@@ -34,21 +34,26 @@ EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-TEST_LEN="0"
+  if [ -f "$MYSQL_ROOT_PASSWORD_FILE" ]; then
+    MYSQL_ROOT_PASSWORD=$(< "$MYSQL_ROOT_PASSWORD_FILE")
+    TEST_LEN=${#MYSQL_ROOT_PASSWORD}
+  else
+    TEST_LEN="0"
+  fi
 else
-TEST_LEN=${#MYSQL_ROOT_PASSWORD}
+  TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
 if [ "$TEST_LEN" -lt "4" ]; then
-MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
+  MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
 else
-MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
+  MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
 fi
 
 # Make sure all user and database settings are set and pass is more than 4 characters
 if [ "${MYSQL_USER+x}" ] && \
 [ "${MYSQL_DATABASE+x}" ] && \
 [ "${MYSQL_PASSWORD+x}" ] && \
-[ "${#MYSQL_PASSWORD}" -gt "4" ]; then
+[ "${#MYSQL_PASSWORD}" -gt "3" ]; then
 read -r -d '' MYSQL_DB_SETUP << EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
@@ -65,6 +70,21 @@ $MYSQL_DB_SETUP
 EONEWSQL
 echo "Setting Up Initial Databases"
 
+# add all sql from a user defined directory on first init
+if ([ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]); then
+  cat /config/initdb.d/*.sql >> "$tempSqlFile"
+fi
+
+# ingest remote sql if REMOTE_SQL is set
+if [ -n "${REMOTE_SQL+set}" ]; then
+  IFS=, read -ra URLS <<< "${REMOTE_SQL}"
+  for URL in "${URLS[@]}"; do
+    if [ $(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null) == 200 ]; then
+      curl -sL "${URL}" >> "$tempSqlFile"
+    fi
+  done
+fi
+cat "$tempSqlFile"
 # set some permissions needed before we begin initialising
 chown -R abc:abc /config/log/mysql /var/run/mysqld
 chmod -R 777 /config/log/mysql /var/run/mysqld
@@ -82,8 +102,8 @@ echo "Database Setup Completed"
 
 # display a message about password if not set or too short
 if [ "$TEST_LEN" -lt "4" ]; then
-printf '\n\n\n%s\n\n\n' "$(</tmp/no-pass.nfo)"
-sleep 5s
+  printf '\n\n\n%s\n\n\n' "$(</tmp/no-pass.nfo)"
+  sleep 5s
 fi
 
 # do some more owning to finish our first run sequence
@@ -96,11 +116,11 @@ chown -R abc:abc /var/run/mysqld
 
 # clean up any old install files from /tmp
 if [ -f "/tmp/no-pass.nfo" ]; then
-rm /tmp/no-pass.nfo
+  rm /tmp/no-pass.nfo
 fi
 
 if [ -f "/tmp/mysql-first-time.sql" ]; then
-rm /tmp/mysql-first-time.sql
+  rm /tmp/mysql-first-time.sql
 fi
 
 chown -R abc:abc /config
