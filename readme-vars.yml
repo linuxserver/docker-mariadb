@@ -40,6 +40,8 @@ opt_param_env_vars:
   - { env_var: "MYSQL_DATABASE", env_value: "<USER DB NAME>", desc: "Specify the name of a database to be created on image startup." }
   - { env_var: "MYSQL_USER", env_value: "<MYSQL USER>", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE." }
   - { env_var: "MYSQL_PASSWORD", env_value: "<DATABASE PASSWORD>", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters)." }
+  - { env_var: "MYSQL_ROOT_PASSWORD_FILE", env_value: "/location/of/file", desc: "Set this to the location of a text file containing your password." }
+  - { env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)." }
 opt_param_usage_include_vols: false
 opt_param_usage_include_ports: false
 opt_param_device_map: false
@@ -53,7 +55,7 @@ app_setup_block: |
   `mysqladmin -u root password <PASSWORD>`
   to set one at the docker prompt...
 
-  NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+  NOTE changing the MYSQL_ROOT_PASSWORD or MYSQL_ROOT_PASSWORD_FILE variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
 
   NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
@@ -62,8 +64,18 @@ app_setup_block: |
   Find custom.cnf in /config for config changes (restart container for them to take effect)
   , the databases in /config/databases and the log in /config/log/myqsl
 
+  ### Bootstrapping a new instance
+  
+  We support a one time run of custom sql files on init. In order to use this place `*.sql` files in:
+  
+  ```
+  /config/initdb.d/
+  ```
+  This will have the same effect as setting the `REMOTE_SQL` environment variable. The sql will only be run on the containers first boot and setup.
+
 # changelog
 changelogs:
+  - { date: "27.10.19:", desc: "Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file." }
   - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup." }
   - { date: "26.01.19:", desc: "Add pipeline logic and multi arch." }

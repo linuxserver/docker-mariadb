@@ -5,7 +5,7 @@ ARG BUILD_DATE
 ARG VERSION
 ARG MARIADB_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL maintainer="thelamer"
 
 # environment variables
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -20,9 +20,9 @@ RUN \
  echo "add mariadb repository ****" && \
  echo "(redundant on armhf platform, but added for consistent dockerfile on all platforms) ****" && \
  apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
- echo "deb http://mirror.sax.uk.as61049.net/mariadb/repo/10.3/ubuntu bionic main" >> \
+ echo "deb http://mirror.sax.uk.as61049.net/mariadb/repo/10.4/ubuntu bionic main" >> \
 	/etc/apt/sources.list.d/mariadb.list && \
- echo "deb-src http://mirror.sax.uk.as61049.net/mariadb/repo/10.3/ubuntu bionic main" >> \
+ echo "deb-src http://mirror.sax.uk.as61049.net/mariadb/repo/10.4/ubuntu bionic main" >> \
 	/etc/apt/sources.list.d/mariadb.list && \
  echo "**** install runtime packages ****" && \
  if [ -z ${MARIADB_VERSION+x} ]; then \
