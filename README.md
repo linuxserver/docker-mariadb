@@ -62,15 +62,14 @@ docker create \
   --name=mariadb \
   -e PUID=1000 \
   -e PGID=1000 \
-  -e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD> \
+  -e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD \
   -e TZ=Europe/London \
-  -e MYSQL_DATABASE=<USER DB NAME> `#optional` \
-  -e MYSQL_USER=<MYSQL USER> `#optional` \
-  -e MYSQL_PASSWORD=<DATABASE PASSWORD> `#optional` \
-  -e MYSQL_ROOT_PASSWORD_FILE=/location/of/file `#optional` \
+  -e MYSQL_DATABASE=USER_DB_NAME `#optional` \
+  -e MYSQL_USER=MYSQL_USER `#optional` \
+  -e MYSQL_PASSWORD=DATABASE_PASSWORD `#optional` \
   -e REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql `#optional` \
   -p 3306:3306 \
-  -v <path to data>:/config \
+  -v path_to_data:/config \
   --restart unless-stopped \
   linuxserver/mariadb
 ```
@@ -90,15 +89,14 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>
+      - MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD
       - TZ=Europe/London
-      - MYSQL_DATABASE=<USER DB NAME> #optional
-      - MYSQL_USER=<MYSQL USER> #optional
-      - MYSQL_PASSWORD=<DATABASE PASSWORD> #optional
-      - MYSQL_ROOT_PASSWORD_FILE=/location/of/file #optional
+      - MYSQL_DATABASE=USER_DB_NAME #optional
+      - MYSQL_USER=MYSQL_USER #optional
+      - MYSQL_PASSWORD=DATABASE_PASSWORD #optional
       - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
     volumes:
-      - <path to data>:/config
+      - path_to_data:/config
     ports:
       - 3306:3306
     restart: unless-stopped
@@ -113,12 +111,11 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-p 3306` | Mariadb listens on this port. |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
-| `-e MYSQL_ROOT_PASSWORD=<DATABASE PASSWORD>` | Set this to root password for installation (minimum 4 characters). |
+| `-e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD` | Set this to root password for installation (minimum 4 characters). |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
-| `-e MYSQL_DATABASE=<USER DB NAME>` | Specify the name of a database to be created on image startup. |
-| `-e MYSQL_USER=<MYSQL USER>` | This user will have superuser access to the database specified by MYSQL_DATABASE. |
-| `-e MYSQL_PASSWORD=<DATABASE PASSWORD>` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters). |
-| `-e MYSQL_ROOT_PASSWORD_FILE=/location/of/file` | Set this to the location of a text file containing your password. |
+| `-e MYSQL_DATABASE=USER_DB_NAME` | Specify the name of a database to be created on image startup. |
+| `-e MYSQL_USER=MYSQL_USER` | This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). |
+| `-e MYSQL_PASSWORD=DATABASE_PASSWORD` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters). |
 | `-e REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql` | Set this to ingest sql files from an http/https endpoint (comma seperated array). |
 | `-v /config` | Contains the db itself and all assorted settings. |
 
@@ -143,7 +140,7 @@ If you didn't set a password during installation, (see logs for warning) use
 `mysqladmin -u root password <PASSWORD>`
 to set one at the docker prompt...
 
-NOTE changing the MYSQL_ROOT_PASSWORD or MYSQL_ROOT_PASSWORD_FILE variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
 
 NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
@@ -151,6 +148,26 @@ Unraid users, it is advisable to edit the template/webui after setup and remove 
 
 Find custom.cnf in /config for config changes (restart container for them to take effect)
 , the databases in /config/databases and the log in /config/log/myqsl
+
+### Loading passwords and users from files
+
+The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
+
+```
+/config/env
+```
+
+Using the following format: 
+
+```
+MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
+MYSQL_DATABASE="USER_DB_NAME"
+MYSQL_USER="MYSQL_USER"
+MYSQL_PASSWORD="DATABASE_PASSWORD"
+REMOTE_SQL="http://URL1/your.sql,https://URL2/your.sql"
+```
+
+These settings can be mixed and matched with Docker ENV settings as you require, but the settings in the file will always take precedence.
 
 ### Bootstrapping a new instance
 

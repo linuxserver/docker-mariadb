@@ -15,6 +15,11 @@ done
 # test for existence of mysql file in datadir and start initialise if not present
 if [ ! -d "$DATADIR/mysql" ]; then
 
+# load env file if it exists
+if [ -f "/config/env" ]; then
+  source /config/env
+fi
+
 # set basic sql command
 tempSqlFile='/tmp/mysql-first-time.sql'
 cat > "$tempSqlFile" <<-EOSQL
@@ -34,12 +39,7 @@ EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
 if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-  if [ -f "$MYSQL_ROOT_PASSWORD_FILE" ]; then
-    MYSQL_ROOT_PASSWORD=$(< "$MYSQL_ROOT_PASSWORD_FILE")
-    TEST_LEN=${#MYSQL_ROOT_PASSWORD}
-  else
-    TEST_LEN="0"
-  fi
+  TEST_LEN="0"
 else
   TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
