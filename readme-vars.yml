@@ -23,11 +23,11 @@ param_container_name: "{{ project_name }}"
 param_usage_include_net: false
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "<DATABASE PASSWORD>", desc: "Set this to root password for installation (minimum 4 characters)." }
+  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters)." }
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London." }
 param_usage_include_vols: true
 param_volumes:
-  - { vol_path: "/config", vol_host_path: "<path to data>", desc: "Contains the db itself and all assorted settings." }
+  - { vol_path: "/config", vol_host_path: "path_to_data", desc: "Contains the db itself and all assorted settings." }
 param_usage_include_ports: true
 param_ports:
   - { external_port: "3306", internal_port: "3306", port_desc: "Mariadb listens on this port." }
@@ -37,10 +37,9 @@ cap_add_param: false
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "MYSQL_DATABASE", env_value: "<USER DB NAME>", desc: "Specify the name of a database to be created on image startup." }
-  - { env_var: "MYSQL_USER", env_value: "<MYSQL USER>", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE." }
-  - { env_var: "MYSQL_PASSWORD", env_value: "<DATABASE PASSWORD>", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters)." }
-  - { env_var: "MYSQL_ROOT_PASSWORD_FILE", env_value: "/location/of/file", desc: "Set this to the location of a text file containing your password." }
+  - { env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created on image startup." }
+  - { env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here)." }
+  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters)." }
   - { env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)." }
 opt_param_usage_include_vols: false
 opt_param_usage_include_ports: false
@@ -55,7 +54,7 @@ app_setup_block: |
   `mysqladmin -u root password <PASSWORD>`
   to set one at the docker prompt...
 
-  NOTE changing the MYSQL_ROOT_PASSWORD or MYSQL_ROOT_PASSWORD_FILE variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+  NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
 
   NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
@@ -63,6 +62,26 @@ app_setup_block: |
 
   Find custom.cnf in /config for config changes (restart container for them to take effect)
   , the databases in /config/databases and the log in /config/log/myqsl
+
+  ### Loading passwords and users from files
+  
+  The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
+  
+  ```
+  /config/env
+  ```
+  
+  Using the following format: 
+  
+  ```
+  MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
+  MYSQL_DATABASE="USER_DB_NAME"
+  MYSQL_USER="MYSQL_USER"
+  MYSQL_PASSWORD="DATABASE_PASSWORD"
+  REMOTE_SQL="http://URL1/your.sql,https://URL2/your.sql"
+  ```
+  
+  These settings can be mixed and matched with Docker ENV settings as you require, but the settings in the file will always take precedence.
 
   ### Bootstrapping a new instance
   
