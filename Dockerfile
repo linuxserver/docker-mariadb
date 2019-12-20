@@ -20,9 +20,9 @@ RUN \
  echo "add mariadb repository ****" && \
  echo "(redundant on armhf platform, but added for consistent dockerfile on all platforms) ****" && \
  apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
- echo "deb http://mirror.sax.uk.as61049.net/mariadb/repo/10.4/ubuntu bionic main" >> \
+ echo "deb http://mirror.rackspace.com/mariadb/repo/10.4/ubuntu bionic main" >> \
 	/etc/apt/sources.list.d/mariadb.list && \
- echo "deb-src http://mirror.sax.uk.as61049.net/mariadb/repo/10.4/ubuntu bionic main" >> \
+ echo "deb-src http://mirror.rackspace.com/mariadb/repo/10.4/ubuntu bionic main" >> \
 	/etc/apt/sources.list.d/mariadb.list && \
  echo "**** install runtime packages ****" && \
  if [ -z ${MARIADB_VERSION+x} ]; then \

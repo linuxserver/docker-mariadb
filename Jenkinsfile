@@ -103,7 +103,7 @@ pipeline {
       steps{
         script{
           env.EXT_RELEASE = sh(
-            script: ''' curl -sX GET http://mirror.sax.uk.as61049.net/mariadb/repo/10.4/ubuntu/dists/bionic/main/binary-amd64/Packages |grep -A 7 -m 1 'Package: mariadb-server' | awk -F ': ' '/Version/{print $2;exit}' ''',
+            script: ''' curl -sX GET http://mirror.rackspace.com/mariadb/repo/10.4/ubuntu/dists/bionic/main/binary-amd64/Packages |grep -A 7 -m 1 'Package: mariadb-server' | awk -F ': ' '/Version/{print $2;exit}' ''',
             returnStdout: true).trim()
             env.RELEASE_LINK = 'custom_command'
         }
