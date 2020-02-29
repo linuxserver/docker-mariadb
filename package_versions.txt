@@ -175,7 +175,7 @@ procps2:3.3.12-3ubuntu1.2
 psmisc23.1-1ubuntu0.1
 publicsuffix20180223.1310-1
 readline-common7.0-3
-rsync3.1.2-2.1ubuntu1
+rsync3.1.2-2.1ubuntu1.1
 sed4.4-2
 sensible-utils0.0.12
 socat1.7.3.2-2ubuntu2
