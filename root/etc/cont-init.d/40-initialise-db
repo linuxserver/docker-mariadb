@@ -70,6 +70,8 @@ $MYSQL_DB_SETUP
 EONEWSQL
 echo "Setting Up Initial Databases"
 
+echo "USE ${MYSQL_DATABASE};" >> "$tempSqlFile"
+
 # add all sql from a user defined directory on first init
 if ([ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]); then
   cat /config/initdb.d/*.sql >> "$tempSqlFile"
