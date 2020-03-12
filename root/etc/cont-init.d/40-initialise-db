@@ -50,6 +50,7 @@ else
 fi
 
 # Make sure all user and database settings are set and pass is more than 4 characters
+# At the end change to default database created with environment variables to run init and remote scripts there
 if [ "${MYSQL_USER+x}" ] && \
 [ "${MYSQL_DATABASE+x}" ] && \
 [ "${MYSQL_PASSWORD+x}" ] && \
@@ -58,6 +59,7 @@ read -r -d '' MYSQL_DB_SETUP << EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
+USE \`${MYSQL_DATABASE}\`;
 EOM
 fi
 
@@ -69,8 +71,6 @@ DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
 echo "Setting Up Initial Databases"
-
-echo "USE ${MYSQL_DATABASE};" >> "$tempSqlFile"
 
 # add all sql from a user defined directory on first init
 if ([ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]); then
