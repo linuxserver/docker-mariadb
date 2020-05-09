@@ -102,7 +102,7 @@ libmariadb31:10.4.12+maria~bionic
 libmnl01.0.4-2
 libmount12.31.1-0.4ubuntu3.6
 libmpfr64.0.1-1
-libmysqlclient205.7.29-0ubuntu0.18.04.1
+libmysqlclient205.7.30-0ubuntu0.18.04.1
 libncurses56.1-1ubuntu1.18.04
 libncursesw56.1-1ubuntu1.18.04
 libnettle63.4-1
