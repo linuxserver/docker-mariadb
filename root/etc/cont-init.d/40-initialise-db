@@ -23,7 +23,7 @@ fi
 # set basic sql command
 tempSqlFile='/tmp/mysql-first-time.sql'
 cat > "$tempSqlFile" <<-EOSQL
-DELETE FROM mysql.user ;
+DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
 
 # set what to display if no password set with variable MYSQL_ROOT_PASSWORD
