@@ -32,7 +32,8 @@ RUN \
  fi && \
  apt-get update && \
  apt-get install -y \
-	${MARIADB} && \
+	${MARIADB} \
+	mariadb-backup && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \

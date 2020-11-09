@@ -27,7 +27,8 @@ RUN \
  echo "**** install runtime packages ****" && \
  apt-get update && \
  apt-get install -y \
-	mariadb-server && \
+	mariadb-server \
+	mariadb-backup && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \

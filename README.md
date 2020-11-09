@@ -174,13 +174,13 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ### Loading passwords and users from files
 
-The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
+The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file:
 
 ```
 /config/env
 ```
 
-Using the following format: 
+Using the following format:
 
 ```
 MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
@@ -273,6 +273,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **09.11.20:** - Add mariadb-backup.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **07.03.19:** - Add ability to setup a database and default user on first spinup.
