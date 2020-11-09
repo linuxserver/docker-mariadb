@@ -35,7 +35,7 @@ Find us at:
 [![MicroBadger Layers](https://img.shields.io/microbadger/layers/linuxserver/mariadb.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge)](https://microbadger.com/images/linuxserver/mariadb "Get your own version badge on microbadger.com")
 [![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/mariadb.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/linuxserver/mariadb)
 [![Docker Stars](https://img.shields.io/docker/stars/linuxserver/mariadb.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/linuxserver/mariadb)
-[![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-mariadb%2Fjob%2Fmaster%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-mariadb/job/master/)
+[![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-mariadb%2Fjob%2Falpine%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-mariadb/job/alpine/)
 [![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.linuxserver.io%2Flinuxserver%2Fmariadb%2Flatest%2Fci-status.yml)](https://ci-tests.linuxserver.io/linuxserver/mariadb/latest/index.html)
 
 [Mariadb](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
@@ -56,6 +56,14 @@ The architectures supported by this image are:
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
 
+## Version Tags
+
+This image provides various versions that are available via tags. `latest` tag usually provides the latest stable version. Others are considered under development and caution must be exercised when using them.
+
+| Tag | Description |
+| :----: | --- |
+| latest | Currently using Ubuntu base images. Will be moved to the Alpine base in the near future. |
+| alpine | Releases with an Alpine base. |
 
 ## Usage
 
@@ -174,13 +182,13 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ### Loading passwords and users from files
 
-The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
+The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file:
 
 ```
 /config/env
 ```
 
-Using the following format: 
+Using the following format:
 
 ```
 MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
@@ -273,6 +281,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **08.02.21:** - Rebase to alpine. Add mariadb-backup.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **07.03.19:** - Add ability to setup a database and default user on first spinup.

@@ -15,7 +15,10 @@ available_architectures:
   - { arch: "{{ arch_armhf }}", tag: "arm32v7-latest"}
 
 # development version
-development_versions: false
+development_versions: true
+development_versions_items:
+  - { tag: "latest", desc: "Currently using Ubuntu base images. Will be moved to the Alpine base in the near future." }
+  - { tag: "alpine", desc: "Releases with an Alpine base." }
 
 # container parameters
 common_param_env_vars_enabled: true
@@ -64,15 +67,15 @@ app_setup_block: |
   , the databases in /config/databases and the log in /config/log/myqsl
 
   ### Loading passwords and users from files
-  
-  The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
-  
+
+  The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file:
+
   ```
   /config/env
   ```
-  
-  Using the following format: 
-  
+
+  Using the following format:
+
   ```
   MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
   MYSQL_DATABASE="USER_DB_NAME"
@@ -80,13 +83,13 @@ app_setup_block: |
   MYSQL_PASSWORD="DATABASE_PASSWORD"
   REMOTE_SQL="http://URL1/your.sql,https://URL2/your.sql"
   ```
-  
+
   These settings can be mixed and matched with Docker ENV settings as you require, but the settings in the file will always take precedence.
 
   ### Bootstrapping a new instance
-  
+
   We support a one time run of custom sql files on init. In order to use this place `*.sql` files in:
-  
+
   ```
   /config/initdb.d/
   ```
@@ -94,6 +97,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "08.02.21:", desc: "Rebase to alpine. Add mariadb-backup." }
   - { date: "27.10.19:", desc: "Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file." }
   - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup." }
