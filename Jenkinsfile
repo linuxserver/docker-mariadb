@@ -23,7 +23,10 @@ pipeline {
     DOCKERHUB_IMAGE = 'linuxserver/mariadb'
     DEV_DOCKERHUB_IMAGE = 'lsiodev/mariadb'
     PR_DOCKERHUB_IMAGE = 'lspipepr/mariadb'
-    DIST_IMAGE = 'ubuntu'
+    DIST_IMAGE = 'alpine'
+    DIST_TAG = '3.12'
+    DIST_REPO = 'http://nl.alpinelinux.org/alpine/v3.12/main/'
+    DIST_REPO_PACKAGES = 'mariadb'
     MULTIARCH='true'
     CI='true'
     CI_WEB='false'
@@ -98,14 +101,16 @@ pipeline {
     /* ########################
        External Release Tagging
        ######################## */
-    // If this is a custom command to determine version use that command
-    stage("Set tag custom bash"){
+    // If this is an alpine repo change for external version determine an md5 from the version string
+    stage("Set tag Alpine Repo"){
       steps{
+        sh '''docker pull alpine:${DIST_TAG}'''
         script{
           env.EXT_RELEASE = sh(
-            script: ''' curl -sX GET http://mirror.rackspace.com/mariadb/repo/10.4/ubuntu/dists/bionic/main/binary-amd64/Packages |grep -A 7 -m 1 'Package: mariadb-server' | awk -F ': ' '/Version/{print $2;exit}' ''',
+            script: '''docker run --rm alpine:${DIST_TAG} sh -c 'apk update --quiet --repository '"${DIST_REPO}"'\
+                       && apk info --repository '"${DIST_REPO}"' '"${DIST_REPO_PACKAGES}"' | md5sum | cut -c1-8' ''',
             returnStdout: true).trim()
-            env.RELEASE_LINK = 'custom_command'
+            env.RELEASE_LINK = 'alpine_repo'
         }
       }
     }
@@ -646,11 +651,11 @@ pipeline {
              "tagger": {"name": "LinuxServer Jenkins","email": "jenkins@linuxserver.io","date": "'${GITHUB_DATE}'"}}' '''
         echo "Pushing New release for Tag"
         sh '''#! /bin/bash
-              echo "Updating to ${EXT_RELEASE_CLEAN}" > releasebody.json
+              echo "Updating external repo packages to ${EXT_RELEASE_CLEAN}" > releasebody.json
               echo '{"tag_name":"'${EXT_RELEASE_CLEAN}'-ls'${LS_TAG_NUMBER}'",\
                      "target_commitish": "master",\
                      "name": "'${EXT_RELEASE_CLEAN}'-ls'${LS_TAG_NUMBER}'",\
-                     "body": "**LinuxServer Changes:**\\n\\n'${LS_RELEASE_NOTES}'\\n**Remote Changes:**\\n\\n' > start
+                     "body": "**LinuxServer Changes:**\\n\\n'${LS_RELEASE_NOTES}'\\n**Repo Changes:**\\n\\n' > start
               printf '","draft": false,"prerelease": false}' >> releasebody.json
               paste -d'\\0' start releasebody.json > releasebody.json.done
               curl -H "Authorization: token ${GITHUB_TOKEN}" -X POST https://api.github.com/repos/${LS_USER}/${LS_REPO}/releases -d @releasebody.json.done'''

@@ -273,7 +273,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
-* **09.11.20:** - Add mariadb-backup.
+* **10.11.20:** - Rebase to alpine. Add mariadb-backup.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **07.03.19:** - Add ability to setup a database and default user on first spinup.
