@@ -2,18 +2,19 @@
 
 # set start function that creates user and password, used later
 start_mysql(){
-mysqld --init-file="$tempSqlFile" &
-pid="$!"
-RET=1
-while [[ RET -ne 0 ]]; do
-mysql -uroot -e "status" > /dev/null 2>&1
-RET=$?
-sleep 1
-done
+  mysqld --init-file="${tempSqlFile}" &
+  pid="$!"
+  RET=1
+  while [[ RET -ne 0 ]]; do
+    mysql -uroot -e "status" > /dev/null 2>&1
+    RET=$?
+    sleep 1
+  done
 }
 
-# test for existence of mysql file in datadir and start initialise if not present
-if [ ! -d "$DATADIR/mysql" ]; then
+# test for existence of mysql folder in datadir and start initialise if not present
+# BEGIN: No indentation due to heredocs
+if [ ! -d "${DATADIR}/mysql" ]; then
 
 # load env file if it exists
 if [ -f "/config/env" ]; then
@@ -21,14 +22,14 @@ if [ -f "/config/env" ]; then
 fi
 
 # set basic sql command
-tempSqlFile='/tmp/mysql-first-time.sql'
-cat > "$tempSqlFile" <<-EOSQL
+tempSqlFile=$(mktemp)
+cat > "${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
 
 # set what to display if no password set with variable MYSQL_ROOT_PASSWORD
-NOPASS_SET='/tmp/no-pass.nfo'
-cat > $NOPASS_SET <<-EOFPASS
+NOPASS_SET=$(mktemp)
+cat > "${NOPASS_SET}" <<-EOFPASS
 #################################################################
 # No root password or too short a password ,min of 4 characters #
 # No root password will be set, this is not a good thing        #
@@ -38,13 +39,13 @@ cat > $NOPASS_SET <<-EOFPASS
 EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
-if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
   TEST_LEN="0"
 else
   TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
-MYSQL_ROOT_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< $MYSQL_ROOT_PASSWORD)
-if [ "$TEST_LEN" -lt "4" ]; then
+MYSQL_ROOT_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_ROOT_PASSWORD}")
+if [ "${TEST_LEN}" -lt "4" ]; then
   MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
 else
   MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
@@ -56,7 +57,7 @@ if [ "${MYSQL_USER+x}" ] && \
 [ "${MYSQL_DATABASE+x}" ] && \
 [ "${MYSQL_PASSWORD+x}" ] && \
 [ "${#MYSQL_PASSWORD}" -gt "3" ]; then
-MYSQL_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< $MYSQL_PASSWORD)
+MYSQL_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_PASSWORD}")
 read -r -d '' MYSQL_DB_SETUP << EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
@@ -66,7 +67,7 @@ EOM
 fi
 
 # add rest of sql commands based on password set or not
-cat >> "$tempSqlFile" <<-EONEWSQL
+cat >> "${tempSqlFile}" <<-EONEWSQL
 $MYSQL_PASS
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
@@ -75,16 +76,16 @@ EONEWSQL
 echo "Setting Up Initial Databases"
 
 # add all sql from a user defined directory on first init
-if ([ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]); then
-  cat /config/initdb.d/*.sql >> "$tempSqlFile"
+if [ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]; then
+  cat /config/initdb.d/*.sql >> "${tempSqlFile}"
 fi
 
 # ingest remote sql if REMOTE_SQL is set
 if [ -n "${REMOTE_SQL+set}" ]; then
   IFS=, read -ra URLS <<< "${REMOTE_SQL}"
   for URL in "${URLS[@]}"; do
-    if [ $(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null) == 200 ]; then
-      curl -sL "${URL}" >> "$tempSqlFile"
+    if [ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]; then
+      curl -sL "${URL}" >> "${tempSqlFile}"
     fi
   done
 fi
@@ -93,37 +94,29 @@ chown -R abc:abc /config/log/mysql /var/run/mysqld
 chmod -R 777 /config/log/mysql /var/run/mysqld
 
 # initialise database structure
-mysql_install_db --datadir="$DATADIR"
+mysql_install_db --datadir="${DATADIR}"
 
 # start mysql and apply our sql commands we set above
 start_mysql
 
 # shut down after apply sql commands, waiting for pid to stop
 mysqladmin -u root shutdown
-wait "$pid"
+wait "${pid}"
 echo "Database Setup Completed"
 
 # display a message about password if not set or too short
-if [ "$TEST_LEN" -lt "4" ]; then
-  printf '\n\n\n%s\n\n\n' "$(</tmp/no-pass.nfo)"
+if [ "${TEST_LEN}" -lt "4" ]; then
+  printf '\n\n\n%s\n\n\n' "$(<"${NOPASS_SET}")"
   sleep 5s
 fi
 
-# do some more owning to finish our first run sequence
-chown -R abc:abc "$MYSQL_DIR" /config/log/mysql
+# clean up any old install files from /tmp
+rm -f "${NOPASS_SET}"
+rm -f "${tempSqlFile}"
+
+# END: No indentation due to heredocs
 fi
 
 # own the folder the pid for mysql runs in
 chown -R abc:abc /var/run/mysqld
-
-
-# clean up any old install files from /tmp
-if [ -f "/tmp/no-pass.nfo" ]; then
-  rm /tmp/no-pass.nfo
-fi
-
-if [ -f "/tmp/mysql-first-time.sql" ]; then
-  rm /tmp/mysql-first-time.sql
-fi
-
 chown -R abc:abc /config

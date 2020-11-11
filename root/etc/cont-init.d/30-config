@@ -2,33 +2,25 @@
 
 # make folders if required
 mkdir -p \
-	"$DATADIR" \
+	"${DATADIR}" \
 	/config/log/mysql \
 	/var/run/mysqld
 
-if [ -e /etc/my.cnf.d/mariadb-server.cnf ]; then \
-	CONF_FILE="/etc/my.cnf.d/mariadb-server.cnf";
- else CONF_FILE="/etc/my.cnf";
-fi
 
 # configure my.cnf and mysqld_safe
-sed -i 's/key_buffer\b/key_buffer_size/g' "$CONF_FILE"
-sed -ri 's/^(bind-address|skip-networking)/;\1/' "$CONF_FILE"
-sed -i s#/var/log/mysql#/config/log/mysql#g "$CONF_FILE"
-sed -i -e 's/\(user.*=\).*/\1 abc/g' "$CONF_FILE"
-sed -i -e "s#\\(datadir.*=\\).*#\\1 $DATADIR#g" "$CONF_FILE"
-sed -i "s/user='mysql'/user='abc'/g" /usr/bin/mysqld_safe
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/mysql/my.cnf
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
+sed -i "s|.*skip-networking.*|skip-networking|g" /etc/mysql/my.cnf
+sed -i "s|.*skip-networking.*|skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 
 # setup custom cnf file
 [[ ! -f /config/custom.cnf ]] && \
 	cp /defaults/my.cnf /config/custom.cnf
-[[ ! -L /etc/mysql/conf.d/custom.cnf && -f /etc/mysql/conf.d/custom.cnf ]] && \
-	rm /etc/mysql/conf.d/custom.cnf
-[[ ! -L /etc/mysql/conf.d/custom.cnf ]] && \
-	ln -s /config/custom.cnf /etc/mysql/conf.d/custom.cnf
+[[ ! -L /etc/my.cnf.d/custom.cnf && -f /etc/my.cnf.d/custom.cnf ]] && \
+	rm /etc/my.cnf.d/custom.cnf
+[[ ! -L /etc/my.cnf.d/custom.cnf ]] && \
+	ln -s /config/custom.cnf /etc/my.cnf.d/custom.cnf
 
 # set permissions
-[[ -e /etc/mysql/debian.cnf ]] && \
-	(chown abc:abc /etc/mysql/debian.cnf && chmod 644 /etc/mysql/debian.cnf)
 chmod -R 777 \
 	/var/run/mysqld
