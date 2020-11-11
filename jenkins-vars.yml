@@ -2,8 +2,7 @@
 
 # jenkins variables
 project_name: docker-mariadb
-external_type: na
-custom_version_command: "curl -sX GET http://mirror.rackspace.com/mariadb/repo/10.4/ubuntu/dists/bionic/main/binary-amd64/Packages |grep -A 7 -m 1 'Package: mariadb-server' | awk -F ': ' '/Version/{print $2;exit}'"
+external_type: alpine_repo
 release_type: stable
 release_tag: latest
 ls_branch: master
@@ -15,7 +14,10 @@ repo_vars:
   - DOCKERHUB_IMAGE = 'linuxserver/mariadb'
   - DEV_DOCKERHUB_IMAGE = 'lsiodev/mariadb'
   - PR_DOCKERHUB_IMAGE = 'lspipepr/mariadb'
-  - DIST_IMAGE = 'ubuntu'
+  - DIST_IMAGE = 'alpine'
+  - DIST_TAG = '3.12'
+  - DIST_REPO = 'http://nl.alpinelinux.org/alpine/v3.12/main/'
+  - DIST_REPO_PACKAGES = 'mariadb'
   - MULTIARCH='true'
   - CI='true'
   - CI_WEB='false'
