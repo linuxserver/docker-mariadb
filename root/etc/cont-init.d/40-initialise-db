@@ -90,14 +90,14 @@ if [ -n "${REMOTE_SQL+set}" ]; then
   done
 fi
 # set some permissions needed before we begin initialising
-chown -R abc:abc /config/log/mysql /var/run/mysqld "${DATADIR}"
-chmod -R 777 /config/log/mysql /var/run/mysqld "${DATADIR}"
+chown -R abc:abc /config/log/mysql /var/run/mysqld
+chmod -R 777 /config/log/mysql /var/run/mysqld
 
 # initialise database structure
-mysql_install_db --datadir="${DATADIR}"
+mysql_install_db --datadir="${DATADIR}" --user=root
 
 # start mysql and apply our sql commands we set above
-start_mysql
+start_mysql --user=root
 
 # shut down after apply sql commands, waiting for pid to stop
 mysqladmin -u root shutdown
