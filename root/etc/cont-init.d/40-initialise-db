@@ -90,8 +90,8 @@ if [ -n "${REMOTE_SQL+set}" ]; then
   done
 fi
 # set some permissions needed before we begin initialising
-chown -R abc:abc /config/log/mysql /var/run/mysqld
-chmod -R 777 /config/log/mysql /var/run/mysqld
+chown -R abc:abc /config/log/mysql /var/run/mysqld "${DATADIR}"
+chmod -R 777 /config/log/mysql /var/run/mysqld "${DATADIR}"
 
 # initialise database structure
 mysql_install_db --datadir="${DATADIR}"
