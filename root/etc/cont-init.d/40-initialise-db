@@ -2,7 +2,7 @@
 
 # set start function that creates user and password, used later
 start_mysql(){
-  mysqld --init-file="${tempSqlFile}" &
+  mysqld --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
   pid="$!"
   RET=1
   while [[ RET -ne 0 ]]; do
@@ -23,6 +23,7 @@ fi
 
 # set basic sql command
 tempSqlFile=$(mktemp)
+chown -R abc:abc $tempSqlFile
 cat > "${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
@@ -90,14 +91,14 @@ if [ -n "${REMOTE_SQL+set}" ]; then
   done
 fi
 # set some permissions needed before we begin initialising
-chown -R abc:abc /config/log/mysql /var/run/mysqld
-chmod -R 777 /config/log/mysql /var/run/mysqld
+chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
+chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
 
 # initialise database structure
-mysql_install_db --datadir="${DATADIR}" --user=root
+mysql_install_db --datadir="${DATADIR}" --user=abc
 
 # start mysql and apply our sql commands we set above
-start_mysql --user=root
+start_mysql
 
 # shut down after apply sql commands, waiting for pid to stop
 mysqladmin -u root shutdown
