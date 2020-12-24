@@ -6,6 +6,9 @@ mkdir -p \
 	/config/log/mysql \
 	/var/run/mysqld
 
+# configure mariadb
+echo "pid-file=/var/run/mysqld/mysqld.pid" >>/etc/my.cnf.d/mariadb-server.cnf
+
 # setup custom cnf file
 [[ ! -f /config/custom.cnf ]] && \
 	cp /defaults/my.cnf /config/custom.cnf
