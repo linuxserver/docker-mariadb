@@ -10,9 +10,6 @@ trap _term SIGTERM
 s6-setuidgid abc \
     /usr/bin/mysqld_safe \
     --console \
-    --bind-address=0.0.0.0 \
-    --skip-name-resolve \
-    --skip-networking=0 \
     --datadir="${DATADIR}" \
     --user=abc &
 

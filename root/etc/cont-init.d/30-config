@@ -6,8 +6,11 @@ mkdir -p \
 	/config/log/mysql \
 	/var/run/mysqld
 
-# configure mariadb
-echo "pid-file=/var/run/mysqld/mysqld.pid" >>/etc/my.cnf.d/mariadb-server.cnf
+# configure my.cnf and mariadb-server.cnf
+echo "pid-file=/var/run/mysqld/mysqld.pid" >> /etc/my.cnf
+echo "pid-file=/var/run/mysqld/mysqld.pid" >> /etc/my.cnf.d/mariadb-server.cnf
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf
 
 # setup custom cnf file
 [[ ! -f /config/custom.cnf ]] && \
