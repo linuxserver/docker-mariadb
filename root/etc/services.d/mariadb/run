@@ -11,6 +11,7 @@ s6-setuidgid abc \
     /usr/bin/mysqld_safe \
     --console \
     --datadir="${DATADIR}" \
+	--pid-file=/var/run/mysqld/mysqld.pid \
     --user=abc &
 
 wait
