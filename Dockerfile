@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.13
 
 # set version label
 ARG BUILD_DATE
@@ -16,7 +16,9 @@ RUN \
  apk add --no-cache \
 	gnupg \
 	mariadb \
+	mariadb-backup \
 	mariadb-client \
+	mariadb-common \
 	mariadb-server-utils && \
  echo "**** cleanup ****" && \
  rm -rf \

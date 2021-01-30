@@ -23,7 +23,7 @@ fi
 
 # set basic sql command
 tempSqlFile=$(mktemp)
-chown -R abc:abc $tempSqlFile
+chown -R abc:abc "${tempSqlFile}"
 cat > "${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
