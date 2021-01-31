@@ -13,13 +13,17 @@ ENV DATADIR=$MYSQL_DIR/databases
 
 RUN \
  echo "**** install runtime packages ****" && \
+ if [ -z ${MARIADB_VERSION+x} ]; then \
+	MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
+	&& awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
+ fi && \
  apk add --no-cache \
 	gnupg \
-	mariadb \
-	mariadb-backup \
-	mariadb-client \
-	mariadb-common \
-	mariadb-server-utils && \
+	mariadb==${MARIADB_VERSION} \
+	mariadb-backup==${MARIADB_VERSION} \
+	mariadb-client==${MARIADB_VERSION} \
+	mariadb-common==${MARIADB_VERSION} \
+	mariadb-server-utils==${MARIADB_VERSION} && \
  echo "**** cleanup ****" && \
  rm -rf \
     /root/.cache \
