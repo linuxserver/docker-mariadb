@@ -102,7 +102,7 @@ libmariadb31:10.4.17+maria~bionic
 libmnl01.0.4-2
 libmount12.31.1-0.4ubuntu3.7
 libmpfr64.0.1-1
-libmysqlclient205.7.32-0ubuntu0.18.04.1
+libmysqlclient205.7.33-0ubuntu0.18.04.1
 libncurses56.1-1ubuntu1.18.04
 libncursesw56.1-1ubuntu1.18.04
 libnettle63.4-1
@@ -181,7 +181,7 @@ sensible-utils0.0.12
 socat1.7.3.2-2ubuntu2
 sysvinit-utils2.88dsf-59.10ubuntu1
 tar1.29b-2ubuntu0.2
-tzdata2020f-0ubuntu0.18.04
+tzdata2021a-0ubuntu0.18.04
 ubuntu-keyring2018.09.18.1~18.04.0
 util-linux2.31.1-0.4ubuntu3.7
 zlib1g1:1.2.11.dfsg-0ubuntu2
