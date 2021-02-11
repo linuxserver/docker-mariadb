@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bash
+
+echo '
+******************************************************
+******************************************************
+*                                                    *
+*                                                    *
+*          This image will soon be rebased           *
+*               from ubuntu to alpine.               *
+*       Please be aware, this may cause issues       *
+*     It is strongly recommended to make backups     *
+*         of your config and databases before        *
+*       updating your image to the alpine base.      *
+*                                                    *
+*                                                    *
+******************************************************
+******************************************************'

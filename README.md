@@ -56,6 +56,14 @@ The architectures supported by this image are:
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
 
+## Version Tags
+
+This image provides various versions that are available via tags. `latest` tag usually provides the latest stable version. Others are considered under development and caution must be exercised when using them.
+
+| Tag | Description |
+| :----: | --- |
+| latest | Currently using Ubuntu base images. Will be moved to the Alpine base in the near future. |
+| alpine | Releases with an Alpine base. |
 
 ## Usage
 
@@ -174,13 +182,13 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 ### Loading passwords and users from files
 
-The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file: 
+The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file:
 
 ```
 /config/env
 ```
 
-Using the following format: 
+Using the following format:
 
 ```
 MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
@@ -273,6 +281,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **08.02.21:** - Release alpine tag. The alpine release will replace the latest tag in the near future.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **07.03.19:** - Add ability to setup a database and default user on first spinup.
