@@ -15,9 +15,6 @@ RUN \
  echo "**** install build packages ****" && \
  apk add --no-cache --virtual=build-dependencies \
 	curl && \
- echo "**** temporarily forcing MARIADB_VERSION ****" && \
-	MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
-	&& awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
  echo "**** install runtime packages ****" && \
  if [ -z ${MARIADB_VERSION+x} ]; then \
 	MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
