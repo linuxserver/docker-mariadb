@@ -20,7 +20,7 @@ libblkid-2.36.1-r1
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
 libcap-2.46-r0
-libcrypto1.1-1.1.1i-r0
+libcrypto1.1-1.1.1j-r0
 libcurl-7.74.0-r0
 libffi-3.3-r2
 libgcc-10.2.1_pre1-r3
@@ -28,12 +28,12 @@ libgcrypt-1.8.7-r0
 libgpg-error-1.41-r0
 libintl-0.20.2-r2
 libksba-1.5.0-r0
-libldap-2.4.57-r0
+libldap-2.4.57-r1
 libmount-2.36.1-r1
 libproc-3.3.16-r0
 libsasl-2.1.27-r10
 libsecret-0.20.4-r0
-libssl1.1-1.1.1i-r0
+libssl1.1-1.1.1j-r0
 libstdc++-10.2.1_pre1-r3
 libtasn1-4.16.0-r1
 libtls-standalone-2.9.1-r1
