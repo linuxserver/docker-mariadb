@@ -21,7 +21,7 @@ libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
 libcap-2.46-r0
 libcrypto1.1-1.1.1j-r0
-libcurl-7.74.0-r0
+libcurl-7.74.0-r1
 libffi-3.3-r2
 libgcc-10.2.1_pre1-r3
 libgcrypt-1.8.7-r0
