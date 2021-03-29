@@ -17,10 +17,10 @@ RUN \
 	curl && \
  echo "**** install runtime packages ****" && \
  if [ -z ${MARIADB_VERSION+x} ]; then \
-	MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
+	MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
 	&& awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
  fi && \
- apk add --no-cache \
+ apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main/ \
 	gnupg \
 	mariadb==${MARIADB_VERSION} \
 	mariadb-backup==${MARIADB_VERSION} \

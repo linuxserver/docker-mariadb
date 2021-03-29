@@ -25,7 +25,7 @@ pipeline {
     PR_DOCKERHUB_IMAGE = 'lspipepr/mariadb'
     DIST_IMAGE = 'alpine'
     DIST_TAG = '3.13'
-    DIST_REPO = 'http://dl-cdn.alpinelinux.org/alpine/v3.13/main/'
+    DIST_REPO = 'http://dl-cdn.alpinelinux.org/alpine/edge/main/'
     DIST_REPO_PACKAGES = 'mariadb'
     MULTIARCH='true'
     CI='true'
