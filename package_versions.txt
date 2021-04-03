@@ -20,7 +20,7 @@ libblkid-2.36.2-r0
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
 libcap-2.49-r0
-libcrypto1.1-1.1.1j-r0
+libcrypto1.1-1.1.1k-r0
 libcurl-7.74.0-r1
 libffi-3.3-r2
 libgcc-10.2.1_git20210328-r0
@@ -33,7 +33,7 @@ libmount-2.36.2-r0
 libproc-3.3.16-r0
 libsasl-2.1.27-r12
 libsecret-0.20.4-r0
-libssl1.1-1.1.1j-r0
+libssl1.1-1.1.1k-r0
 libstdc++-10.2.1_git20210328-r0
 libtasn1-4.16.0-r1
 libtls-standalone-2.9.1-r1
