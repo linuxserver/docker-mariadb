@@ -23,7 +23,6 @@ fi
 
 # set basic sql command
 tempSqlFile=$(mktemp)
-chown -R abc:abc "${tempSqlFile}"
 cat > "${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
@@ -74,6 +73,7 @@ GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
+chown -R abc:abc "${tempSqlFile}"
 echo "Setting Up Initial Databases"
 
 # add all sql from a user defined directory on first init
@@ -95,7 +95,7 @@ chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
 chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
 
 # initialise database structure
-mysql_install_db --datadir="${DATADIR}" --user=abc
+mysql_install_db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
 
 # start mysql and apply our sql commands we set above
 start_mysql
