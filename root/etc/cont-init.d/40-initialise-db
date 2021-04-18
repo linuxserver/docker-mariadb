@@ -95,7 +95,7 @@ chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
 chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
 
 # initialise database structure
-mysql_install_db --datadir="${DATADIR}" --user=abc
+mysql_install_db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
 
 # start mysql and apply our sql commands we set above
 start_mysql
