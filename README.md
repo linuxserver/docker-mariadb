@@ -40,6 +40,7 @@ Find us at:
 [![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.linuxserver.io%2Flinuxserver%2Fmariadb%2Flatest%2Fci-status.yml)](https://ci-tests.linuxserver.io/linuxserver/mariadb/latest/index.html)
 
 [Mariadb](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
+
 [![mariadb](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)](https://mariadb.org/)
 
 ## Supported Architectures
