@@ -8,7 +8,7 @@ ca-certificates-20191127-r5
 ca-certificates-bundle-20191127-r5
 coreutils-8.32-r2
 gdbm-1.19-r0
-glib-2.68.1-r0
+glib-2.68.2-r0
 gmp-6.2.1-r0
 gnupg-2.2.27-r0
 gnutls-3.7.1-r0
