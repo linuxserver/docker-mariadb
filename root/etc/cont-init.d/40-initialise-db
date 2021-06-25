@@ -73,13 +73,16 @@ GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
-chown -R abc:abc "${tempSqlFile}"
+
 echo "Setting Up Initial Databases"
 
 # add all sql from a user defined directory on first init
 if [ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]; then
   cat /config/initdb.d/*.sql >> "${tempSqlFile}"
 fi
+
+chown -R abc:abc "${tempSqlFile}"
+
 
 # ingest remote sql if REMOTE_SQL is set
 if [ -n "${REMOTE_SQL+set}" ]; then
