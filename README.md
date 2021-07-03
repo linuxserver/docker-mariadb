@@ -283,6 +283,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **03.07.21:** - Rebase to 3.14.
 * **08.02.21:** - Fix new installs.
 * **08.02.21:** - Rebase to alpine. Add mariadb-backup.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.

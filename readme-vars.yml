@@ -97,6 +97,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "03.07.21:", desc: "Rebase to 3.14." }
   - { date: "08.02.21:", desc: "Fix new installs." }
   - { date: "08.02.21:", desc: "Rebase to alpine. Add mariadb-backup." }
   - { date: "27.10.19:", desc: "Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file." }
