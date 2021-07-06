@@ -3,7 +3,7 @@ alpine-keys-2.3-r1
 apk-tools-2.12.5-r1
 bash-5.1.4-r0
 brotli-libs-1.0.9-r5
-busybox-1.33.1-r2
+busybox-1.33.1-r3
 ca-certificates-20191127-r5
 ca-certificates-bundle-20191127-r5
 coreutils-8.32-r2
@@ -31,7 +31,7 @@ libksba-1.5.1-r0
 libldap-2.4.58-r0
 libmount-2.37-r0
 libproc-3.3.17-r0
-libretls-3.3.3-r0
+libretls-3.3.3-r2
 libsasl-2.1.27-r12
 libsecret-0.20.4-r1
 libssl1.1-1.1.1k-r0
@@ -64,7 +64,7 @@ scanelf-1.3.2-r0
 shadow-4.8.1-r0
 skalibs-2.10.0.3-r0
 sqlite-libs-3.35.5-r0
-ssl_client-1.33.1-r2
+ssl_client-1.33.1-r3
 tzdata-2021a-r0
 utmps-0.1.0.2-r0
 xz-5.2.5-r0
