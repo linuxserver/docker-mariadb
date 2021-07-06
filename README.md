@@ -56,15 +56,6 @@ The architectures supported by this image are:
 | arm64 | arm64v8-latest |
 | armhf | arm32v7-latest |
 
-## Version Tags
-
-This image provides various versions that are available via tags. `latest` tag usually provides the latest stable version. Others are considered under development and caution must be exercised when using them.
-
-| Tag | Description |
-| :----: | --- |
-| latest | Currently using Ubuntu base images. Will be moved to the Alpine base in the near future. |
-| alpine | Releases with an Alpine base. |
-
 ## Application Setup
 
 If you didn't set a password during installation, (see logs for warning) use
@@ -283,6 +274,10 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **06.07.21:** - Rebase master to alpine.
+* **03.07.21:** - Rebase to 3.14.
+* **08.02.21:** - Fix new installs.
+* **08.02.21:** - Rebase to alpine. Add mariadb-backup.
 * **08.02.21:** - Release alpine tag. The alpine release will replace the latest tag in the near future.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
