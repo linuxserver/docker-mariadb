@@ -1,6 +1,6 @@
 alpine-baselayout-3.2.0-r16
 alpine-keys-2.3-r1
-apk-tools-2.12.6-r0
+apk-tools-2.12.7-r0
 bash-5.1.4-r0
 brotli-libs-1.0.9-r5
 busybox-1.33.1-r3
@@ -31,7 +31,7 @@ libksba-1.5.1-r0
 libldap-2.4.58-r0
 libmount-2.37-r0
 libproc-3.3.17-r0
-libretls-3.3.3-r2
+libretls-3.3.3p1-r2
 libsasl-2.1.27-r12
 libsecret-0.20.4-r1
 libssl1.1-1.1.1k-r0
