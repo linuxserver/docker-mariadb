@@ -24,7 +24,7 @@ libcrypto1.1-1.1.1l-r0
 libcurl-7.78.0-r0
 libffi-3.3-r2
 libgcc-10.3.1_git20210424-r2
-libgcrypt-1.9.3-r0
+libgcrypt-1.9.4-r0
 libgpg-error-1.42-r0
 libintl-0.21-r0
 libksba-1.5.1-r0
