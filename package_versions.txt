@@ -10,7 +10,7 @@ coreutils-8.32-r2
 gdbm-1.19-r0
 glib-2.68.3-r0
 gmp-6.2.1-r0
-gnupg-2.2.27-r0
+gnupg-2.2.31-r0
 gnutls-3.7.1-r0
 libacl-2.2.53-r0
 libaio-0.3.112-r1
@@ -65,7 +65,7 @@ shadow-4.8.1-r0
 skalibs-2.10.0.3-r0
 sqlite-libs-3.35.5-r0
 ssl_client-1.33.1-r3
-tzdata-2021a-r0
+tzdata-2021b-r0
 utmps-0.1.0.2-r0
 xz-5.2.5-r0
 xz-libs-5.2.5-r0
