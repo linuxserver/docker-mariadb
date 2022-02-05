@@ -16,7 +16,7 @@ libacl-2.2.53-r0
 libaio-0.3.112-r1
 libassuan-2.5.5-r0
 libattr-2.5.1-r0
-libblkid-2.37.2-r0
+libblkid-2.37.3-r0
 libbz2-1.0.8-r1
 libc-utils-0.7.2-r3
 libcap-2.50-r0
@@ -29,7 +29,7 @@ libgpg-error-1.42-r0
 libintl-0.21-r0
 libksba-1.5.1-r0
 libldap-2.4.58-r0
-libmount-2.37.2-r0
+libmount-2.37.3-r0
 libproc-3.3.17-r0
 libretls-3.3.3p1-r2
 libsasl-2.1.27-r12
