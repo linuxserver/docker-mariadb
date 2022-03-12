@@ -9,7 +9,7 @@ ca-certificates-bundle-20211220-r0
 coreutils-8.32-r2
 gdbm-1.19-r0
 glib-2.68.3-r0
-gmp-6.2.1-r0
+gmp-6.2.1-r1
 gnupg-2.2.31-r0
 gnutls-3.7.1-r0
 libacl-2.2.53-r0
@@ -38,7 +38,7 @@ libssl1.1-1.1.1l-r0
 libstdc++-10.3.1_git20210424-r2
 libtasn1-4.17.0-r0
 libunistring-0.9.10-r1
-libxml2-2.9.12-r1
+libxml2-2.9.13-r0
 linux-pam-1.5.1-r1
 mariadb-10.5.13-r0
 mariadb-backup-10.5.13-r0
