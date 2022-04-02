@@ -31,7 +31,7 @@ libksba-1.5.1-r0
 libldap-2.4.58-r0
 libmount-2.37.4-r0
 libproc-3.3.17-r0
-libretls-3.3.3p1-r2
+libretls-3.3.3p1-r3
 libsasl-2.1.28-r0
 libsecret-0.20.4-r1
 libssl1.1-1.1.1n-r0
@@ -69,4 +69,4 @@ tzdata-2022a-r0
 utmps-0.1.0.2-r0
 xz-5.2.5-r0
 xz-libs-5.2.5-r0
-zlib-1.2.11-r3
+zlib-1.2.12-r0
