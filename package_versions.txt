@@ -38,7 +38,7 @@ libssl1.1-1.1.1n-r0
 libstdc++-10.3.1_git20210424-r2
 libtasn1-4.17.0-r0
 libunistring-0.9.10-r1
-libxml2-2.9.13-r0
+libxml2-2.9.14-r0
 linux-pam-1.5.1-r1
 mariadb-10.5.15-r0
 mariadb-backup-10.5.15-r0
@@ -69,4 +69,4 @@ tzdata-2022a-r0
 utmps-0.1.0.2-r0
 xz-5.2.5-r1
 xz-libs-5.2.5-r1
-zlib-1.2.12-r0
+zlib-1.2.12-r1
