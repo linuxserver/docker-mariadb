@@ -54,7 +54,7 @@ nghttp2-libs-1.43.0-r0
 npth-1.6-r0
 p11-kit-0.23.22-r0
 pcre-8.44-r0
-pcre2-10.36-r0
+pcre2-10.36-r1
 perl-5.32.1-r0
 pinentry-1.1.1-r0
 procps-3.3.17-r0
