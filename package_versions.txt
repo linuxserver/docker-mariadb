@@ -3,7 +3,7 @@ alpine-keys-2.4-r0
 apk-tools-2.12.7-r0
 bash-5.1.16-r0
 brotli-libs-1.0.9-r5
-busybox-1.33.1-r7
+busybox-1.33.1-r8
 ca-certificates-20211220-r0
 ca-certificates-bundle-20211220-r0
 coreutils-8.32-r2
@@ -48,8 +48,8 @@ mariadb-common-10.5.16-r0
 mariadb-server-utils-10.5.16-r0
 musl-1.2.2-r3
 musl-utils-1.2.2-r3
-ncurses-libs-6.2_p20210612-r0
-ncurses-terminfo-base-6.2_p20210612-r0
+ncurses-libs-6.2_p20210612-r1
+ncurses-terminfo-base-6.2_p20210612-r1
 nettle-3.7.3-r0
 nghttp2-libs-1.43.0-r0
 npth-1.6-r0
@@ -65,7 +65,7 @@ scanelf-1.3.2-r0
 shadow-4.8.1-r0
 skalibs-2.10.0.3-r0
 sqlite-libs-3.35.5-r0
-ssl_client-1.33.1-r7
+ssl_client-1.33.1-r8
 tzdata-2022a-r0
 utmps-0.1.0.2-r0
 xz-5.2.5-r1
