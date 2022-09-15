@@ -12,9 +12,6 @@ ENV MYSQL_DIR="/config"
 ENV DATADIR=$MYSQL_DIR/databases
 
 RUN \
-  echo "**** install build packages ****" && \
-  apk add --no-cache --virtual=build-dependencies \
-    curl && \
   echo "**** install runtime packages ****" && \
   if [ -z ${MARIADB_VERSION+x} ]; then \
     MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.14/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
@@ -28,8 +25,6 @@ RUN \
     mariadb-common==${MARIADB_VERSION} \
     mariadb-server-utils==${MARIADB_VERSION} && \
   echo "**** cleanup ****" && \
-  apk del --purge \
-    build-dependencies && \
   rm -rf \
       /root/.cache \
       /tmp/* && \
