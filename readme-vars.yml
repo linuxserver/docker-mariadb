@@ -8,6 +8,11 @@ project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is one of the
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 project_blurb_optional_extras_enabled: false
 
+project_deprecation_status: true
+project_deprecation_message: |
+  Please switch to the "latest" tag instead
+  as it is now Alpine-based.
+
 # supported architectures
 available_architectures:
   - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
