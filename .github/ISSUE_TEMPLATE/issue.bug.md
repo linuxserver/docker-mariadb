@@ -3,6 +3,12 @@ name: Bug report
 about: Create a report to help us improve
 
 ---
+# DEPRECATION NOTICE
+
+This image is deprecated. We will not offer support for this image and it will not be updated.
+Please switch to the "latest" tag instead
+as it is now Alpine-based.
+
 [linuxserverurl]: https://linuxserver.io
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
