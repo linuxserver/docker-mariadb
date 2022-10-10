@@ -25,7 +25,7 @@ param_container_name: "{{ project_name }}"
 param_usage_include_net: false
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters)." }
+  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped)." }
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London." }
 param_usage_include_vols: true
 param_volumes:
@@ -96,6 +96,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "10.10.22:", desc: "Remove password escape logic which caused problems for a small subset of users." }
   - { date: "06.07.21:", desc: "Rebase master to alpine." }
   - { date: "03.07.21:", desc: "Rebase to 3.14." }
   - { date: "08.02.21:", desc: "Fix new installs." }
