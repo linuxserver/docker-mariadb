@@ -41,7 +41,7 @@ opt_param_usage_include_env: true
 opt_param_env_vars:
   - { env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created on image startup." }
   - { env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here)." }
-  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters)." }
+  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped)." }
   - { env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)." }
 opt_param_usage_include_vols: false
 opt_param_usage_include_ports: false
