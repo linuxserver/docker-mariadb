@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+echo "Caught SIGTERM signal!"
+
+kill -TERM "$(cat /var/run/mysqld/mysqld.pid)" 2>/dev/null

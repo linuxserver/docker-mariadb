@@ -159,11 +159,11 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-p 3306` | Mariadb listens on this port. |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
-| `-e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD` | Set this to root password for installation (minimum 4 characters). |
+| `-e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD` | Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped). |
 | `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
 | `-e MYSQL_DATABASE=USER_DB_NAME` | Specify the name of a database to be created on image startup. |
 | `-e MYSQL_USER=MYSQL_USER` | This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). |
-| `-e MYSQL_PASSWORD=DATABASE_PASSWORD` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters). |
+| `-e MYSQL_PASSWORD=DATABASE_PASSWORD` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). |
 | `-e REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql` | Set this to ingest sql files from an http/https endpoint (comma seperated array). |
 | `-v /config` | Contains the db itself and all assorted settings. |
 
@@ -276,6 +276,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **11.10.22:** - Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users.
 * **06.07.21:** - Rebase master to alpine.
 * **03.07.21:** - Rebase to 3.14.
 * **08.02.21:** - Fix new installs.

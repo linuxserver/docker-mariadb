@@ -14,10 +14,10 @@ start_mysql(){
 
 # test for existence of mysql folder in datadir and start initialise if not present
 # BEGIN: No indentation due to heredocs
-if [ ! -d "${DATADIR}/mysql" ]; then
+if [[ ! -d "${DATADIR}/mysql" ]]; then
 
 # load env file if it exists
-if [ -f "/config/env" ]; then
+if [[ -f "/config/env" ]]; then
     source /config/env
 fi
 
@@ -31,21 +31,21 @@ EOSQL
 NOPASS_SET=$(mktemp)
 cat > "${NOPASS_SET}" <<-EOFPASS
 #################################################################
-# No root password or too short a password ,min of 4 characters #
-# No root password will be set, this is not a good thing        #
-# You shoud set one after initialisation with the command       #
-#          mysqladmin -u root password <PASSWORD>               #
+# No root password or too short a password, min of 4 characters #
+#    No root password will be set, this is not a good thing     #
+#    You shoud set one after initialisation with the command    #
+#             mysqladmin -u root password <PASSWORD>            #
 #################################################################
 EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
-if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
+if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
     TEST_LEN="0"
 else
     TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
-MYSQL_ROOT_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_ROOT_PASSWORD}")
-if [ "${TEST_LEN}" -lt "4" ]; then
+
+if [[ "${TEST_LEN}" -lt "4" ]]; then
     MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
 else
     MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
@@ -53,11 +53,10 @@ fi
 
 # Make sure all user and database settings are set and pass is more than 4 characters
 # At the end change to default database created with environment variables to run init and remote scripts there
-if [ "${MYSQL_USER+x}" ] && \
-[ "${MYSQL_DATABASE+x}" ] && \
-[ "${MYSQL_PASSWORD+x}" ] && \
-[ "${#MYSQL_PASSWORD}" -gt "3" ]; then
-MYSQL_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_PASSWORD}")
+if [[ "${MYSQL_USER+x}" ]] && \
+[[ "${MYSQL_DATABASE+x}" ]] && \
+[[ "${MYSQL_PASSWORD+x}" ]] && \
+[[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
 read -r -d '' MYSQL_DB_SETUP << EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
@@ -77,7 +76,7 @@ EONEWSQL
 echo "Setting Up Initial Databases"
 
 # add all sql from a user defined directory on first init
-if [ -e "/config/initdb.d" ] && [ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]; then
+if [[ -e "/config/initdb.d" ]] && [[ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]]; then
     cat /config/initdb.d/*.sql >> "${tempSqlFile}"
 fi
 
@@ -85,10 +84,10 @@ chown -R abc:abc "${tempSqlFile}"
 
 
 # ingest remote sql if REMOTE_SQL is set
-if [ -n "${REMOTE_SQL+set}" ]; then
+if [[ -n "${REMOTE_SQL+set}" ]]; then
     IFS=, read -ra URLS <<< "${REMOTE_SQL}"
     for URL in "${URLS[@]}"; do
-        if [ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]; then
+        if [[ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]]; then
         curl -sL "${URL}" >> "${tempSqlFile}"
         fi
     done
@@ -109,7 +108,7 @@ wait "${pid}"
 echo "Database Setup Completed"
 
 # display a message about password if not set or too short
-if [ "${TEST_LEN}" -lt "4" ]; then
+if [[ "${TEST_LEN}" -lt "4" ]]; then
     printf '\n\n\n%s\n\n\n' "$(<"${NOPASS_SET}")"
     sleep 5s
 fi
