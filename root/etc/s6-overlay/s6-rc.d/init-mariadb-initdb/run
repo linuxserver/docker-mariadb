@@ -44,7 +44,7 @@ if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
 else
     TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
-MYSQL_ROOT_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_ROOT_PASSWORD}")
+
 if [[ "${TEST_LEN}" -lt "4" ]]; then
     MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
 else
@@ -57,7 +57,6 @@ if [[ "${MYSQL_USER+x}" ]] && \
 [[ "${MYSQL_DATABASE+x}" ]] && \
 [[ "${MYSQL_PASSWORD+x}" ]] && \
 [[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
-MYSQL_PASSWORD=$(sed -E 's/('\'')/\\\1/g' <<< "${MYSQL_PASSWORD}")
 read -r -d '' MYSQL_DB_SETUP << EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
