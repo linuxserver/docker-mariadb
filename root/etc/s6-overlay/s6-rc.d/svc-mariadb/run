@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 3306" \
+    s6-setuidgid abc \
+        /usr/bin/mariadbd-safe \
+        --datadir="${DATADIR}" \
+        --pid-file=/var/run/mysqld/mysqld.pid \
+        --user=abc &
+
+wait

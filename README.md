@@ -276,6 +276,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **11.10.22:** - Rebase master to Alpine 3.16, migrate to s6v3.
 * **06.07.21:** - Rebase master to alpine.
 * **03.07.21:** - Rebase to 3.14.
 * **08.02.21:** - Fix new installs.
