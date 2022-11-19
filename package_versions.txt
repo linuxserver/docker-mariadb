@@ -52,8 +52,8 @@ mariadb-backup-10.6.10-r0
 mariadb-client-10.6.10-r0
 mariadb-common-10.6.10-r0
 mariadb-server-utils-10.6.10-r0
-musl-1.2.3-r1
-musl-utils-1.2.3-r1
+musl-1.2.3-r2
+musl-utils-1.2.3-r2
 ncurses-libs-6.3_p20220521-r0
 ncurses-terminfo-base-6.3_p20220521-r0
 nettle-3.7.3-r0
