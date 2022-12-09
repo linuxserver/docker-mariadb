@@ -106,7 +106,7 @@ EONEWSQL
 # No root password or too short a password, min of 4 characters #
 #    No root password will be set, this is not a good thing     #
 #    You shoud set one after initialisation with the command    #
-#           mariadb-admin -u root password <PASSWORD>           #
+#              mariadb-admin -u root -p<PASSWORD>               #
 #################################################################
 
 
@@ -133,7 +133,7 @@ else
 
 #################################################################
 #   An upgrade is required on your databases. Run the command   #
-#          mariadb-upgrade -u root password <PASSWORD>          #
+#             mariadb-upgrade -u root -p<PASSWORD>              #
 #################################################################
 
 
