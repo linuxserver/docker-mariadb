@@ -94,8 +94,17 @@ app_setup_block: |
   ```
   This will have the same effect as setting the `REMOTE_SQL` environment variable. The sql will only be run on the containers first boot and setup.
 
+  ### Upgrading
+
+  When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade check will run. If an upgrade is required the log will indicate the need to run:
+
+  ```
+  mariadb-upgrade -u root password <PASSWORD>
+  ```
+
 # changelog
 changelogs:
+  - { date: "09.12.22:", desc: "Add upgrade check warning." }
   - { date: "11.10.22:", desc: "Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users." }
   - { date: "06.07.21:", desc: "Rebase master to alpine." }
   - { date: "03.07.21:", desc: "Rebase to 3.14." }

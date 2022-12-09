@@ -1,42 +1,20 @@
 #!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
-# set start function that creates user and password, used later
-start_mysql(){
-    mysqld --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
+# set start function used later
+start_mariadb() {
+    mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
     pid="$!"
     RET=1
     while [[ RET -ne 0 ]]; do
-        mysql -uroot -e "status" > /dev/null 2>&1
+        mariadb -uroot -e "status" >/dev/null 2>&1
         RET=$?
         sleep 1
     done
 }
 
-# test for existence of mysql folder in datadir and start initialise if not present
-# BEGIN: No indentation due to heredocs
-if [[ ! -d "${DATADIR}/mysql" ]]; then
-
-# load env file if it exists
-if [[ -f "/config/env" ]]; then
-    source /config/env
-fi
-
-# set basic sql command
+# make temp sql init file
 tempSqlFile=$(mktemp)
-cat > "${tempSqlFile}" <<-EOSQL
-DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
-EOSQL
-
-# set what to display if no password set with variable MYSQL_ROOT_PASSWORD
-NOPASS_SET=$(mktemp)
-cat > "${NOPASS_SET}" <<-EOFPASS
-#################################################################
-# No root password or too short a password, min of 4 characters #
-#    No root password will be set, this is not a good thing     #
-#    You shoud set one after initialisation with the command    #
-#             mysqladmin -u root password <PASSWORD>            #
-#################################################################
-EOFPASS
 
 # test for empty password variable, if it's set to 0 or less than 4 characters
 if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
@@ -45,81 +23,136 @@ else
     TEST_LEN=${#MYSQL_ROOT_PASSWORD}
 fi
 
-if [[ "${TEST_LEN}" -lt "4" ]]; then
-    MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
-else
-    MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
-fi
+# test for existence of mysql folder in datadir and start initialise if not present
+if [[ ! -d "${DATADIR}/mysql" ]]; then
+    # load env file if it exists
+    if [[ -f "/config/env" ]]; then
+        # shellcheck source=/dev/null
+        source /config/env
+    fi
 
-# Make sure all user and database settings are set and pass is more than 4 characters
-# At the end change to default database created with environment variables to run init and remote scripts there
-if [[ "${MYSQL_USER+x}" ]] && \
-[[ "${MYSQL_DATABASE+x}" ]] && \
-[[ "${MYSQL_PASSWORD+x}" ]] && \
-[[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
-read -r -d '' MYSQL_DB_SETUP << EOM
+    # set basic sql command
+    cat >"${tempSqlFile}" <<-EOSQL
+DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
+EOSQL
+
+    if [[ "${TEST_LEN}" -lt "4" ]]; then
+        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
+    else
+        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
+    fi
+
+    # Make sure all user and database settings are set and pass is more than 4 characters
+    # At the end change to default database created with environment variables to run init and remote scripts there
+    if [[ "${MYSQL_USER+x}" ]] &&
+        [[ "${MYSQL_DATABASE+x}" ]] &&
+        [[ "${MYSQL_PASSWORD+x}" ]] &&
+        [[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
+        read -r -d '' MYSQL_DB_SETUP <<-EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 USE \`${MYSQL_DATABASE}\`;
 EOM
-fi
+    fi
 
-# add rest of sql commands based on password set or not
-cat >> "${tempSqlFile}" <<-EONEWSQL
+    # add rest of sql commands based on password set or not
+    cat >>"${tempSqlFile}" <<-EONEWSQL
 $MYSQL_PASS
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
 
-echo "Setting Up Initial Databases"
+    echo "Setting Up Initial Databases"
 
-# add all sql from a user defined directory on first init
-if [[ -e "/config/initdb.d" ]] && [[ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]]; then
-    cat /config/initdb.d/*.sql >> "${tempSqlFile}"
-fi
+    # add all sql from a user defined directory on first init
+    if [[ -e "/config/initdb.d" ]] && [[ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]]; then
+        cat /config/initdb.d/*.sql >>"${tempSqlFile}"
+    fi
 
-chown -R abc:abc "${tempSqlFile}"
+    # ingest remote sql if REMOTE_SQL is set
+    if [[ -n "${REMOTE_SQL+set}" ]]; then
+        IFS=, read -ra URLS <<<"${REMOTE_SQL}"
+        for URL in "${URLS[@]}"; do
+            if [[ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]]; then
+                curl -sL "${URL}" >>"${tempSqlFile}"
+            fi
+        done
+    fi
+
+    # set some permissions needed before we begin
+    lsiown -R abc:abc "${tempSqlFile}" /config/log/mysql /var/run/mysqld /var/lib/mysql
+    chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
+
+    # initialise database structure
+    mariadb-install-db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
+
+    # start mariadb and apply our sql commands we set above
+    start_mariadb
+
+    # shut down after apply sql commands, waiting for pid to stop
+    mariadb-admin -u root shutdown
+    wait "${pid}"
+    echo "Database Setup Completed"
+
+    # display a message about password if not set or too short
+    if [[ "${TEST_LEN}" -lt "4" ]]; then
+        cat <<-EOFPASS
 
 
-# ingest remote sql if REMOTE_SQL is set
-if [[ -n "${REMOTE_SQL+set}" ]]; then
-    IFS=, read -ra URLS <<< "${REMOTE_SQL}"
-    for URL in "${URLS[@]}"; do
-        if [[ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]]; then
-        curl -sL "${URL}" >> "${tempSqlFile}"
+
+#################################################################
+# No root password or too short a password, min of 4 characters #
+#    No root password will be set, this is not a good thing     #
+#    You shoud set one after initialisation with the command    #
+#           mariadb-admin -u root password <PASSWORD>           #
+#################################################################
+
+
+
+EOFPASS
+
+        sleep 5s
+    fi
+else
+    if [[ "${TEST_LEN}" -lt "4" ]]; then
+        echo "MYSQL_ROOT_PASSWORD is not set or too short, skipping upgrade check"
+    else
+        # set some permissions needed before we begin
+        lsiown -R abc:abc "${tempSqlFile}"
+
+        # start mariadb
+        start_mariadb
+
+        # display a message about upgrading database if needed
+        if mariadb-upgrade -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
+            cat <<-EOFPASS
+
+
+
+#################################################################
+#   An upgrade is required on your databases. Run the command   #
+#          mariadb-upgrade -u root password <PASSWORD>          #
+#################################################################
+
+
+
+EOFPASS
+
+            sleep 5s
         fi
-    done
-fi
-# set some permissions needed before we begin initialising
-chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
-chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
 
-# initialise database structure
-mysql_install_db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
-
-# start mysql and apply our sql commands we set above
-start_mysql
-
-# shut down after apply sql commands, waiting for pid to stop
-mysqladmin -u root shutdown
-wait "${pid}"
-echo "Database Setup Completed"
-
-# display a message about password if not set or too short
-if [[ "${TEST_LEN}" -lt "4" ]]; then
-    printf '\n\n\n%s\n\n\n' "$(<"${NOPASS_SET}")"
-    sleep 5s
+        # shut down after apply sql commands, waiting for pid to stop
+        mariadb-admin -u root shutdown
+        wait "${pid}"
+        echo "Database Upgrade Check Completed"
+    fi
 fi
 
 # clean up any old install files from /tmp
-rm -f "${NOPASS_SET}"
 rm -f "${tempSqlFile}"
 
-# END: No indentation due to heredocs
-fi
-
 # own the folder the pid for mysql runs in
-chown -R abc:abc /var/run/mysqld
-chown -R abc:abc /config
+lsiown -R abc:abc /var/run/mysqld
+lsiown -R abc:abc /config
