@@ -1,12 +1,13 @@
 #!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
 # set start function that creates user and password, used later
-start_mysql(){
+start_mysql() {
     mysqld --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
     pid="$!"
     RET=1
     while [[ RET -ne 0 ]]; do
-        mysql -uroot -e "status" > /dev/null 2>&1
+        mysql -uroot -e "status" >/dev/null 2>&1
         RET=$?
         sleep 1
     done
@@ -16,20 +17,20 @@ start_mysql(){
 # BEGIN: No indentation due to heredocs
 if [[ ! -d "${DATADIR}/mysql" ]]; then
 
-# load env file if it exists
-if [[ -f "/config/env" ]]; then
-    source /config/env
-fi
+    # load env file if it exists
+    if [[ -f "/config/env" ]]; then
+        source /config/env
+    fi
 
-# set basic sql command
-tempSqlFile=$(mktemp)
-cat > "${tempSqlFile}" <<-EOSQL
+    # set basic sql command
+    tempSqlFile=$(mktemp)
+    cat >"${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
 
-# set what to display if no password set with variable MYSQL_ROOT_PASSWORD
-NOPASS_SET=$(mktemp)
-cat > "${NOPASS_SET}" <<-EOFPASS
+    # set what to display if no password set with variable MYSQL_ROOT_PASSWORD
+    NOPASS_SET=$(mktemp)
+    cat >"${NOPASS_SET}" <<-EOFPASS
 #################################################################
 # No root password or too short a password, min of 4 characters #
 #    No root password will be set, this is not a good thing     #
@@ -38,84 +39,83 @@ cat > "${NOPASS_SET}" <<-EOFPASS
 #################################################################
 EOFPASS
 
-# test for empty password variable, if it's set to 0 or less than 4 characters
-if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
-    TEST_LEN="0"
-else
-    TEST_LEN=${#MYSQL_ROOT_PASSWORD}
-fi
+    # test for empty password variable, if it's set to 0 or less than 4 characters
+    if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
+        TEST_LEN="0"
+    else
+        TEST_LEN=${#MYSQL_ROOT_PASSWORD}
+    fi
 
-if [[ "${TEST_LEN}" -lt "4" ]]; then
-    MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
-else
-    MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
-fi
+    if [[ "${TEST_LEN}" -lt "4" ]]; then
+        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
+    else
+        MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
+    fi
 
-# Make sure all user and database settings are set and pass is more than 4 characters
-# At the end change to default database created with environment variables to run init and remote scripts there
-if [[ "${MYSQL_USER+x}" ]] && \
-[[ "${MYSQL_DATABASE+x}" ]] && \
-[[ "${MYSQL_PASSWORD+x}" ]] && \
-[[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
-read -r -d '' MYSQL_DB_SETUP << EOM
+    # Make sure all user and database settings are set and pass is more than 4 characters
+    # At the end change to default database created with environment variables to run init and remote scripts there
+    if [[ "${MYSQL_USER+x}" ]] &&
+        [[ "${MYSQL_DATABASE+x}" ]] &&
+        [[ "${MYSQL_PASSWORD+x}" ]] &&
+        [[ "${#MYSQL_PASSWORD}" -gt "3" ]]; then
+        read -r -d '' MYSQL_DB_SETUP <<EOM
 CREATE DATABASE \`${MYSQL_DATABASE}\`;
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 USE \`${MYSQL_DATABASE}\`;
 EOM
-fi
+    fi
 
-# add rest of sql commands based on password set or not
-cat >> "${tempSqlFile}" <<-EONEWSQL
+    # add rest of sql commands based on password set or not
+    cat >>"${tempSqlFile}" <<-EONEWSQL
 $MYSQL_PASS
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
 
-echo "Setting Up Initial Databases"
+    echo "Setting Up Initial Databases"
 
-# add all sql from a user defined directory on first init
-if [[ -e "/config/initdb.d" ]] && [[ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]]; then
-    cat /config/initdb.d/*.sql >> "${tempSqlFile}"
-fi
+    # add all sql from a user defined directory on first init
+    if [[ -e "/config/initdb.d" ]] && [[ -n "$(/bin/ls -A /config/initdb.d/*.sql 2>/dev/null)" ]]; then
+        cat /config/initdb.d/*.sql >>"${tempSqlFile}"
+    fi
 
-chown -R abc:abc "${tempSqlFile}"
+    chown -R abc:abc "${tempSqlFile}"
 
+    # ingest remote sql if REMOTE_SQL is set
+    if [[ -n "${REMOTE_SQL+set}" ]]; then
+        IFS=, read -ra URLS <<<"${REMOTE_SQL}"
+        for URL in "${URLS[@]}"; do
+            if [[ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]]; then
+                curl -sL "${URL}" >>"${tempSqlFile}"
+            fi
+        done
+    fi
+    # set some permissions needed before we begin initialising
+    chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
+    chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
 
-# ingest remote sql if REMOTE_SQL is set
-if [[ -n "${REMOTE_SQL+set}" ]]; then
-    IFS=, read -ra URLS <<< "${REMOTE_SQL}"
-    for URL in "${URLS[@]}"; do
-        if [[ "$(curl -I -sL -w "%{http_code}" "${URL}" -o /dev/null)" == 200 ]]; then
-        curl -sL "${URL}" >> "${tempSqlFile}"
-        fi
-    done
-fi
-# set some permissions needed before we begin initialising
-chown -R abc:abc /config/log/mysql /var/run/mysqld /var/lib/mysql
-chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
+    # initialise database structure
+    mysql_install_db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
 
-# initialise database structure
-mysql_install_db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
+    # start mysql and apply our sql commands we set above
+    start_mysql
 
-# start mysql and apply our sql commands we set above
-start_mysql
+    # shut down after apply sql commands, waiting for pid to stop
+    mysqladmin -u root shutdown
+    wait "${pid}"
+    echo "Database Setup Completed"
 
-# shut down after apply sql commands, waiting for pid to stop
-mysqladmin -u root shutdown
-wait "${pid}"
-echo "Database Setup Completed"
+    # display a message about password if not set or too short
+    if [[ "${TEST_LEN}" -lt "4" ]]; then
+        printf '\n\n\n%s\n\n\n' "$(<"${NOPASS_SET}")"
+        sleep 5s
+    fi
 
-# display a message about password if not set or too short
-if [[ "${TEST_LEN}" -lt "4" ]]; then
-    printf '\n\n\n%s\n\n\n' "$(<"${NOPASS_SET}")"
-    sleep 5s
-fi
-
-# clean up any old install files from /tmp
-rm -f "${NOPASS_SET}"
-rm -f "${tempSqlFile}"
+    # clean up any old install files from /tmp
+    rm -f "${NOPASS_SET}"
+    rm -f "${tempSqlFile}"
 
 # END: No indentation due to heredocs
 fi
