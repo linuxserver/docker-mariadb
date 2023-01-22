@@ -29,14 +29,7 @@ if [[ ! -d "${DATADIR}/mysql" ]]; then
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
 
-    # test for empty password variable, if it's set to 0 or less than 4 characters
-    if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
-        TEST_LEN="0"
-    else
-        TEST_LEN=${#MYSQL_ROOT_PASSWORD}
-    fi
-
-    if [[ "${TEST_LEN}" -lt "4" ]]; then
+    if [[ "${#MYSQL_ROOT_PASSWORD}" -lt "4" ]]; then
         MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
     else
         MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;"
@@ -97,7 +90,7 @@ EONEWSQL
     echo "Database Setup Completed"
 
     # display a message about password if not set or too short
-    if [[ "${TEST_LEN}" -lt "4" ]]; then
+    if [[ "${#MYSQL_ROOT_PASSWORD}" -lt "4" ]]; then
         cat <<-EOFPASS
 
 
