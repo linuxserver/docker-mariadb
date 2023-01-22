@@ -61,7 +61,7 @@ The architectures supported by this image are:
 ## Application Setup
 
 If you didn't set a password during installation, (see logs for warning) use
-`mysqladmin -u root password <PASSWORD>`
+`mariadb-admin -u root -p<PASSWORD>`
 to set one at the docker prompt...
 
 NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
@@ -101,6 +101,14 @@ We support a one time run of custom sql files on init. In order to use this plac
 /config/initdb.d/
 ```
 This will have the same effect as setting the `REMOTE_SQL` environment variable. The sql will only be run on the containers first boot and setup.
+
+### Upgrading
+
+When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade check will run. If an upgrade is required the log will indicate the need to run:
+
+```
+mariadb-upgrade -u root -p<PASSWORD>
+```
 
 ## Usage
 
@@ -276,6 +284,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **09.12.22:** - Add upgrade check warning.
 * **11.10.22:** - Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users.
 * **06.07.21:** - Rebase master to alpine.
 * **03.07.21:** - Rebase to 3.14.
