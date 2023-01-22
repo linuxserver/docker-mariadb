@@ -13,16 +13,6 @@ start_mariadb() {
     done
 }
 
-# make temp sql init file
-tempSqlFile=$(mktemp)
-
-# test for empty password variable, if it's set to 0 or less than 4 characters
-if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
-    TEST_LEN="0"
-else
-    TEST_LEN=${#MYSQL_ROOT_PASSWORD}
-fi
-
 # test for existence of mysql folder in datadir and start initialise if not present
 if [[ ! -d "${DATADIR}/mysql" ]]; then
     # load env file if it exists
@@ -31,10 +21,20 @@ if [[ ! -d "${DATADIR}/mysql" ]]; then
         source /config/env
     fi
 
+    # make temp sql init file
+    tempSqlFile=$(mktemp)
+
     # set basic sql command
     cat >"${tempSqlFile}" <<-EOSQL
 DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
 EOSQL
+
+    # test for empty password variable, if it's set to 0 or less than 4 characters
+    if [[ -z "${MYSQL_ROOT_PASSWORD}" ]]; then
+        TEST_LEN="0"
+    else
+        TEST_LEN=${#MYSQL_ROOT_PASSWORD}
+    fi
 
     if [[ "${TEST_LEN}" -lt "4" ]]; then
         MYSQL_PASS="CREATE USER 'root'@'%' IDENTIFIED BY '' ;"
@@ -115,43 +115,10 @@ EOFPASS
 
         sleep 5s
     fi
-else
-    if [[ "${TEST_LEN}" -lt "4" ]]; then
-        echo "MYSQL_ROOT_PASSWORD is not set or too short, skipping upgrade check"
-    else
-        # set some permissions needed before we begin
-        lsiown -R abc:abc "${tempSqlFile}"
 
-        # start mariadb
-        start_mariadb
-
-        # display a message about upgrading database if needed
-        if mariadb-upgrade -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
-            cat <<-EOFPASS
-
-
-
-#################################################################
-#   An upgrade is required on your databases. Run the command   #
-#             mariadb-upgrade -u root -p<PASSWORD>              #
-#################################################################
-
-
-
-EOFPASS
-
-            sleep 5s
-        fi
-
-        # shut down after apply sql commands, waiting for pid to stop
-        mariadb-admin -u root shutdown
-        wait "${pid}"
-        echo "Database Upgrade Check Completed"
-    fi
+    # clean up any old install files from /tmp
+    rm -f "${tempSqlFile}"
 fi
-
-# clean up any old install files from /tmp
-rm -f "${tempSqlFile}"
 
 # own the folder the pid for mysql runs in
 lsiown -R abc:abc /var/run/mysqld
