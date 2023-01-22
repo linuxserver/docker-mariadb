@@ -9,8 +9,14 @@ if [[ "${#MYSQL_ROOT_PASSWORD}" -gt "3" ]]; then
 
 
 #################################################################
-#   An upgrade is required on your databases. Run the command   #
+#                                                               #
+#           An upgrade is required on your databases.           #
+#                                                               #
+#         Stop any services that are accessing databases        #
+#          in this container, and then run the command          #
+#                                                               #
 #             mariadb-upgrade -u root -p<PASSWORD>              #
+#                                                               #
 #################################################################
 
 
