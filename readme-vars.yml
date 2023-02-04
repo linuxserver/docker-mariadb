@@ -104,6 +104,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "04.02.23:", desc: "Minor updates to defaults in custom.cnf." }
   - { date: "31.01.23:", desc: "Rebase to 3.17." }
   - { date: "09.12.22:", desc: "Add upgrade check warning." }
   - { date: "11.10.22:", desc: "Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users." }
