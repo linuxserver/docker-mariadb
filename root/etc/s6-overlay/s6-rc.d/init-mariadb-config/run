@@ -11,17 +11,9 @@ mkdir -p \
 sed -i "s|.*skip-networking.*|#skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
 
 # setup custom cnf file
-if [[ ! -f /config/custom.cnf ]]; then
-    cp /defaults/my.cnf /config/custom.cnf
-fi
-
-if [[ ! -L /etc/my.cnf.d/custom.cnf && -f /etc/my.cnf.d/custom.cnf ]]; then
-    rm /etc/my.cnf.d/custom.cnf
-fi
-
-if [[ ! -L /etc/my.cnf.d/custom.cnf ]]; then
-    ln -s /config/custom.cnf /etc/my.cnf.d/custom.cnf
-fi
+cp -n /defaults/custom.cnf /config/custom.cnf
+rm -rf /etc/my.cnf.d/custom.cnf
+ln -s /config/custom.cnf /etc/my.cnf.d/custom.cnf
 
 # set permissions
 chmod -R 777 \
