@@ -60,6 +60,7 @@ bulk_insert_buffer_size = 16M
 tmp_table_size          = 32M
 max_heap_table_size     = 32M
 
+#performance_schema = on
 character_set_server    = utf8mb4
 collation_server        = utf8mb4_general_ci
 transaction_isolation   = READ-COMMITTED
