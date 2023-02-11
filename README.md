@@ -56,7 +56,7 @@ The architectures supported by this image are:
 | :----: | :----: | ---- |
 | x86-64 | ✅ | amd64-\<version tag\> |
 | arm64 | ✅ | arm64v8-\<version tag\> |
-| armhf| ✅ | arm32v7-\<version tag\> |
+| armhf | ✅ | arm32v7-\<version tag\> |
 
 ## Application Setup
 
@@ -126,8 +126,8 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Etc/UTC
       - MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD
-      - TZ=Europe/London
       - MYSQL_DATABASE=USER_DB_NAME #optional
       - MYSQL_USER=MYSQL_USER #optional
       - MYSQL_PASSWORD=DATABASE_PASSWORD #optional
@@ -146,8 +146,8 @@ docker run -d \
   --name=mariadb \
   -e PUID=1000 \
   -e PGID=1000 \
+  -e TZ=Etc/UTC \
   -e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD \
-  -e TZ=Europe/London \
   -e MYSQL_DATABASE=USER_DB_NAME `#optional` \
   -e MYSQL_USER=MYSQL_USER `#optional` \
   -e MYSQL_PASSWORD=DATABASE_PASSWORD `#optional` \
@@ -156,6 +156,7 @@ docker run -d \
   -v path_to_data:/config \
   --restart unless-stopped \
   lscr.io/linuxserver/mariadb:latest
+
 ```
 
 ## Parameters
@@ -167,8 +168,8 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-p 3306` | Mariadb listens on this port. |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
+| `-e TZ=Etc/UTC` | specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
 | `-e MYSQL_ROOT_PASSWORD=ROOT_ACCESS_PASSWORD` | Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped). |
-| `-e TZ=Europe/London` | Specify a timezone to use EG Europe/London. |
 | `-e MYSQL_DATABASE=USER_DB_NAME` | Specify the name of a database to be created on image startup. |
 | `-e MYSQL_USER=MYSQL_USER` | This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). |
 | `-e MYSQL_PASSWORD=DATABASE_PASSWORD` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). |
