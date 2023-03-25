@@ -12,7 +12,7 @@ busybox-binsh           1.35.0-r29             apk
 ca-certificates         20220614-r4            apk     
 ca-certificates-bundle  20220614-r4            apk     
 coreutils               9.1-r0                 apk     
-curl                    7.88.1-r0              apk     
+curl                    7.88.1-r1              apk     
 gdbm                    1.23-r0                apk     
 gmp                     6.2.1-r2               apk     
 gnupg                   2.2.40-r0              apk     
@@ -35,7 +35,7 @@ libbsd                  0.11.7-r0              apk
 libbz2                  1.0.8-r4               apk     
 libc-utils              0.7.2-r3               apk     
 libcrypto3              3.0.8-r0               apk     
-libcurl                 7.88.1-r0              apk     
+libcurl                 7.88.1-r1              apk     
 libffi                  3.4.4-r0               apk     
 libgcc                  12.2.1_git20220924-r4  apk     
 libgcrypt               1.10.1-r0              apk     
