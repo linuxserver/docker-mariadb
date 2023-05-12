@@ -52,11 +52,11 @@ libtasn1                4.19.0-r0              apk
 libunistring            1.1-r0                 apk     
 libxml2                 2.10.4-r0              apk     
 linux-pam               1.5.2-r1               apk     
-mariadb                 10.6.12-r0             apk     
-mariadb-backup          10.6.12-r0             apk     
-mariadb-client          10.6.12-r0             apk     
-mariadb-common          10.6.12-r0             apk     
-mariadb-server-utils    10.6.12-r0             apk     
+mariadb                 10.6.13-r0             apk     
+mariadb-backup          10.6.13-r0             apk     
+mariadb-client          10.6.13-r0             apk     
+mariadb-common          10.6.13-r0             apk     
+mariadb-server-utils    10.6.13-r0             apk     
 musl                    1.2.3-r4               apk     
 musl-utils              1.2.3-r4               apk     
 ncurses-libs            6.3_p20221119-r0       apk     
