@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.17
+FROM ghcr.io/linuxserver/baseimage-alpine:3.18
 
 # set version label
 ARG BUILD_DATE
@@ -16,7 +16,7 @@ ENV DATADIR=$MYSQL_DIR/databases
 RUN \
   echo "**** install runtime packages ****" && \
   if [ -z ${MARIADB_VERSION+x} ]; then \
-    MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
+    MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.18/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
@@ -26,12 +26,12 @@ RUN \
     mariadb-client==${MARIADB_VERSION} \
     mariadb-common==${MARIADB_VERSION} \
     mariadb-server-utils==${MARIADB_VERSION} && \
+  mkdir -p \
+    /var/lib/mysql && \
   echo "**** cleanup ****" && \
   rm -rf \
-      /root/.cache \
-      /tmp/* && \
-  mkdir -p \
-    /var/lib/mysql
+    /tmp/* \
+    $HOME/.cache
 
 # copy local files
 COPY root/ /
