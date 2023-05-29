@@ -77,13 +77,13 @@ Find custom.cnf in /config for config changes (restart container for them to tak
 
 The `MYSQL_ROOT_PASSWORD MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD REMOTE_SQL` env values can be set in a file:
 
-```
+```path
 /config/env
 ```
 
 Using the following format:
 
-```
+```env
 MYSQL_ROOT_PASSWORD="ROOT_ACCESS_PASSWORD"
 MYSQL_DATABASE="USER_DB_NAME"
 MYSQL_USER="MYSQL_USER"
@@ -97,24 +97,16 @@ These settings can be mixed and matched with Docker ENV settings as you require,
 
 We support a one time run of custom sql files on init. In order to use this place `*.sql` files in:
 
-```
+```path
 /config/initdb.d/
 ```
 This will have the same effect as setting the `REMOTE_SQL` environment variable. The sql will only be run on the containers first boot and setup.
-
-### Upgrading
-
-When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade check will run. If an upgrade is required the log will indicate the need to run:
-
-```
-mariadb-upgrade -u root -p<PASSWORD>
-```
 
 ### Check and Repair
 
 If user databases are not in a healthy state (sometimes caused by a failed upgrade), it may be remedied by running:
 
-```
+```shell
 mariadb-check -u root -p<PASSWORD> -c -A # check all databases for errors
 mariadb-check -u root -p<PASSWORD> -r -A # repair all databases
 mariadb-check -u root -p<PASSWORD> -a -A # analyze all databases
@@ -122,6 +114,14 @@ mariadb-check -u root -p<PASSWORD> -o -A # optimize all databases
 ```
 
 After running the above commands, you may need to run the upgrade command again.
+
+### Upgrading
+
+When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade check will run. If an upgrade is required the log will indicate the need stop any services that are accessing databases in this container, and then run the command:
+
+```shell
+mariadb-upgrade -u root -p<PASSWORD>
+```
 
 ## Usage
 
