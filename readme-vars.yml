@@ -101,6 +101,19 @@ app_setup_block: |
   mariadb-upgrade -u root -p<PASSWORD>
   ```
 
+  ### Check and Repair
+
+  If user databases are not in a healthy state (sometimes caused by a failed upgrade), it may be remedied by running:
+
+  ```
+  mariadb-check -u root -p<PASSWORD> -c -A # check all databases for errors
+  mariadb-check -u root -p<PASSWORD> -r -A # repair all databases
+  mariadb-check -u root -p<PASSWORD> -a -A # analyze all databases
+  mariadb-check -u root -p<PASSWORD> -o -A # optimize all databases
+  ```
+
+  After running the above commands, you may need to run the upgrade command again.
+
 # changelog
 changelogs:
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }

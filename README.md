@@ -110,6 +110,19 @@ When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade chec
 mariadb-upgrade -u root -p<PASSWORD>
 ```
 
+### Check and Repair
+
+If user databases are not in a healthy state (sometimes caused by a failed upgrade), it may be remedied by running:
+
+```
+mariadb-check -u root -p<PASSWORD> -c -A # check all databases for errors
+mariadb-check -u root -p<PASSWORD> -r -A # repair all databases
+mariadb-check -u root -p<PASSWORD> -a -A # analyze all databases
+mariadb-check -u root -p<PASSWORD> -o -A # optimize all databases
+```
+
+After running the above commands, you may need to run the upgrade command again.
+
 ## Usage
 
 Here are some example snippets to help you get started creating a container.
