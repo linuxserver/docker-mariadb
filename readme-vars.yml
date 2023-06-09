@@ -116,6 +116,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "09.06.23:", desc: "Update lc_messages path in shipped custom.cnf to match upstream." }
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
   - { date: "04.02.23:", desc: "Minor updates to defaults in custom.cnf." }
   - { date: "31.01.23:", desc: "Rebase to 3.17." }
