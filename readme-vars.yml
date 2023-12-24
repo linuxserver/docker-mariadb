@@ -28,7 +28,7 @@ param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London." }
 param_usage_include_vols: true
 param_volumes:
-  - { vol_path: "/config", vol_host_path: "path_to_data", desc: "Contains the db itself and all assorted settings." }
+  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files" }
 param_usage_include_ports: true
 param_ports:
   - { external_port: "3306", internal_port: "3306", port_desc: "Mariadb listens on this port." }
@@ -116,6 +116,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
   - { date: "09.06.23:", desc: "Update lc_messages path in shipped custom.cnf to match upstream." }
   - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
   - { date: "04.02.23:", desc: "Minor updates to defaults in custom.cnf." }
