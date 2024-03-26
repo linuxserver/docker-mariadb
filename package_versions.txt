@@ -9,8 +9,8 @@ brotli-libs             1.1.0-r1               apk
 busybox                 1.36.1-r15             apk     
 busybox-binsh           1.36.1-r15             apk     
 c-ares                  1.24.0-r1              apk     
-ca-certificates         20230506-r0            apk     
-ca-certificates-bundle  20230506-r0            apk     
+ca-certificates         20240226-r0            apk     
+ca-certificates-bundle  20240226-r0            apk     
 coreutils               9.4-r2                 apk     
 coreutils-env           9.4-r2                 apk     
 coreutils-fmt           9.4-r2                 apk     
@@ -24,7 +24,7 @@ gnupg-gpgconf           2.4.4-r0               apk
 gnupg-keyboxd           2.4.4-r0               apk     
 gnupg-utils             2.4.4-r0               apk     
 gnupg-wks-client        2.4.4-r0               apk     
-gnutls                  3.8.3-r0               apk     
+gnutls                  3.8.4-r0               apk     
 gpg                     2.4.4-r0               apk     
 gpg-agent               2.4.4-r0               apk     
 gpg-wks-server          2.4.4-r0               apk     
