@@ -347,6 +347,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **31.05.24:** - Rebase to Alpine 3.20.
 * **23.12.23:** - Rebase to Alpine 3.19.
 * **09.06.23:** - Update lc_messages path in shipped custom.cnf to match upstream.
 * **25.05.23:** - Rebase to Alpine 3.18, deprecate armhf.

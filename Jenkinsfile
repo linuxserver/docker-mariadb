@@ -25,8 +25,8 @@ pipeline {
     DEV_DOCKERHUB_IMAGE = 'lsiodev/mariadb'
     PR_DOCKERHUB_IMAGE = 'lspipepr/mariadb'
     DIST_IMAGE = 'alpine'
-    DIST_TAG = '3.19'
-    DIST_REPO = 'http://dl-cdn.alpinelinux.org/alpine/v3.19/main/'
+    DIST_TAG = '3.20'
+    DIST_REPO = 'http://dl-cdn.alpinelinux.org/alpine/v3.20/main/'
     DIST_REPO_PACKAGES = 'mariadb'
     MULTIARCH='true'
     CI='true'
@@ -35,7 +35,7 @@ pipeline {
     CI_SSL='false'
     CI_DELAY='30'
     CI_DOCKERENV='MYSQL_ROOT_PASSWORD=password'
-    CI_AUTH='user:password'
+    CI_AUTH=''
     CI_WEBPATH=''
   }
   stages {
