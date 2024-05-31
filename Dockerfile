@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM ghcr.io/linuxserver/baseimage-alpine:3.19
+FROM ghcr.io/linuxserver/baseimage-alpine:3.20
 
 # set version label
 ARG BUILD_DATE
@@ -16,7 +16,7 @@ ENV DATADIR=$MYSQL_DIR/databases
 RUN \
   echo "**** install runtime packages ****" && \
   if [ -z ${MARIADB_VERSION+x} ]; then \
-    MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
+    MARIADB_VERSION=$(curl -sL "http://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz" | tar -xz -C /tmp \
     && awk '/^P:mariadb$/,/V:/' /tmp/APKINDEX | sed -n 2p | sed 's/^V://'); \
   fi && \
   apk add --no-cache \
@@ -28,6 +28,7 @@ RUN \
     mariadb-server-utils==${MARIADB_VERSION} && \
   mkdir -p \
     /var/lib/mysql && \
+  printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \
