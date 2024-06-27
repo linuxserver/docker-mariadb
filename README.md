@@ -60,7 +60,7 @@ The architectures supported by this image are:
 ## Application Setup
 
 If you didn't set a password during installation, (see logs for warning) use
-`mariadb-admin -u root -p<PASSWORD>`
+`mariadb-admin -u root password`
 to set one at the docker prompt...
 
 NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
