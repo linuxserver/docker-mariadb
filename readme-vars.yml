@@ -26,7 +26,7 @@ param_volumes:
   - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files" }
 param_usage_include_ports: true
 param_ports:
-  - { external_port: "3306", internal_port: "3306", port_desc: "Mariadb listens on this port." }
+  - { external_port: "3306", internal_port: "3306", port_desc: "MariaDB listens on this port." }
 
 # optional container parameters
 opt_param_usage_include_env: true
@@ -43,7 +43,7 @@ app_setup_block: |
   `mariadb-admin -u root -p<PASSWORD>`
   to set one at the docker prompt...
 
-  NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+  NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your MariaDB password.
 
   NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
@@ -121,12 +121,12 @@ changelogs:
   - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup." }
   - { date: "26.01.19:", desc: "Add pipeline logic and multi arch." }
-  - { date: "10.09.18:", desc: "Rebase to ubuntu bionic and use 10.3 mariadb repository." }
+  - { date: "10.09.18:", desc: "Rebase to ubuntu bionic and use 10.3 MariaDB repository." }
   - { date: "09.12.17:", desc: "Fix continuation lines." }
-  - { date: "12.09.17:", desc: "Gracefully shut down mariadb." }
+  - { date: "12.09.17:", desc: "Gracefully shut down MariaDB." }
   - { date: "27.10.16:", desc: "Implement linting suggestions on database init script." }
   - { date: "11.10.16:", desc: "Rebase to ubuntu xenial, add version labelling." }
-  - { date: "09.03.16:", desc: "Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile." }
+  - { date: "09.03.16:", desc: "Update to MariaDB 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile." }
   - { date: "26.01.16:", desc: "Change user of mysqld_safe script to abc, better unclean shutdown handling on restart." }
   - { date: "23.12.15:", desc: "Remove autoupdating, between some version updates the container breaks." }
   - { date: "12.08.15:", desc: "Initial Release." }

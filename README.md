@@ -39,9 +39,9 @@ Find us at:
 [![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-mariadb%2Fjob%2Fmaster%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-mariadb/job/master/)
 [![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.linuxserver.io%2Flinuxserver%2Fmariadb%2Flatest%2Fci-status.yml)](https://ci-tests.linuxserver.io/linuxserver/mariadb/latest/index.html)
 
-[Mariadb](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
+[MariaDB](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
 
-[![mariadb](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)](https://mariadb.org/)
+[![MariaDB](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)](https://mariadb.org/)
 
 ## Supported Architectures
 
@@ -63,7 +63,7 @@ If you didn't set a password during installation, (see logs for warning) use
 `mariadb-admin -u root -p<PASSWORD>`
 to set one at the docker prompt...
 
-NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your mariadb password.
+NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your MariaDB password.
 
 NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
@@ -175,7 +175,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 
 | Parameter | Function |
 | :----: | --- |
-| `-p 3306` | Mariadb listens on this port. |
+| `-p 3306` | MariaDB listens on this port. |
 | `-e PUID=1000` | for UserID - see below for explanation |
 | `-e PGID=1000` | for GroupID - see below for explanation |
 | `-e TZ=Etc/UTC` | specify a timezone to use, see this [list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List). |
@@ -358,18 +358,18 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 * **06.07.21:** - Rebase master to alpine.
 * **03.07.21:** - Rebase to 3.14.
 * **08.02.21:** - Fix new installs.
-* **08.02.21:** - Rebase to alpine. Add mariadb-backup.
+* **08.02.21:** - Rebase to alpine. Add MariaDB-backup.
 * **08.02.21:** - Release alpine tag. The alpine release will replace the latest tag in the near future.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
 * **07.03.19:** - Add ability to setup a database and default user on first spinup.
 * **26.01.19:** - Add pipeline logic and multi arch.
-* **10.09.18:** - Rebase to ubuntu bionic and use 10.3 mariadb repository.
+* **10.09.18:** - Rebase to ubuntu bionic and use 10.3 MariaDB repository.
 * **09.12.17:** - Fix continuation lines.
-* **12.09.17:** - Gracefully shut down mariadb.
+* **12.09.17:** - Gracefully shut down MariaDB.
 * **27.10.16:** - Implement linting suggestions on database init script.
 * **11.10.16:** - Rebase to ubuntu xenial, add version labelling.
-* **09.03.16:** - Update to mariadb 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
+* **09.03.16:** - Update to MariaDB 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile.
 * **26.01.16:** - Change user of mysqld_safe script to abc, better unclean shutdown handling on restart.
 * **23.12.15:** - Remove autoupdating, between some version updates the container breaks.
 * **12.08.15:** - Initial Release.
