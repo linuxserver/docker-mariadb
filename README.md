@@ -39,9 +39,9 @@ Find us at:
 [![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-mariadb%2Fjob%2Fmaster%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-mariadb/job/master/)
 [![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Fci-tests.linuxserver.io%2Flinuxserver%2Fmariadb%2Flatest%2Fci-status.yml)](https://ci-tests.linuxserver.io/linuxserver/mariadb/latest/index.html)
 
-[MariaDB](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
+[Mariadb](https://mariadb.org/) is one of the most popular database servers. Made by the original developers of MySQL.
 
-[![MariaDB](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)](https://mariadb.org/)
+[![mariadb](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png)](https://mariadb.org/)
 
 ## Supported Architectures
 
@@ -358,7 +358,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 * **06.07.21:** - Rebase master to alpine.
 * **03.07.21:** - Rebase to 3.14.
 * **08.02.21:** - Fix new installs.
-* **08.02.21:** - Rebase to alpine. Add MariaDB-backup.
+* **08.02.21:** - Rebase to alpine. Add mariadb-backup.
 * **08.02.21:** - Release alpine tag. The alpine release will replace the latest tag in the near future.
 * **27.10.19:** - Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
