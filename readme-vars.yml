@@ -43,7 +43,7 @@ app_setup_block: |
   `mariadb-admin -u root -p<PASSWORD>`
   to set one at the docker prompt...
 
-  NOTE changing any of the MYSQL_ variable after the container has set up the initial databases has no effect, use the mysqladmin tool or cli to make changes.
+  NOTE changing any of the MYSQL_ variables after the container has set up the initial databases has no effect, use the mysqladmin tool or cli to make changes.
 
   NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
