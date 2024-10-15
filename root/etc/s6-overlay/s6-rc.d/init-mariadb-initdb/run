@@ -6,9 +6,9 @@ start_mariadb() {
     mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
     pid="$!"
     RET=1
-    while [[ RET -ne 0 ]]; do
+    while [[ ${RET} -ne 0 ]]; do
         mariadb -uroot -e "status" >/dev/null 2>&1
-        RET=$?
+        ${RET}=$?
         sleep 1
     done
 }
