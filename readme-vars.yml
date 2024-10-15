@@ -19,7 +19,7 @@ param_container_name: "{{ project_name }}"
 
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped)." }
+  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)" }
 
 param_usage_include_vols: true
 param_volumes:
@@ -31,9 +31,9 @@ param_ports:
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created on image startup." }
-  - { env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here)." }
-  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped)." }
+  - { env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created. (valid only for first run)" }
+  - { env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run)" }
+  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)" }
   - { env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)." }
 
 # application setup block
@@ -43,7 +43,7 @@ app_setup_block: |
   `mariadb-admin -u root -p<PASSWORD>`
   to set one at the docker prompt...
 
-  NOTE changing the MYSQL_ROOT_PASSWORD variable after the container has set up the initial databases has no effect, use the mysqladmin tool to change your MariaDB password.
+  NOTE changing any of the MYSQL_ variables after the container has set up the initial databases has no effect, use the mysqladmin tool or cli to make changes.
 
   NOTE if you want to use (MYSQL_DATABASE MYSQL_USER MYSQL_PASSWORD) **all three** of these variables need to be set you cannot pick and choose.
 
