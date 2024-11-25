@@ -15,6 +15,9 @@ cp -n /defaults/custom.cnf /config/custom.cnf
 rm -rf /etc/my.cnf.d/custom.cnf
 ln -s /config/custom.cnf /etc/my.cnf.d/custom.cnf
 
+# remove orphan pid file
+[ -f /var/run/mysqld/mysqld.pid ] && rm /var/run/mysqld/mysqld.pid
+
 # set permissions
 chmod -R 777 \
     /var/run/mysqld
