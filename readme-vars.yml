@@ -7,35 +7,29 @@ project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/ma
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is one of the most popular database servers. Made by the original developers of MySQL."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 project_blurb_optional_extras_enabled: false
-
 # supported architectures
 available_architectures:
-  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
-  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
-
+  - {arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
+  - {arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
 # container parameters
 common_param_env_vars_enabled: true
 param_container_name: "{{ project_name }}"
-
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)" }
-
+  - {env_var: "MYSQL_ROOT_PASSWORD", env_value: "ROOT_ACCESS_PASSWORD", desc: "Set this to root password for installation (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)"}
 param_usage_include_vols: true
 param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files" }
+  - {vol_path: "/config", vol_host_path: "/path/to/{{ project_name }}/config", desc: "Persistent config files"}
 param_usage_include_ports: true
 param_ports:
-  - { external_port: "3306", internal_port: "3306", port_desc: "MariaDB listens on this port." }
-
+  - {external_port: "3306", internal_port: "3306", port_desc: "MariaDB listens on this port."}
 # optional container parameters
 opt_param_usage_include_env: true
 opt_param_env_vars:
-  - { env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created. (valid only for first run)" }
-  - { env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run)" }
-  - { env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)" }
-  - { env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)." }
-
+  - {env_var: "MYSQL_DATABASE", env_value: "USER_DB_NAME", desc: "Specify the name of a database to be created. (valid only for first run)"}
+  - {env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run)"}
+  - {env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)"}
+  - {env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)."}
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -101,32 +95,76 @@ app_setup_block: |
   ```shell
   mariadb-upgrade -u root -p<PASSWORD>
   ```
-
+# init diagram
+init_diagram: |
+  "mariadb:latest": {
+    docker-mods
+    base {
+      fix-attr +\nlegacy cont-init
+    }
+    docker-mods -> base
+    legacy-services
+    custom services
+    init-services -> legacy-services
+    init-services -> custom services
+    custom services -> legacy-services
+    legacy-services -> ci-service-check
+    init-migrations -> init-adduser
+    init-os-end -> init-config
+    init-config -> init-config-end
+    init-mariadb-initdb -> init-config-end
+    init-os-end -> init-crontab-config
+    init-mods-end -> init-custom-files
+    base -> init-envfile
+    init-config -> init-mariadb-config
+    init-mariadb-config -> init-mariadb-initdb
+    svc-mariadb -> init-mariadb-upgrade
+    base -> init-migrations
+    base -> init-mods
+    init-config-end -> init-mods
+    init-mods -> init-mods-end
+    init-mods-package-install -> init-mods-end
+    init-mods -> init-mods-package-install
+    base -> init-os-end
+    init-adduser -> init-os-end
+    init-envfile -> init-os-end
+    init-migrations -> init-os-end
+    init-custom-files -> init-services
+    init-mods-end -> init-services
+    init-services -> svc-cron
+    svc-cron -> legacy-services
+    init-services -> svc-mariadb
+    svc-mariadb -> legacy-services
+  }
+  Base Images: {
+    "baseimage-alpine:3.20"
+  }
+  "mariadb:latest" <- Base Images
 # changelog
 changelogs:
-  - { date: "31.05.24:", desc: "Rebase to Alpine 3.20."}
-  - { date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
-  - { date: "09.06.23:", desc: "Update lc_messages path in shipped custom.cnf to match upstream." }
-  - { date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf." }
-  - { date: "04.02.23:", desc: "Minor updates to defaults in custom.cnf." }
-  - { date: "31.01.23:", desc: "Rebase to 3.17." }
-  - { date: "09.12.22:", desc: "Add upgrade check warning." }
-  - { date: "11.10.22:", desc: "Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users." }
-  - { date: "06.07.21:", desc: "Rebase master to alpine." }
-  - { date: "03.07.21:", desc: "Rebase to 3.14." }
-  - { date: "08.02.21:", desc: "Fix new installs." }
-  - { date: "08.02.21:", desc: "Rebase to alpine. Add mariadb-backup." }
-  - { date: "08.02.21:", desc: "Release alpine tag. The alpine release will replace the latest tag in the near future." }
-  - { date: "27.10.19:", desc: "Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file." }
-  - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
-  - { date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup." }
-  - { date: "26.01.19:", desc: "Add pipeline logic and multi arch." }
-  - { date: "10.09.18:", desc: "Rebase to ubuntu bionic and use 10.3 MariaDB repository." }
-  - { date: "09.12.17:", desc: "Fix continuation lines." }
-  - { date: "12.09.17:", desc: "Gracefully shut down MariaDB." }
-  - { date: "27.10.16:", desc: "Implement linting suggestions on database init script." }
-  - { date: "11.10.16:", desc: "Rebase to ubuntu xenial, add version labelling." }
-  - { date: "09.03.16:", desc: "Update to MariaDB 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile." }
-  - { date: "26.01.16:", desc: "Change user of mysqld_safe script to abc, better unclean shutdown handling on restart." }
-  - { date: "23.12.15:", desc: "Remove autoupdating, between some version updates the container breaks." }
-  - { date: "12.08.15:", desc: "Initial Release." }
+  - {date: "31.05.24:", desc: "Rebase to Alpine 3.20."}
+  - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
+  - {date: "09.06.23:", desc: "Update lc_messages path in shipped custom.cnf to match upstream."}
+  - {date: "25.05.23:", desc: "Rebase to Alpine 3.18, deprecate armhf."}
+  - {date: "04.02.23:", desc: "Minor updates to defaults in custom.cnf."}
+  - {date: "31.01.23:", desc: "Rebase to 3.17."}
+  - {date: "09.12.22:", desc: "Add upgrade check warning."}
+  - {date: "11.10.22:", desc: "Rebase master to Alpine 3.16, migrate to s6v3, remove password escape logic which caused problems for a small subset of users."}
+  - {date: "06.07.21:", desc: "Rebase master to alpine."}
+  - {date: "03.07.21:", desc: "Rebase to 3.14."}
+  - {date: "08.02.21:", desc: "Fix new installs."}
+  - {date: "08.02.21:", desc: "Rebase to alpine. Add mariadb-backup."}
+  - {date: "08.02.21:", desc: "Release alpine tag. The alpine release will replace the latest tag in the near future."}
+  - {date: "27.10.19:", desc: "Bump to 10.4, ability use custom sql on initial init ,defining root passwords via file."}
+  - {date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag."}
+  - {date: "07.03.19:", desc: "Add ability to setup a database and default user on first spinup."}
+  - {date: "26.01.19:", desc: "Add pipeline logic and multi arch."}
+  - {date: "10.09.18:", desc: "Rebase to ubuntu bionic and use 10.3 MariaDB repository."}
+  - {date: "09.12.17:", desc: "Fix continuation lines."}
+  - {date: "12.09.17:", desc: "Gracefully shut down MariaDB."}
+  - {date: "27.10.16:", desc: "Implement linting suggestions on database init script."}
+  - {date: "11.10.16:", desc: "Rebase to ubuntu xenial, add version labelling."}
+  - {date: "09.03.16:", desc: "Update to MariaDB 10.1. Change to use custom.cnf over my.cnf in /config. Restructured init files to change config options on startup, rather than in the dockerfile."}
+  - {date: "26.01.16:", desc: "Change user of mysqld_safe script to abc, better unclean shutdown handling on restart."}
+  - {date: "23.12.15:", desc: "Remove autoupdating, between some version updates the container breaks."}
+  - {date: "12.08.15:", desc: "Initial Release."}
