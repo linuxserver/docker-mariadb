@@ -5,16 +5,9 @@
 mkdir -p \
     "${DATADIR}" \
     /config/log/mysql \
-    /var/run/mysqld
+    /run/mysqld
 
-# configure mariadb-server.cnf
-sed -i "s|.*skip-networking.*|#skip-networking|g" /etc/my.cnf.d/mariadb-server.cnf
-
-# setup custom cnf file
-cp -n /defaults/custom.cnf /config/custom.cnf
-rm -rf /etc/my.cnf.d/custom.cnf
-ln -s /config/custom.cnf /etc/my.cnf.d/custom.cnf
-
-# set permissions
-chmod -R 777 \
-    /var/run/mysqld
+# copy custom cnf file
+if [[ ! -f /config/custom.cnf ]]; then
+    cp /defaults/custom.cnf /config/custom.cnf
+fi

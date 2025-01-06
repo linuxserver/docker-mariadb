@@ -6,7 +6,6 @@ project_url: "https://mariadb.org/"
 project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mariadb-git.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is one of the most popular database servers. Made by the original developers of MySQL."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
-project_blurb_optional_extras_enabled: false
 # supported architectures
 available_architectures:
   - {arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
@@ -30,6 +29,11 @@ opt_param_env_vars:
   - {env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run)"}
   - {env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)"}
   - {env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)."}
+readonly_supported: true
+readonly_message: |
+  * `/tmp` must be mounted to tmpfs
+  * Not supported on first run
+nonroot_supported: true
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -142,6 +146,7 @@ init_diagram: |
   "mariadb:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "06.01.25:", desc: "Rebase to Alpine 3.21."}
   - {date: "31.05.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
   - {date: "09.06.23:", desc: "Update lc_messages path in shipped custom.cnf to match upstream."}
