@@ -11,3 +11,8 @@ mkdir -p \
 if [[ ! -f /config/custom.cnf ]]; then
     cp /defaults/custom.cnf /config/custom.cnf
 fi
+
+# remove orphan pid file
+if [[ -f /run/mysqld/mysqld.pid ]]; then
+    rm -f /run/mysqld/mysqld.pid
+fi
