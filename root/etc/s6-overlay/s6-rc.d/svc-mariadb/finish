@@ -3,4 +3,4 @@
 
 echo "Caught SIGTERM signal!"
 
-kill -TERM "$(cat /var/run/mysqld/mysqld.pid)" 2>/dev/null
+kill -TERM "$(cat /run/mysqld/mysqld.pid)" 2>/dev/null

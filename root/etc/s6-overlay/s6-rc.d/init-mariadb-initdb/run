@@ -3,7 +3,11 @@
 
 # set start function used later
 start_mariadb() {
-    mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --user=abc &
+    if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+        mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid --user=abc &
+    else
+        mariadbd --datadir="${DATADIR}" --init-file="${tempSqlFile}" --pid-file=/run/mysqld/mysqld.pid &
+    fi
     pid="$!"
     RET=1
     while [[ ${RET} -ne 0 ]]; do
@@ -74,13 +78,17 @@ EONEWSQL
         done
     fi
 
-    # set some permissions needed before we begin
-    lsiown -R abc:abc "${tempSqlFile}" /config/log/mysql /var/run/mysqld /var/lib/mysql
-    chmod -R 777 /config/log/mysql /var/run/mysqld /var/lib/mysql
+    if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+        lsiown -R abc:abc "${tempSqlFile}" /config/log/mysql /run/mysqld
+        chmod -R 777 /config/log/mysql /run/mysqld
+    fi
 
     # initialise database structure
-    mariadb-install-db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
-
+    if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+        mariadb-install-db --datadir="${DATADIR}" --user=abc --auth-root-authentication-method=normal
+    else
+        mariadb-install-db --datadir="${DATADIR}" --auth-root-authentication-method=normal
+    fi
     # start mariadb and apply our sql commands we set above
     start_mariadb
 
@@ -113,6 +121,8 @@ EOFPASS
     rm -f "${tempSqlFile}"
 fi
 
-# own the folder the pid for mysql runs in
-lsiown -R abc:abc /var/run/mysqld
-lsiown -R abc:abc /config
+if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
+    # own the folder the pid for mysql runs in
+    lsiown -R abc:abc /run/mysqld
+    lsiown -R abc:abc /config
+fi
