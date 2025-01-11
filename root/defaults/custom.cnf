@@ -102,7 +102,7 @@ console                 = 1
 #
 log_warnings            = 2
 # Error logging goes to syslog due to /etc/mysql/conf.d/mysqld_safe_syslog.cnf
-#log_error               = /config/log/mysql/mysql.log
+log_error               = /config/log/mysql/mariadb-error.log
 #
 # Enable the slow query log to see queries with especially long duration
 slow_query_log          = 1

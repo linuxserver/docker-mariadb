@@ -1,0 +1,53 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# check logrotate permissions
+if mariadb-admin --local version  2> /dev/null; then
+    echo "Logrotate is enabled"
+else
+    cat <<-EOFPASS
+
+
+
+#####################################################################################
+#                                                                                   #
+#                  Logrotate requires the following permission:                     #
+# GRANT ALL ON *.* TO root@localhost IDENTIFIED VIA unix_socket WITH GRANT OPTION ; #
+#                              You can grant it via:                                #
+#                           mariadb -uroot -p<PASSWORD>                             #
+#                                                                                   #
+#                         You can read more about it here:                          #
+#             https://mariadb.com/kb/en/authentication-from-mariadb-10-4/           #
+#                                                                                   #
+#####################################################################################
+
+
+
+EOFPASS
+fi
+
+# check for upgrades
+if [[ "${#MYSQL_ROOT_PASSWORD}" -gt "3" ]]; then
+    # display a message about upgrading database if needed
+    if mariadb-upgrade -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
+        cat <<-EOF
+
+
+
+#################################################################
+#                                                               #
+#           An upgrade is required on your databases.           #
+#                                                               #
+#         Stop any services that are accessing databases        #
+#          in this container, and then run the command          #
+#                                                               #
+#                   mariadb-upgrade -u root                     #
+#                                                               #
+#################################################################
+
+
+
+EOF
+        sleep 5s
+    fi
+fi
