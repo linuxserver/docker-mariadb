@@ -19,6 +19,9 @@ else
 #                         You can read more about it here:                          #
 #             https://mariadb.com/kb/en/authentication-from-mariadb-10-4/           #
 #                                                                                   #
+#             And add the following to /config/custom.cnf under [mysqld]:           #
+#                  log_error = /config/log/mysql/mariadb-error.log                  #
+#                                                                                   #
 #####################################################################################
 
 

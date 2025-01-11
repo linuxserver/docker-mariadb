@@ -1,4 +1,4 @@
-/config/log/mysql/*.log /config/databases/*.err {
+/config/log/mysql/*.log {
     firstaction
         /usr/bin/mariadb-admin --local version >/dev/null 2>&1
     endscript
