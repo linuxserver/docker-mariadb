@@ -11,16 +11,20 @@ else
 
 #####################################################################################
 #                                                                                   #
-#                  Logrotate requires the following permission:                     #
-# GRANT ALL ON *.* TO root@localhost IDENTIFIED VIA unix_socket WITH GRANT OPTION ; #
-#                              You can grant it via:                                #
-#                           mariadb -uroot -p<PASSWORD>                             #
+#                             Logrotate Instructions                                #
 #                                                                                   #
-#                         You can read more about it here:                          #
-#             https://mariadb.com/kb/en/authentication-from-mariadb-10-4/           #
-#                                                                                   #
-#             And add the following to /config/custom.cnf under [mysqld]:           #
+#               Add the following to /config/custom.cnf under [mysqld]:             #
 #                  log_error = /config/log/mysql/mariadb-error.log                  #
+#                                                                                   #
+#                 Login to the SQL shell inside the container using:                #
+#                           mariadb -uroot -p<PASSWORD>                             #
+#                          And run the following command:                           #
+# GRANT ALL ON *.* TO root@localhost IDENTIFIED VIA unix_socket WITH GRANT OPTION ; #
+#                                                                                   #
+#                     Restart the container to apply the changes.                   #
+#                                                                                   #
+#              You can read more about root@localhost permissions here:             #
+#             https://mariadb.com/kb/en/authentication-from-mariadb-10-4/           #
 #                                                                                   #
 #####################################################################################
 
