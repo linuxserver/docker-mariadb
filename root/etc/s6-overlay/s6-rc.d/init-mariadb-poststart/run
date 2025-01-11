@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 # check logrotate permissions
-if mariadb-admin --local version  2> /dev/null; then
+if mariadb-admin --local version >/dev/null 2>&1; then
     echo "Logrotate is enabled"
 else
     cat <<-EOFPASS
