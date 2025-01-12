@@ -142,6 +142,7 @@ init_diagram: |
   "mariadb:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "11.01.25:", desc: "Add log rotation, follow the instructions in the container log."}
   - {date: "06.01.25:", desc: "Rebase to Alpine 3.21."}
   - {date: "31.05.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}

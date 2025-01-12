@@ -21,6 +21,7 @@ RUN \
   fi && \
   apk add --no-cache \
     gnupg \
+    logrotate \
     mariadb==${MARIADB_VERSION} \
     mariadb-backup==${MARIADB_VERSION} \
     mariadb-client==${MARIADB_VERSION} \
