@@ -30,7 +30,7 @@ if [[ ! -d "${DATADIR}/mysql" ]]; then
 
     # set basic sql command
     cat >"${tempSqlFile}" <<-EOSQL
-DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
+DELETE FROM mysql.user WHERE user <> 'mariadb.sys' AND user <> 'root';
 EOSQL
 
     if [[ "${#MYSQL_ROOT_PASSWORD}" -lt "4" ]]; then
@@ -57,8 +57,6 @@ EOM
     cat >>"${tempSqlFile}" <<-EONEWSQL
 $MYSQL_PASS
 GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
-DROP USER 'root'@'localhost';
-GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED VIA unix_socket WITH GRANT OPTION ;
 DROP DATABASE IF EXISTS test ;
 $MYSQL_DB_SETUP
 EONEWSQL
