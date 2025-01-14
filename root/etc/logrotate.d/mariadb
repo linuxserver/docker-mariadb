@@ -1,6 +1,6 @@
 /config/log/mysql/*.log {
     firstaction
-        /usr/bin/mariadb-admin --local version >/dev/null 2>&1
+        /usr/bin/mariadb-admin -uroot --local version >/dev/null 2>&1
     endscript
     su abc abc
     missingok
@@ -18,6 +18,6 @@
     olddir archive/
     createolddir 770 abc abc
     postrotate
-        /usr/bin/mariadb-admin --local flush-error-log flush-engine-log flush-general-log flush-slow-log
+        /usr/bin/mariadb-admin -uroot --local flush-error-log flush-engine-log flush-general-log flush-slow-log
     endscript
 }
