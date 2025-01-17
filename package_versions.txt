@@ -60,6 +60,7 @@ libtasn1                4.19.0-r2         apk
 libunistring            1.2-r0            apk     
 libxml2                 2.13.4-r3         apk     
 linux-pam               1.6.1-r1          apk     
+logrotate               3.21.0-r1         apk     
 mariadb                 11.4.4-r1         apk     
 mariadb-backup          11.4.4-r1         apk     
 mariadb-client          11.4.4-r1         apk     
@@ -78,6 +79,7 @@ p11-kit                 0.25.5-r2         apk
 pcre2                   10.43-r0          apk     
 perl                    5.40.0-r3         apk     
 pinentry                1.3.1-r0          apk     
+popt                    1.19-r4           apk     
 procps-ng               4.0.4-r2          apk     
 readline                8.2.13-r0         apk     
 scanelf                 1.3.8-r1          apk     
