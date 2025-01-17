@@ -123,7 +123,7 @@ init_diagram: |
     base -> init-envfile
     init-config -> init-mariadb-config
     init-mariadb-config -> init-mariadb-initdb
-    svc-mariadb -> init-mariadb-upgrade
+    svc-mariadb -> init-mariadb-poststart
     base -> init-migrations
     init-config-end -> init-mods
     init-mods-package-install -> init-mods-end
