@@ -1,0 +1,60 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# check logrotate permissions
+if mariadb-admin -uroot --local version >/dev/null 2>&1; then
+    echo "Logrotate is enabled"
+else
+    cat <<-EOFPASS
+
+
+
+#####################################################################################
+#                                                                                   #
+#                             Logrotate Instructions                                #
+#                                                                                   #
+#               Add the following to /config/custom.cnf under [mysqld]:             #
+#                  log_error = /config/log/mysql/mariadb-error.log                  #
+#                                                                                   #
+#                 Login to the SQL shell inside the container using:                #
+#                           mariadb -uroot -p<PASSWORD>                             #
+#                          And run the following command:                           #
+# GRANT ALL ON *.* TO root@localhost IDENTIFIED VIA unix_socket WITH GRANT OPTION ; #
+#                                                                                   #
+#                     Restart the container to apply the changes.                   #
+#                                                                                   #
+#              You can read more about root@localhost permissions here:             #
+#             https://mariadb.com/kb/en/authentication-from-mariadb-10-4/           #
+#                                                                                   #
+#####################################################################################
+
+
+
+EOFPASS
+fi
+
+# check for upgrades
+if [[ "${#MYSQL_ROOT_PASSWORD}" -gt "3" ]]; then
+    # display a message about upgrading database if needed
+    if mariadb-upgrade -u root -p"${MYSQL_ROOT_PASSWORD}" --check-if-upgrade-is-needed >/dev/null 2>&1; then
+        cat <<-EOF
+
+
+
+#################################################################
+#                                                               #
+#           An upgrade is required on your databases.           #
+#                                                               #
+#         Stop any services that are accessing databases        #
+#          in this container, and then run the command          #
+#                                                               #
+#                   mariadb-upgrade -u root                     #
+#                                                               #
+#################################################################
+
+
+
+EOF
+        sleep 5s
+    fi
+fi

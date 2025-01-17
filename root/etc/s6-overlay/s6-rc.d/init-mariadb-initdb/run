@@ -30,7 +30,7 @@ if [[ ! -d "${DATADIR}/mysql" ]]; then
 
     # set basic sql command
     cat >"${tempSqlFile}" <<-EOSQL
-DELETE FROM mysql.user WHERE user <> 'mariadb.sys';
+DELETE FROM mysql.user WHERE user <> 'mariadb.sys' AND user <> 'root';
 EOSQL
 
     if [[ "${#MYSQL_ROOT_PASSWORD}" -lt "4" ]]; then

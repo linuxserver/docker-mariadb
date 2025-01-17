@@ -1,0 +1,23 @@
+/config/log/mysql/*.log {
+    firstaction
+        /usr/bin/mariadb-admin -uroot --local version >/dev/null 2>&1
+    endscript
+    su abc abc
+    missingok
+    create 660 abc abc
+    notifempty
+    daily
+    minsize 1M
+    maxsize 100M
+    rotate 30
+    dateext
+    dateformat .%Y-%m-%d-%H-%M-%S
+    compress
+    delaycompress
+    sharedscripts 
+    olddir archive/
+    createolddir 770 abc abc
+    postrotate
+        /usr/bin/mariadb-admin -uroot --local flush-error-log flush-engine-log flush-general-log flush-slow-log
+    endscript
+}
