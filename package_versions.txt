@@ -58,7 +58,7 @@ libssl3                 3.3.3-r0          apk
 libstdc++               14.2.0-r4         apk     
 libtasn1                4.20.0-r0         apk     
 libunistring            1.2-r0            apk     
-libxml2                 2.13.4-r5         apk     
+libxml2                 2.13.4-r6         apk     
 linux-pam               1.6.1-r1          apk     
 logrotate               3.21.0-r1         apk     
 mariadb                 11.4.5-r0         apk     
