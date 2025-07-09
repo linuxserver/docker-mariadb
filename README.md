@@ -363,6 +363,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **09.07.25:** - Rebase to Alpine 3.22.
 * **11.01.25:** - Add log rotation, follow the instructions in the container log.
 * **06.01.25:** - Rebase to Alpine 3.21.
 * **31.05.24:** - Rebase to Alpine 3.20.
