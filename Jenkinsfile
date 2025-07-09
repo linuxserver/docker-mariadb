@@ -34,7 +34,7 @@ pipeline {
     CI_WEB='false'
     CI_PORT='3306'
     CI_SSL='false'
-    CI_DELAY='30'
+    CI_DELAY='60'
     CI_DOCKERENV='MYSQL_ROOT_PASSWORD=password'
     CI_AUTH=''
     CI_WEBPATH=''
