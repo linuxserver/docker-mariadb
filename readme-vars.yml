@@ -140,7 +140,7 @@ init_diagram: |
     svc-mariadb -> legacy-services
   }
   Base Images: {
-    "baseimage-alpine:3.21"
+    "baseimage-alpine:3.22"
   }
   "mariadb:latest" <- Base Images
 # changelog
