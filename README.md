@@ -56,7 +56,7 @@ The architectures supported by this image are:
 
 ## Application Setup
 
-If you didn't set a root password during the initial start, follow the instructions in the container log.
+Root via localhost (docker exec) no longer requires a password according to [upstream behavior](https://mariadb.com/docs/server/security/user-account-management/authentication-from-mariadb-10-4), if you didn't set a root password for remote access during the initial start follow the instructions in the container log.
 
 NOTE changing any of the MYSQL_ variables after the container has set up the initial databases has no effect, use the mysqladmin tool or cli to make changes.
 
