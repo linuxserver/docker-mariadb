@@ -56,9 +56,7 @@ The architectures supported by this image are:
 
 ## Application Setup
 
-If you didn't set a password during installation, (see logs for warning) use
-`mariadb-admin -u root -p<PASSWORD>`
-to set one at the docker prompt...
+Root via localhost (docker exec) no longer requires a password according to [upstream behavior](https://mariadb.com/docs/server/security/user-account-management/authentication-from-mariadb-10-4), if you didn't set a root password for remote access during the initial start follow the instructions in the container log.
 
 NOTE changing any of the MYSQL_ variables after the container has set up the initial databases has no effect, use the mysqladmin tool or cli to make changes.
 
@@ -103,10 +101,10 @@ This will have the same effect as setting the `REMOTE_SQL` environment variable.
 If user databases are not in a healthy state (sometimes caused by a failed upgrade), it may be remedied by running:
 
 ```shell
-mariadb-check -u root -p<PASSWORD> -c -A # check all databases for errors
-mariadb-check -u root -p<PASSWORD> -r -A # repair all databases
-mariadb-check -u root -p<PASSWORD> -a -A # analyze all databases
-mariadb-check -u root -p<PASSWORD> -o -A # optimize all databases
+mariadb-check -c -A # check all databases for errors
+mariadb-check -r -A # repair all databases
+mariadb-check -a -A # analyze all databases
+mariadb-check -o -A # optimize all databases
 ```
 
 After running the above commands, you may need to run the upgrade command again.
@@ -116,7 +114,7 @@ After running the above commands, you may need to run the upgrade command again.
 When this container initializes, if `MYSQL_ROOT_PASSWORD` is set an upgrade check will run. If an upgrade is required the log will indicate the need stop any services that are accessing databases in this container, and then run the command:
 
 ```shell
-mariadb-upgrade -u root -p<PASSWORD>
+mariadb-upgrade
 ```
 
 ## Read-Only Operation
