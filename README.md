@@ -135,7 +135,7 @@ This image can be run with a non-root user. For details please [read the docs](h
 To help you get started creating a container from this image you can either use docker-compose or the docker cli.
 
 >[!NOTE]
->Unless a parameter is flaged as 'optional', it is *mandatory* and a value must be provided.
+>Unless a parameter is flagged as 'optional', it is *mandatory* and a value must be provided.
 
 ### docker-compose (recommended, [click here for more info](https://docs.linuxserver.io/general/docker-compose))
 
@@ -154,6 +154,7 @@ services:
       - MYSQL_USER=MYSQL_USER #optional
       - MYSQL_PASSWORD=DATABASE_PASSWORD #optional
       - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+      - CLI_OPTS= #optional
     volumes:
       - /path/to/mariadb/config:/config
     ports:
@@ -174,6 +175,7 @@ docker run -d \
   -e MYSQL_USER=MYSQL_USER `#optional` \
   -e MYSQL_PASSWORD=DATABASE_PASSWORD `#optional` \
   -e REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql `#optional` \
+  -e CLI_OPTS= `#optional` \
   -p 3306:3306 \
   -v /path/to/mariadb/config:/config \
   --restart unless-stopped \
@@ -195,6 +197,7 @@ Containers are configured using parameters passed at runtime (such as those abov
 | `-e MYSQL_USER=MYSQL_USER` | This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run) |
 | `-e MYSQL_PASSWORD=DATABASE_PASSWORD` | Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run) |
 | `-e REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql` | Set this to ingest sql files from an http/https endpoint (comma seperated array). |
+| `-e CLI_OPTS=` | Pass CLI options to mariadbd via mariadbd-safe. Use with caution as mariadbd option precedence is complex. |
 | `-v /config` | Persistent config files |
 | `--read-only=true` | Run container with a read-only filesystem. Please [read the docs](https://docs.linuxserver.io/misc/read-only/). |
 | `--user=1000:1000` | Run container with a non-root user. Please [read the docs](https://docs.linuxserver.io/misc/non-root/). |
@@ -361,6 +364,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **14.02.25:** - Rebase to Alpine 3.23. Add ability to pass CLI options to mariadbd.
 * **09.07.25:** - Rebase to Alpine 3.22.
 * **11.01.25:** - Add log rotation, follow the instructions in the container log.
 * **06.01.25:** - Rebase to Alpine 3.21.

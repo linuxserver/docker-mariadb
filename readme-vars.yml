@@ -30,6 +30,7 @@ opt_param_env_vars:
   - {env_var: "MYSQL_USER", env_value: "MYSQL_USER", desc: "This user will have superuser access to the database specified by MYSQL_DATABASE (do not use root here). (valid only for first run)"}
   - {env_var: "MYSQL_PASSWORD", env_value: "DATABASE_PASSWORD", desc: "Set this to the password you want to use for you MYSQL_USER (minimum 4 characters & non-alphanumeric passwords must be properly escaped). (valid only for first run)"}
   - {env_var: "REMOTE_SQL", env_value: "http://URL1/your.sql,https://URL2/your.sql", desc: "Set this to ingest sql files from an http/https endpoint (comma seperated array)."}
+  - {env_var: "CLI_OPTS", env_value: "", desc: "Pass CLI options to mariadbd via mariadbd-safe. Use with caution as mariadbd option precedence is complex."}
 readonly_supported: true
 readonly_message: |
   * `/tmp` must be mounted to tmpfs
@@ -143,6 +144,7 @@ init_diagram: |
   "mariadb:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "14.02.25:", desc: "Rebase to Alpine 3.23. Add ability to pass CLI options to mariadbd."}
   - {date: "09.07.25:", desc: "Rebase to Alpine 3.22."}
   - {date: "11.01.25:", desc: "Add log rotation, follow the instructions in the container log."}
   - {date: "06.01.25:", desc: "Rebase to Alpine 3.21."}
