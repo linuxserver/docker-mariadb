@@ -9,16 +9,12 @@ if [[ -z ${LSIO_NON_ROOT_USER} ]]; then
         --datadir="${DATADIR}" \
         --pid-file=/run/mysqld/mysqld.pid \
         --skip-networking=OFF \
-        --user=abc &
-
-    wait
+        --user=abc ${CLI_OPTS}
 else
     s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 3306" \
         /usr/bin/mariadbd-safe \
         --defaults-extra-file=/config/custom.cnf \
         --datadir="${DATADIR}" \
         --pid-file=/run/mysqld/mysqld.pid \
-        --skip-networking=OFF &
-
-    wait
+        --skip-networking=OFF ${CLI_OPTS}
 fi
