@@ -129,6 +129,8 @@ log_bin_index           = /config/log/mysql/mariadb-bin.index
 expire_logs_days        = 10
 max_binlog_size         = 100M
 # slaves
+# If not set in a single server environment binary logs will never be discarded - https://jira.mariadb.org/browse/MDEV-34504
+slave_connections_needed_for_purge = 0
 #relay_log              = /config/log/mysql/relay-bin
 #relay_log_index        = /config/log/mysql/relay-bin.index
 #relay_log_info_file    = /config/log/mysql/relay-bin.info
