@@ -27,7 +27,7 @@ gnupg-gpgconf           2.4.9-r0          apk
 gnupg-keyboxd           2.4.9-r0          apk     
 gnupg-utils             2.4.9-r0          apk     
 gnupg-wks-client        2.4.9-r0          apk     
-gnutls                  3.8.8-r0          apk     
+gnutls                  3.8.12-r0         apk     
 gpg                     2.4.9-r0          apk     
 gpg-agent               2.4.9-r0          apk     
 gpg-wks-server          2.4.9-r0          apk     
