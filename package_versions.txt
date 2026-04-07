@@ -79,7 +79,7 @@ npth                    1.8-r0            apk
 oniguruma               6.9.10-r0         apk     
 p11-kit                 0.25.5-r2         apk     
 pcre2                   10.47-r0          apk     
-perl                    5.42.1-r0         apk     
+perl                    5.42.2-r0         apk     
 pinentry                1.3.2-r0          apk     
 popt                    1.19-r4           apk     
 procps-ng               4.0.5-r0          apk     
