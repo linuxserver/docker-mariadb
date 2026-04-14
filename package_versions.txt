@@ -40,7 +40,7 @@ libassuan               3.0.2-r0          apk
 libattr                 2.5.2-r2          apk     
 libbsd                  0.12.2-r0         apk     
 libbz2                  1.0.8-r6          apk     
-libcrypto3              3.5.5-r0          apk     
+libcrypto3              3.5.6-r0          apk     
 libcurl                 8.17.0-r1         apk     
 libffi                  3.5.2-r0          apk     
 libgcc                  15.2.0-r2         apk     
@@ -55,7 +55,7 @@ libncursesw             6.5_p20251123-r0  apk
 libproc2                4.0.5-r0          apk     
 libpsl                  0.21.5-r3         apk     
 libsasl                 2.1.28-r9         apk     
-libssl3                 3.5.5-r0          apk     
+libssl3                 3.5.6-r0          apk     
 libstdc++               15.2.0-r2         apk     
 libtasn1                4.21.0-r0         apk     
 libunistring            1.4.1-r0          apk     
@@ -68,8 +68,8 @@ mariadb-client          11.4.9-r0         apk
 mariadb-client-perl     11.4.9-r0         apk     
 mariadb-common          11.4.9-r0         apk     
 mariadb-server-utils    11.4.9-r0         apk     
-musl                    1.2.5-r21         apk     
-musl-utils              1.2.5-r21         apk     
+musl                    1.2.5-r23         apk     
+musl-utils              1.2.5-r23         apk     
 ncurses-terminfo-base   6.5_p20251123-r0  apk     
 netcat-openbsd          1.234.1-r0        apk     
 nettle                  3.10.2-r0         apk     
