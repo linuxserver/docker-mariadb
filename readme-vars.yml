@@ -144,6 +144,7 @@ init_diagram: |
   "mariadb:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "05.07.26:", desc: "Rebase to Alpine 3.24."}
   - {date: "14.02.25:", desc: "Rebase to Alpine 3.23. Add ability to pass CLI options to mariadbd."}
   - {date: "09.07.25:", desc: "Rebase to Alpine 3.22."}
   - {date: "11.01.25:", desc: "Add log rotation, follow the instructions in the container log."}
