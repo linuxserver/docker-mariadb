@@ -364,6 +364,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **05.07.26:** - Rebase to Alpine 3.24.
 * **14.02.25:** - Rebase to Alpine 3.23. Add ability to pass CLI options to mariadbd.
 * **09.07.25:** - Rebase to Alpine 3.22.
 * **11.01.25:** - Add log rotation, follow the instructions in the container log.
