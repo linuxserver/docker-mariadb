@@ -1233,7 +1233,7 @@ pipeline {
                   "type": "commit",\
                   "tagger": {"name": "LinuxServer-CI","email": "ci@linuxserver.io","date": "'${GITHUB_DATE}'"}}'
               echo "Pushing New release for Tag"
-              echo "Updating external repo packages to ${EXT_RELEASE_CLEAN}" > releasebody.json
+              curl -H "Authorization: token ${GITHUB_TOKEN}" -s "https://api.github.com/repos/mariadb/server/releases/tags/mariadb-${EXT_RELEASE%%-r*}" | jq -r '. |.body' > releasebody.json
               jq -n \
                 --arg tag_name "$META_TAG" \
                 --arg target_commitish "master" \

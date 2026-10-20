@@ -3,6 +3,8 @@
 # jenkins variables
 project_name: docker-mariadb
 external_type: alpine_repo
+custom_release_notes_command: |-
+  curl -H "Authorization: token ${GITHUB_TOKEN}" -s "https://api.github.com/repos/mariadb/server/releases/tags/mariadb-${EXT_RELEASE%%-r*}" | jq -r '. |.body' > releasebody.json
 release_type: stable
 release_tag: latest
 ls_branch: master
