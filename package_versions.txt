@@ -40,9 +40,9 @@ libassuan               3.0.2-r0          apk
 libattr                 2.5.2-r2          apk     
 libbsd                  0.12.2-r0         apk     
 libbz2                  1.0.8-r6          apk     
-libcrypto3              3.5.9-r0          apk     
+libcrypto3              3.5.9-r1          apk     
 libcurl                 8.23.0-r0         apk     
-libffi                  3.5.2-r1          apk     
+libffi                  3.8.1-r0          apk     
 libgcc                  15.2.0-r5         apk     
 libgcrypt               1.12.2-r0         apk     
 libgpg-error            1.61-r0           apk     
@@ -55,11 +55,11 @@ libncursesw             6.6_p20260516-r0  apk
 libproc2                4.0.6-r0          apk     
 libpsl                  0.21.5-r3         apk     
 libsasl                 2.1.28-r9         apk     
-libssl3                 3.5.9-r0          apk     
+libssl3                 3.5.9-r1          apk     
 libstdc++               15.2.0-r5         apk     
 libtasn1                4.21.0-r0         apk     
 libunistring            1.4.2-r0          apk     
-libxml2                 2.13.9-r2         apk     
+libxml2                 2.13.9-r3         apk     
 linux-pam               1.7.1-r2          apk     
 logrotate               3.22.0-r0         apk     
 mariadb                 11.8.10-r0        apk     
